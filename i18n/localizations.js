@@ -6,7 +6,7 @@
 String.toLocaleString({
 	"en-US": {
 		"%l_welcome": "Welcome To",
-		"%l_coursename": "Titanium Certified Developer (TCD) Training",
+		"%l_coursename": "Titanium Certified Expert (TCE) Training",
 		"%l_agenda_title": "AGENDA",
 	},
 

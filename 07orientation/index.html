@@ -1,0 +1,423 @@
+<!doctype html>  
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Orientation and Gestures</title>
+		<meta name="description" content="Orientation and Gestures, Advanced Titanium Mobile Development">
+    	<meta name="author" content="Appcelerator, Inc." />
+		
+		<link href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+		<link rel="stylesheet" href="../../presentation-engine/reveal.js/css/reset.css">
+		<link rel="stylesheet" href="../../presentation-engine/reveal.js/css/main.css">
+		<link rel="stylesheet" href="../css/magula.css">
+		<link rel="stylesheet" href="../css/presentation.css">
+		<script type="text/javascript" src="../../presentation-engine/js/l10n.js"></script>
+		<script type="text/javascript" src="i18n/localizations.js"></script>
+		<script>
+		function loadStyleSheet(url){
+		    if(document.createStyleSheet) {
+		        try {document.createStyleSheet(url);} catch (e) { }
+		    }
+		    else{
+		        var css;
+		        css         = document.createElement('link');
+		        css.rel     = 'stylesheet';
+		        css.type    = 'text/css';
+		        css.media   = "all";
+		        css.href    = url;
+		        document.getElementsByTagName("head")[0].appendChild(css);
+		    }
+		}
+		var browserlang = document.documentElement.lang || String.locale || 'en-US';
+		loadStyleSheet('../css/'+browserlang+'.css');
+		</script>
+		<link rel="stylesheet" href="../../presentation-engine/reveal.js/css/print.css" media="print">
+	</head>
+	
+	<body>
+		<div id="reveal">	
+			<!-- Any section element inside of this container is displayed as a slide -->
+
+			<!--
+				SLIDE INSTRUCTIONS:
+					- Set the <title> tag to this lesson's US English title
+					- Set the <meta description tag to the US English course & lesson title
+					- Add one <section></section> for each slide. Slides can contain most any valid HTML
+					- Each text tag (<p> or <li> or <h1> etc.) must have a class name that begins with
+						"l_" and is unique. Each of those class names must be added to the i18n/localizations.js
+						file and their values must be set equal to the US English version of the strings. That 
+						file is used for translation and its contents OVERRIDES the text in this file.
+					- Each slide must have a <div class="slidenote"></div> container, which can be empty. These
+						are used for presenter notes. They also must be given unique "l_" classnames and strings
+						provided in the localizations.js file.
+					- Please use inline CSS on the slides to size & arrange contents.
+					- Graphics should be placed in the images folder and cropped/sized appropriately.
+					- Assume a 1024 x 768 display resolution
+					- A link to the index.html for each lesson must be added in order to the coursename/index.html
+						title slide.
+			-->
+			
+			
+			<div class="slides">
+				
+				<section>
+					<h1 style="margin-top:100px;" class="l_lessontitle">Orientation and Gestures</h1>
+					<h5 class="l_subtitle">Advanced Titanium Mobile Development</h5>
+					<script>
+						// DO NOT REMOVE THIS, MUST BE INCLUDED WITH THE FIRST SLIDE
+						if( navigator.userAgent.match( /(iPhone|iPad|iPod|Android)/i ) )
+						document.write( '<p style="color: rgba(0,0,0,0.3); text-shadow: none;">('+'Tap to navigate'+')</p>' );
+					</script>
+				<div class="slidenote"><div class="l_slidenote_titleslide"><b>Module time: 60 mins</b>(30 mins teaching, 30 mins for lab)</p></div>
+				</section>
+				
+				<section id="agenda">
+					<h1 style="margin-top:50px;" class="l_agenda_title">Agenda</h1>
+			    	<ul style="width:100%; margin-left:30px;">
+			    		<li class="l_agenda1">Device orientation</li>
+			    		<li class="l_agenda2">Gestures</li>
+			    	</ul>
+					
+					<div class="slidenote">
+						<!-- Please use a classname that relates to the associated slide content. For example, this
+							slide is the agenda, thus the class is l_slidenote_agenda
+						 -->
+						<div class="l_slidenote_agenda">In this module, we'll discuss how to deal with device orientation as well as how to integrate gestures other than taps into your app.</div></div>
+				</section>
+
+				<!-- - - - - - - - - - - - - - - - - NEW TOPIC - - - - - - - - - - - - - - - - -->
+				<section>
+					<h1 class="topicH1 l_topic"><img src="../images/topic.png"/>Topic</h1>
+					<h5 style="clear:both;" class="l_orientationtopic">Orientation</h5>
+					<div class="slidenote"><div class="l_slidenote_orientationtopic"></div></div>
+				</section>
+
+				<section>
+					<h2 style="" class="l_orientsupport">Orientation Support</h2>
+					<p class="l_orientation_image"><img src="images/orientation.png" style="margin-top:5px;height:350px;float:right;"/></p>
+					<ul style="width:60%;float:left;">
+						<li class="l_orientsupport1">Fixing orientation for the whole app</li>
+						<li class="l_orientsupport2">Setting supported orientation for each window</li>
+						<li class="l_orientsupport3">Reacting to orientation changes dynamically</li>
+					</ul>
+					<div class="slidenote"><div class="l_slidenote_orientsupport"></div></div>
+				</section>
+
+				<section>
+					<h2 style="" class="l_applevel">App-level Orientation</h2>
+					<ul style="width:80%;">
+						<li class="l_applevel1">App-level settings either fix orientation for the entire app</li>
+						<li class="l_applevel2">Or specify the possible orientations that the app supports</li>
+						<li class="l_applevel3">Controls splash screen orientation (on tablets)</li>
+						<li>Techniques differ for iOS &amp; Android</li>
+					</ul>
+					<div class="slidenote"><div class="l_slidenote_applevel"></div></div>
+				</section>
+
+					
+				<section>
+					<h2 class="l_lock_orientation">App-level Orientation Support - iOS</h2>
+					<p align="left" class="in_tiapp">In tiapp.xml:</p><br>
+<pre><code contenteditable class="l_lockios_codev2">
+&lt;ios>
+&lt;plist>
+&lt;dict>
+  &lt;key>UISupportedInterfaceOrientations&lt;/key>
+  &lt;array>
+    &lt;string>UIInterfaceOrientationPortrait&lt;/string>
+  &lt;/array>
+  &lt;key>UISupportedInterfaceOrientations~ipad&lt;/key>
+  &lt;array>
+    &lt;string>UIInterfaceOrientationPortrait&lt;/string>
+    &lt;string>UIInterfaceOrientationPortraitUpsideDown&lt;/string>
+    &lt;string>UIInterfaceOrientationLandscapeLeft&lt;/string>
+    &lt;string>UIInterfaceOrientationLandscapeRight&lt;/string>
+  &lt;/array>
+&lt;/dict>
+&lt;/plist>
+&lt;/ios>
+</code></pre>
+					<div class="slidenote"><div class="l_slidenote_lock_orientation2">You specify all the orientations your app <em>could take</em> in tiapp.xml<br><br/>These new values replace the &lt;orientations> tag from pre-Ti2.1.<br/><br/>Use the ~iphone or ~ipad suffix to target specific platforms or leave off to apply to all.<br/><br/>These settings also control the splash screen orientations..</div></div>
+				</section>
+				
+				<section>
+					<h2 class="l_lock_orientation_android">App-level Orientation Support - Android</h2>
+					<p align="left" class="l_option_1">Option 1 - modify tiapp.xml:</p><br>
+					<ol style="width:100%; margin-left:30px;">
+			    		<li class="l_copy_code">Copy code from build/android/AndroidManifest.xml</li>
+			    		<li class="l_add_nested">Add nested &lt;manifest&gt; tags within &lt;android&gt;</li>
+						<li class="l_remove">remove '|orientation' from every node</li>
+			    	</ol>
+<pre><code contenteditable class="l_lockandroid_code">
+&lt;android xmlns:android="http://schemas.android.com/apk/res/android">
+  &lt;manifest>
+    &lt;activity
+    android:name="org.appcelerator.titanium.TiActivity"
+    android:configChanges="keyboardHidden"
+       android:screenOrientation="portrait"
+    />
+    &lt;activity android:name="ti.modules.titanium.ui.TiTabActivity"
+      android:configChanges="keyboardHidden"
+    />
+  &lt;/manifest>
+&lt;/android>
+</code></pre>
+					<div class="slidenote"><div class="l_slidenote_lock_orientation_android">Again, this option specifies the orientations your app could support and controls the splash screen orientations. </div></div>
+				</section>
+				
+				<section>
+					<h2 class="l_lock_orientation_android">App-level Orientation Support - Android</h2>
+					<p align="left" class="l_option_2">Option 2 - Custom Android manifest file</p><br>
+					<ol style="width:100%; margin-left:30px;">
+			    		<li class="l_copy_build">Copy build/android/AndroidManifest.xml to <b>platform/android/AndroidManifest.xml</b></li>
+						<li class="l_remove">remove '|orientation' from every node</li>
+			    	</ol>
+					<div class="slidenote"><div class="l_slidenote_lock_orientation_android_2">Option 2 is to create a custom manifest file in the Platform/android folder<br>The Platform folder doesn't exist by default<br>Clean the project before rebuilding to clear out old AndroidManifest.xml file</div></div>
+				</section>
+				
+				<section>
+					<h2 class="">Setting Orientation per Window</h2>
+					<p align="left" class="l_window_modes">Window Orientation Modes</p>
+					<p align="left" class="l_supported_val">Supported values include:</p>
+					<ul style="width:100%; margin-left:30px;">
+			    		<li class="l_portrait">PORTRAIT / UPSIDE_PORTRAIT</li>
+						<li class="l_landscape">LANDSCAPE_LEFT / LANDSCAPE_RIGHT</li>
+			    	</ul>
+<pre><code contenteditable class="">
+// traditional API code
+var win = Ti.UI.createWindow({
+   orientationModes: [Ti.UI.PORTRAIT, Ti.UI.LANDSCAPE_LEFT]
+});
+
+/* With Alloy, can define in the TSS file */
+"#window": {
+	orientationModes: [Ti.UI.PORTRAIT, Ti.UI.LANDSCAPE_LEFT]
+}
+</code></pre>
+					<div class="slidenote"><div class="l_slidenote_fixed_orientation">You can set orientation on a per window basis within your app<br>The older Ti.UI.orientation property technique is deprecated and should not be used.</div></div>
+				</section>
+
+				<section>
+					<h2 style="" class="l_winorient">Change a Window's Orientation</h2>
+					<pre style=""><code contenteditable>
+$.orient.addEventListener('click', function() {
+  if(Titanium.UI.orientation == Ti.UI.PORTRAIT) {
+    Titanium.UI.orientation = Ti.UI.LANDSCAPE_LEFT;
+  } else {
+    Titanium.UI.orientation = Ti.UI.PORTRAIT;
+  }
+})
+$.index.open();					</code></pre>
+					<div class="slidenote"><div class="l_slidenote_winorient"></div></div>
+				</section>
+				
+				<section>
+					<h2 class="l_or_events">Orientation Events</h2>
+					 <p align="left" class="l_ti_gestureorientation">Ti.Gesture.orientationchange</p><br>
+					 <p align="left" class="l_event_props">Event properties and methods:</p><br>
+
+<pre><code contenteditable class="l_orientation_code">
+Ti.Gesture.addEventListener('orientationchange', function(e) {
+   // current device orientation
+   // Ti.Gesture.orientation
+
+   // or, get orientation from event object
+   // e.orientation
+
+   // also, there are two helpers:
+   // e.source.isPortrait()
+   // e.source.isLandscape()
+});
+</code></pre>
+					 <div class="slidenote"><div class="l_slidenote_or_events">You can react to orientation change events<br>Use the Ti.Gesture event listener<br>Test on device<br/><br/>Keep in mind the difference expections of what a handset considers the top of the device (ear-piece up/mic down) versus a tablet (what most of us would call landscape orientation)</div></div>
+				</section>
+				
+				<section>
+					<h2 class="l_handling_or">Handling Orientation Changes</h2>
+					<p align="left" class="l_react_to">React to orientation change via event listener</p><br>
+					<p align="left" class="l_use_self">Use self-contained, self-updating UI components</p><br>
+					<p align="left" class="l_move_rotate">Move, rotate, and swap UI elements</p><br>
+					<p align="left" class="l_take_adv">Take advantage of the orientation</p><br>
+					<p align="left" class="l_dont_forget">Don't forget the soft keyboard</p>
+					<div class="slidenote"><div class="l_slidenote_handling_or"><ul><li>Unless your UI dictates otherwise, best-practice is to actively react to orientation changes</li><li>Self-contained, self-updating is same as we use in TiBountyHunter with the tableview where it 'knows' how to update itself &mdash; Components listen for a global orientation event and update themselves</li><li>You might move, rotate, swap elements as orientation changes</li><li>Take advantage &mdash; move components to logical location, change size & shape, show different content (as in the Jamie Oliver recipe application that shows longer how-to info in landscape and short text & ingredients in portrait)</li><li>Soft keyboard &mdash; might cover a lot more of your UI</li></ul></div></div>
+					</section>
+
+				<!-- - - - - - - - - - - - - - - - - NEW TOPIC - - - - - - - - - - - - - - - - -->
+				<section>
+					<h1 class="topicH1 l_topic"><img src="../images/topic.png"/>Topic</h1>
+					<h5 style="clear:both;" class="l_gestures">Gestures</h5>
+					<div class="slidenote"><div class="l_slidenote_gestures"></div></div>
+				</section>
+
+
+				<section>
+					<h2 class="l_gestures">Gestures</h2>
+					<p align="left" class="l_shake">Shake</p><br>
+					<p align="left" class="l_swipe">Swipe</p><br>
+					<p align="left" class="l_touch">Touch start, end, move, and cancel</p><br>
+					<p align="left" class="l_pinch">Pinch (iOS)</p><br>
+					<p align="left" class="l_long">Long press</p><br>
+					<p align="left" class="l_pitch">Pitch, roll, and yaw</p>
+					<div class="slidenote"><div class="l_slidenote_gestures_detail">Other than taps, you can react to these gestures<br>(don't go too deep here, there are upcoming slides for that)</div></div>
+					</section>			
+				
+				<section>
+					<h2 class="l_shake">Shake</h2>
+					<p class="l_shake_image"><img src="images/shake.png" style="margin-top:5px;height:300px;float:right;"/></p>
+					<p align="left" class="l_ti_gesture">Ti.Gesture.shake</p><br>
+					<p align="left" class="l_ev_obj">Event object properties</p><br>
+					<p class="l_shake_code_image"><img src="images/shake-code.png" style="margin-top:5px;height:200px;"/></p>
+					<div class="slidenote"><div class="l_slidenote_shake">timestamp is useful to track the time since last shake<br>Useful for not over reacting to shakes (delay before counting as a new shake event)</div>
+				</div></section>
+				
+				<section>
+					<h2 class="l_swipes">Swipes</h2>
+					<p class="l_swipe_image" style="margin-top:5px;width:300px;float:right;"><img src="images/swipe.png" width="320"/></p>
+					<div  style="float:left;width:70%;">
+					<p align="left" class="l_built_in">Built-in event on most Ti.UI elements</p><br>
+					<p align="left" class="l_ev_obj_props">Event object properties:</p><br>
+					<ul style="width:100%; margin-left:30px;">
+			    		<li class="l_direction">direction</li>
+						<li class="l_source">source</li>
+						<li class="l_xy">x/y coords</li>
+			    	</ul>
+					</div>
+					<div class="slidenote"><div class="l_slidenote_swipes">Swipe supported on pretty much all Ti.UI components<br>Most likely to be used on views, windows, tableviews, imageviews, labels, web views<br>Key object properties are direction (left or right) and source</div>
+				</div></section>
+				
+				<section>
+					<h2 class="l_touches">Touches</h2>
+					<p align="left" class="l_built_in">Built-in event on most Ti.UI elements</p><br>
+					<p align="left" class="l_subtypes">Subtypes: touchstart, touchmove, touchend, touchcancel</p><br>
+					<p align="left" class="l_ev_obj_props">Event object properties:</p><br>
+					<ul style="width:100%; margin-left:30px;">
+						<li class="l_source">source</li>
+						<li class="l_xy">x/y coords</li>
+			    	</ul><br><br>
+					<p align="left" class="l_touchmove">touchmove fires continuously during event</p><br>
+					<div class="slidenote"><div class="l_slidenote_touches">touchcancel fired when your app is interrupted (phone call)<br>Use x/y coordinates to determine direction</div>
+				</div></section>
+				
+				<section>
+					<h2 class="l_pinch">Pinch</h2>
+					<p class="l_pinch_image"><img src="images/pinch.png" style="margin-top:5px;height:300px;float:right;"/></p>
+					<p align="left" class="l_ios_pinchV2">iOS and Android</p><br>
+					<p align="left" class="l_zoom">Zoom only (no rotation)</p><br>
+					<p class="l_pinch_code_image"><img src="images/pinch-code.png" style="margin-top:5px;height:200px;"/></p>
+					<div class="slidenote"><div class="l_slidenote_pinchV2">iOS pinch support added in 1.8.0.1, Android support in 2.1<br><br>Only pinch to zoom supported now, rotation might be added</div>
+				</div>
+				</section>
+	
+				<section>
+					<h2 class="l_long_press">Long press</h2>
+					<ul style="width:80%;">
+						<li class="l_longpress1">Supported by most UI elements</li>
+						<li class="l_longpress2">Keep in mind native UI conventions for long presses</li>
+						<li class="l_longpress3">Native support since 1.8, simulate with touchstart/touchend for older SDKs</li>
+					</ul>
+					<div class="slidenote"><div class="l_slidenote_long_pressV2">Native support for long press added in 1.8.0.1<br>Simulate in older SDKs by tracking touchstart and touchend<br><br>Keep in mind native conventions: e.g. on iOS, longpress selects word to look up definition</div></div>
+					</section>
+
+				<section>
+					<h2 class="l_acc">Gyroscope (via Accelerometer)</h2>
+					<p align="left" class="l_ios_android">iOS and Android natively support gyroscope</p><br>
+					<p align="left" class="l_ti_apis">Titanium APIs don't support it currently</p><br>
+					<p align="left" class="l_not_all">Not all devices include necessary gyro hardware</p><br>
+					<p align="left" class="l_approx">Approximation: Use the accelerometer to track pitch, roll, and yaw changes</p><br>
+					<div class="slidenote"><div class="l_slidenote_acc">Android and iOS support gyroscope APIs to track rotational changes<br>But not currently supported in Titanium APIs<br>Use linear acceleration from accelerometer as workaround<br>Detect 3-axis change values and will probably need some good math to get accurate correspondence to pitch, roll, yaw<br><b>Demo must be run on a device</b><br>Phone tab > Accelerometer<br>Resources/examples/accelerometer.js</div></div>
+					</section>
+					
+				<section>
+					<h1 class="l_qa">Q&amp;A</h1>
+					<div class="slidenote"><div class="l_slidenote_qa"></div></div>
+				</section>
+				
+				<section>
+					<h1 class="l_lab_goals">Lab Goals</h1>
+					<p align="left" class="l_update_simple">Update simple app to add orientation support</p><br>
+					<p align="left" class="l_update_data">Update data based on swipe and shake events</p><br>					
+					<p class="l_labURL" style="font-size:0.7em;margin-top:20px;"><a href='https://wiki.appcelerator.org/display/td/325+-+Handling+Gestures+and+Orientation+Changes'>wiki.appcelerator.org/display/td/325+-+Handling+Gestures+and+Orientation+Changes</a></p>
+					<div class="slidenote"><div class="l_slidenote_lab_goals">In this lab you will create modify a simple UI based on orientation changes and then alter than data based on swipe and shake gesture events. When the phone registers the shake event, it will choose a random photo to display as the album image. When you swipe over the copy, it will choose a random one for display as well. Rotation of device will reorient the content of the window to be more effectively located.</div></div>
+				</section>
+				
+
+			</div>
+
+			<!-- MAKE NO CHANGES BELOW THIS LINE -->
+
+			<!-- Appc logo and presenter notes -->
+			<div id="appclogo"><a href="../index.html"><img src="../images/appu_thumb.png"/></a></div>
+			<a id="presenternotes" onClick="openPresenterNotes()"><img src="../images/presenternotes.png" title='Open Presenter Notes Window' alt='Presenter notes'/></a>
+
+			<!-- The navigational controls UI -->
+			<aside class="controls">
+				<a class="left" href="#">&#x25C4;</a>
+				<a class="right" href="#">&#x25BA;</a>
+				<a class="up" href="#">&#x25B2;</a>
+				<a class="down" href="#">&#x25BC;</a>
+			</aside>
+
+			<!-- Displays presentation progress, max value changes via JS to reflect # of slides -->
+			<div class="progress"><span></span></div>
+			
+		</div>
+		
+		<script src="../../presentation-engine/reveal.js/js/reveal.js"></script>
+		<script src="../../presentation-engine/reveal.js/lib/highlight.js"></script>
+		<script>
+			// Parse the query string into a key/value object
+			var query = {};
+			location.search.replace( /[A-Z0-9]+?=(\w*)/gi, function(a) {
+				query[ a.split( '=' ).shift() ] = a.split( '=' ).pop();
+			} );
+
+			Reveal.initialize({
+				// Display controls in the bottom right corner
+				controls: true,
+
+				// Display a presentation progress bar
+				progress: true,
+
+				// If true; each slide will be pushed to the browser history
+				history: true,
+
+				// Flags if mouse wheel navigation should be enabled
+				mouseWheel: true,
+
+				// Apply a 3D roll to links on hover
+				rollingLinks: true,
+
+				// UI style
+				theme: query.theme || 'default', // default/neon
+
+				// Transition style
+				transition: query.transition || 'default' // default/cube/page/concave/linear(2d)
+			});
+
+			hljs.initHighlightingOnLoad();
+		</script>
+		<script src="../../presentation-engine/js/localize.js"></script>
+		<script>
+			var presenterNotesWindow = null;
+			function openPresenterNotes() {
+				presenterNotesWindow = window.open('presenternotes.html', presenterNotesWindow, "location=0,menubar=no,toolbar=no,height=480,width=640");
+			}
+			var s = (function load(){
+				var s = {};
+				if(window.outerHeight){
+					s = { w: window.outerWidth, h: window.outerHeight};
+				}
+				else {
+					s = { w: document.body.clientWidth, h: document.body.clientHeight};
+				}
+				return s;
+			})();
+			if(s.w < 1000 || s.h < 800) {
+				var slides = document.querySelectorAll( '#reveal .slides' );
+				for( var i = 0, len = slides.length; i < len; i++ ) {
+					slides[i].classList.add( 'smallscreen' );
+			    }
+			}
+		</script>
+	</body>
+</html>

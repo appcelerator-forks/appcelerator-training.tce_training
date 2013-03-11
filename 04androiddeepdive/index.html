@@ -1,0 +1,525 @@
+<!doctype html>  
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Android API Deep Dive</title>
+		<meta name="description" content="Android API Deep Dive, Advanced Titanium Mobile Development">
+    	<meta name="author" content="Appcelerator, Inc." />
+		
+		<link href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+		<link rel="stylesheet" href="../../presentation-engine/reveal.js/css/reset.css">
+		<link rel="stylesheet" href="../../presentation-engine/reveal.js/css/main.css">
+		<link rel="stylesheet" href="../css/magula.css">
+		<link rel="stylesheet" href="../css/presentation.css">
+		<script type="text/javascript" src="../../presentation-engine/js/l10n.js"></script>
+		<script type="text/javascript" src="i18n/localizations.js"></script>
+		<script>
+		function loadStyleSheet(url){
+		    if(document.createStyleSheet) {
+		        try {document.createStyleSheet(url);} catch (e) { }
+		    }
+		    else{
+		        var css;
+		        css         = document.createElement('link');
+		        css.rel     = 'stylesheet';
+		        css.type    = 'text/css';
+		        css.media   = "all";
+		        css.href    = url;
+		        document.getElementsByTagName("head")[0].appendChild(css);
+		    }
+		}
+		var browserlang = document.documentElement.lang || String.locale || 'en-US';
+		loadStyleSheet('../css/'+browserlang+'.css');
+		</script>
+		<link rel="stylesheet" href="../../presentation-engine/reveal.js/css/print.css" media="print">
+	</head>
+	
+	<body>
+		<div id="reveal">	
+			<!-- Any section element inside of this container is displayed as a slide -->
+
+			<!--
+				SLIDE INSTRUCTIONS:
+					- Set the <title> tag to this lesson's US English title
+					- Set the <meta description tag to the US English course & lesson title
+					- Add one <section></section> for each slide. Slides can contain most any valid HTML
+					- Each text tag (<p> or <li> or <h1> etc.) must have a class name that begins with
+						"l_" and is unique. Each of those class names must be added to the i18n/localizations.js
+						file and their values must be set equal to the US English version of the strings. That 
+						file is used for translation and its contents OVERRIDES the text in this file.
+					- Each slide must have a <div class="slidenote"></div> container, which can be empty. These
+						are used for presenter notes. They also must be given unique "l_" classnames and strings
+						provided in the localizations.js file.
+					- Please use inline CSS on the slides to size & arrange contents.
+					- Graphics should be placed in the images folder and cropped/sized appropriately.
+					- Assume a 1024 x 768 display resolution
+					- A link to the index.html for each lesson must be added in order to the coursename/index.html
+						title slide.
+			-->
+			
+			
+			<div class="slides">
+				
+				<section>
+					<h1 style="margin-top:100px;" class="l_lessontitle">Android API Deep Dive</h1>
+					<h5 class="l_subtitle">Advanced Titanium Mobile Development</h5>
+					<script>
+						// DO NOT REMOVE THIS, MUST BE INCLUDED WITH THE FIRST SLIDE
+						if( navigator.userAgent.match( /(iPhone|iPad|iPod|Android)/i ) )
+						document.write( '<p style="color: rgba(0,0,0,0.3); text-shadow: none;">('+'Tap to navigate'+')</p>' );
+					</script>
+				<div class="slidenote"><div class="l_slidenote_titleslide"><b>Module time: 90 mins</b>(60 mins teaching, 30 mins lab)</div></div>
+				</section>
+				
+				<section id="agenda">
+					<h1 style="margin-top:50px;" class="l_agenda_title">Agenda</h1>
+			    	<ul style="width:100%; margin-left:30px;">
+			    		<li class="l_agenda1">Platform characteristics</li>
+			    		<li class="l_agenda2">Android vocabulary</li>
+			    		<li class="l_agenda3">Android Specific Configuration Options</li>
+						<li class="l_agenda4">Android Specific UI APIs</li>
+						<li class="l_agenda5">Android Specific Non-visual APIs</li>
+						<li class="l_agenda6">Lab</li>
+			    	</ul>
+					
+					<div class="slidenote">
+						<!-- Please use a classname that relates to the associated slide content. For example, this
+							slide is the agenda, thus the class is l_slidenote_agenda
+						 -->
+						<div class="l_slidenote_agenda"></div></div>
+				</section>
+				
+				<section>
+					<h2 class="l_android_strengths">Android Platform Strengths</h2>
+					<p align="left" class="l_open">Open nature (Hackable)</p><br>
+					<p align="left" class="l_variety">Variety of app distribution methods</p><br>
+					<p align="left" class="l_low_cost">Low cost handsets on a variety of hardware</p><br>
+					<p align="left" class="l_java">Java-based environment (common skill set)</p><br>
+					<p align="left" class="l_great">Many great Google apps</p>
+					<div class="slidenote"><div class="l_slidenote_android_strengths">Some carriers restrict installation of non-market apps</div></div>
+				</section>
+
+				<section>
+					<h2 class="l_ti_android_strengths">Ti Android Platform Strengths</h2>
+					<p align="left" class="l_ios_support">Lots of support for OS specific functionality, focus on 'best of breed' experience</p><br>
+					<p align="left" class="l_easy_dep">Easy deployment to devices for testing</p><br>
+					<p align="left" class="l_easy_distr">Easy to distribute apps for testing</p><br>
+					<p align="left" class="l_easy_market">Easy to deploy apps to market</p>
+					<div class="slidenote"><div class="l_slidenote_ti_android_strengths"></div></div>
+				</section>				
+				
+				<section>
+					<h2 class="l_android_weaknesses">Android Platform Weaknesses</h2>
+					<p align="left" class="l_open">Open nature (Hackable)</p><br>
+					<p align="left" class="l_large_dist">Large distribution of device screen types, hardware capabilities, OS versions...</p><br>
+					<p align="left" class="l_less_active">Less active app economy (fewer purchases)</p><br>
+					<p align="left" class="l_confusing">Confusing UX (Linux on a handset!)</p>
+					<div class="slidenote"><div class="l_slidenote_android_weaknesses"><ul><li>Carrier themes add a layer of complexity in UI design (button backgrounds or default text vary by carrier themes, for example)</li><li>UX is perhaps more confusing for novices, general public than for typical developer or tech geek</li></ul></div></div>
+				</section>
+				
+				<section>
+					<h2 class="l_ti_android_weaknesses">Ti Android Platform Weaknesses</h2>
+					<p align="left" class="l_parity">API Parity - Platform diversity can make adding features slower</p><br>
+					<p align="left" class="l_builtin_ui">Not as many built-in UI components (platform weakness really)</p><br>
+					<p align="left" class="l_js_engine">JavaScript engine performance - V8 is fast!(but Rhino not so much)</p>
+					<div class="slidenote"><div class="l_slidenote_ti_android_weaknesses"><ul><li>API parity issues is basically a growing-pains result, we're doing our best to catch up and achieve parity</li><li>SDK 1.8 added V8 JS engine, which is much faster than Rhino</li><li>Rhino also supported for pre-Android 2.2 devices</li></ul></div></div>
+				</section>
+				
+				<section>
+					<h1 class="l_many_dev">Many devices &amp; form factors - test!</h1>
+					<div class="slidenote"><div class="l_slidenote_many_dev">Phones, tablets, various operating system versions, vendor skins, carrier add-ons, forked versions<br>Need to test as widely as possible<br>Test on device</div></div>
+				</section>
+				
+				<section>
+					<h2 class="l_android_key">Android Application Key Components</h2>
+					<ul style="width:100%; margin-left:30px;">
+			    		<li class="l_activities">Activities</li>
+			    		<li class="l_services">Services</li>
+			    		<li class="l_broadcast">Broadcast Receivers</li>
+						<li class="l_intents">Intents</li>
+			    	</ul>
+					<p align="left" class="l_necessary">It is necessary to understand and implement these in Ti to provide a native experience</p><br>
+					<p class="l_android_url" style="font-size:0.7em;margin-top:20px;"><a href='http://developer.android.com/guide/topics/fundamentals.html'>http://developer.android.com/guide/topics/fundamentals.html</a></p>
+					<div class="slidenote"><div class="l_slidenote_android_key"><ul><li>Every app has at least one activity and might implement the other components listed here. </li><li><b>READ THE ANDROID APP FUNDAMENTALS!  Don't cheat and hope Titanium will understand all of Aandroid for you!</b></li></ul></div></div>
+				</section>
+				
+				<section>
+					<h2 class="l_android_vocab">Android Vocabulary</h2>
+					<h2 style="margin-top:50px;" class="l_activity">Activity</h2>
+					<p align="left" class="l_activity_def" style="font-style:italic;">'An activity is a single, focused thing that the user can do. Almost all activities interact with the user, so the Activity class takes care of creating a window for you in which you can place your UI'</p><br>
+					<p class="l_activity_url" style="font-size:0.7em;margin-top:20px;"><a href='http://developer.android.com/reference/android/app/Activity.html'>http://developer.android.com/reference/android/app/Activity.html</a></p>
+					<div class="slidenote"><div class="l_slidenote_android_vocab">An app is made up from one or more activities: one to list email messages, one to compose a message, one to read a message, etc.</div></div>
+				</section>
+				
+				<section>
+					<h2 class="l_android_vocab">Android Vocabulary</h2>
+					<h2 style="margin-top:50px;" class="l_service">Service</h2>
+					<p align="left" class="l_service_def" style="font-style:italic;">'A Service is an application component representing either an application's desire to perform a longer-running operation while not interacting with the user or to supply functionality for other applications to use.'</p><br>
+					<p class="l_service_url" style="font-size:0.7em;margin-top:20px;"><a href='http://developer.android.com/reference/android/app/Service.html'>http://developer.android.com/reference/android/app/Service.html</a></p>
+					<div class="slidenote"><div class="l_slidenote_android_vocab_2"><ul><li>Play music in the background</li><li>Check a network source periodically</li><li>Listen for data from a local or remote resource</li></ul></div></div>
+				</section>
+				
+				<section>
+					<h2 class="l_android_vocab">Android Vocabulary</h2>
+					<h2 style="margin-top:50px;" class="l_broadcast">Broadcast Receiver</h2>
+					<p align="left" class="l_broadcast_def" style="font-style:italic;">'A broadcast receiver is a component that responds to system-wide broadcast announcements'</p><br>
+					<p class="l_broadcast_url" style="font-size:0.7em;margin-top:20px;"><a href='http://developer.android.com/reference/android/content/BroadcastReceiver.html'>http://developer.android.com/reference/android/content/BroadcastReceiver.html</a></p>
+					<div class="slidenote"><div class="l_slidenote_android_vocab_3"><ul><li>System broadcasts: screen is on/off, battery is low, picture was captured</li><li>Your app could initiate a broadcast (when data is available to be used by other apps) or react to broadcasts</li><li>Broadcasts don't interact with the user (no UI) except via a notification in the Notification Bar</li></ul></div></div>
+				</section>
+				
+				<section>
+					<h2 class="l_android_vocab">Android Vocabulary</h2>
+					<h2 style="margin-top:50px;" class="l_intent">Intent</h2>
+					<p align="left" class="l_intent_def" style="font-style:italic;">'Three of the core components of an application - activities, services, and broadcast receivers - are activated through messages, called intents.'</p><br>
+					<p class="l_intent_url" style="font-size:0.7em;margin-top:20px;"><a href='http://developer.android.com/guide/topics/intents/intents-filters.html'>http://developer.android.com/guide/topics/intents/intents-filters.html</a></p>
+					<div class="slidenote"><div class="l_slidenote_android_vocab_4"><ul><li>Intents are basically message objects that hold data which pass from one activity to a service, or one activity to another activity, etc.</li><li>Broadcasts are communicated in the form of events</li><li>For security reasons, your app can't directly start an activity in another app. Instead, you send an intent requesting that activity and the OS starts the activity on your app's behalf</li><li>You can request service from another activity directly (call on it) or you can publish an intent and a 'filter' describing the type of service you need and let the OS find appropriate activities for you (think of how the Share button works &mdash; your app is publishing some text and the OS is returning all the activities that could share that text: email, twitter, etc.</li></ul></div></div>
+				</section>
+				
+				<section>
+					<h1 class="l_all_these">All of these work in Ti</h1>
+					<div class="slidenote"><div class="l_slidenote_all_these">Much of this goes on behind the scenes without you having to worry a lot over it. But you can manage the process and take specific actions to capitalize on this application architecture</div></div>
+				</section>
+				
+				<section>
+					<h2 class="l_android_config">Android Configuration</h2>
+					<p align="left" class="l_core_os">Most of the core OS services are configured in AndroidManifest.xml</p><br>
+					<p align="left" class="l_tiapp">AndroidManifest.xml properties can be configured in tiapp.xml</p><br>
+					<p align="left" class="l_custom">You can also have a custom AndroidManifest.xml</p><br>
+					<p align="left" class="l_demo_tiapp">Demo: tiapp.xml config and custom AndroidManifest.xml</p>
+					<div class="slidenote"><div class="l_slidenote_android_config"><ul><li>Activities, services, &amp; content providers not defined in the manifest are not visible to the OS and therefore cannot be started</li><li>Titanium adds these elements, but you could also define or configure them yourself</li><li>Also use the manifest to define hardware needs (orientation, screen size &amp; density, platform version)</li></ul><b>Demo</b><ul><li>Show kitchen sink tiapp.xml &mdash; activity &amp; services configurations</li><li>Via finder, open KS/build/android/AndroidManifest.xml</li><li><intent-filter> describes the capabilities of your activities so the OS knows what type of intents they could respond to</li><li>Explain how you could create a custom manifest (covered in Orientation module)</li></ul></div></div>
+				</section>
+				
+				<!-- - - - - - - - - - - - - - - - - NEW TOPIC - - - - - - - - - - - - - - - - -->
+				<section>
+					<h1 class="topicH1 l_topic"><img src="../images/topic.png"/>Topic</h1>
+					<h5 style="clear:both;" class="l_android_ui_api">Android UI APIs</h5>
+					<div class="slidenote"><div class="l_slidenote_android_ui_api"></div></div>
+				</section>
+
+				
+				<section>
+					<h2 class="l_windows">Windows</h2>
+					<ul style="width:40%;float:left;">
+						<li class="l_win1">Lightweight == full-screen view</li>
+						<li class="l_win2">Heavyweight == Activity</li>
+						<li class="l_win3">Title bar only with Heavyweight windows</li>
+						<li class="l_win4">No pre-built animations like with iOS</li>
+					</ul>
+					<pre style="width:550px;float:right;"><code contenteditable>
+"#win": {
+  fullscreen: false,
+  navBarHidden: false,
+  modal: false,
+  windowSoftInputMode: Ti.UI.Android.SOFT_INPUT_ADJUST_PAN
+}
+					</code></pre>
+					<p class="" style="clear:both;font-size:0.7em;margin-top:100px;"><a href='http://docs.appcelerator.com/titanium/latest/#!/guide/Android_Platform_Overview-section-29004888_AndroidPlatformOverview-Activities'>Guides > Building Mobile Apps > Cross-Platform Mobile > Android Platform Overview</a></p>
+					<div class="slidenote"><div class="l_slidenote_windows">A 'heavyweight' window is Ti terminology for an Activity<br/><br>You can have a lightweight window that isn't exactly equivalent to an Activity, more like a full-screen view<br><br/>To force a Ti window to be a heavyweight window (an activity), set navBarHidden=true or set fullscreen=true or false and see the URL here for a couple of extra ways</div></div>
+				</section>
+				
+				<section>
+					<h2 class="l_hardware">Hardware Menu</h2>
+					<p align="left" class="l_menu_options">Menu of options displayed when hardware button is pressed</p><br>
+					<p align="left" class="">Associated with an activity (heavyweight Titanium Window)</p><br>
+					<p align="left" class="l_text_icons">Can configure text and icons</p><br>
+					<div class="slidenote"><div class="l_slidenote_hardware">Demo: KitchenSink &mdash; android_menu1, 2, and 3</div></div>
+				</section>
+
+				<section>
+					<h2 style="" class="l_menuold">Menu Example - pre-ICS</h2>
+					<pre style=""><code contenteditable>
+var w = Ti.UI.createWindow({
+  backgroundColor : 'blue',
+  navBarHidden : false,
+  activity : {
+    onCreateOptionsMenu : function(e) {
+    var menu = e.menu;
+
+    var m1 = menu.add({ title : 'Close Window' });
+    m1.setIcon(Titanium.Android.R.drawable.ic_menu_close_clear_cancel);
+    m1.addEventListener('click', function(e) {
+      w.close();
+    });
+    }
+  }
+});
+					</code></pre>
+					<div class="slidenote"><div class="l_slidenote_menuold"></div></div>
+				</section>
+
+				<section>
+					<h2 style="" class="l_menuics">ICS Menu Example - Manifest</h2>
+					<pre style=""><code contenteditable>
+&lt;android xmlns:android="http://schemas.android.com/apk/res/android"> 
+    &lt;tool-api-level>11&lt;/tool-api-level> 
+    &lt;manifest> 
+        &lt;uses-sdk android:targetSdkVersion="11"/> 
+        &lt;!-- other manifest entries --> 
+    &lt;/manifest> 
+&lt;/android>
+					</code></pre>
+					<div class="slidenote"><div class="l_slidenote_menuics"></div></div>
+				</section>
+
+				<section>
+					<h2 style="" class="l_menuicsb">ICS Menu Example - Code</h2>
+					<pre style=""><code contenteditable>
+$.win.activity.onCreateOptionsMenu = function(e) { 
+    var menu = e.menu; 
+    var menuItem = menu.add({ 
+        title : "Compose", 
+        icon : "images/compose_icon.png", 
+        showAsAction : Ti.Android.SHOW_AS_ACTION_IF_ROOM 
+    }); 
+    menuItem.addEventListener("click", function(e) { 
+        Ti.API.info("Action Item Clicked!"); 
+    }); 
+};
+					</code></pre>
+					<div class="slidenote"><div class="l_slidenote_menuicsb"></div></div>
+				</section>
+				
+				<section>
+					<h2 class="l_android_labels">Android Labels</h2>
+					<p align="left" class="l_much_ios">Much more capable than iOS Labels</p><br>
+					<p align="left" class="l_styling_props">Styling properties on creation same cross platform</p><br>
+					<p align="left" class="l_android_inline">Android can display inline HTML (basic formatting tags)</p><br>
+					<p align="left" class="l_android_links">Android can display links inline (web, tel, maps)</p><br>
+					<p align="left" class="l_demo_label">Demo: Label gymnastics</p><br>
+					<div class="slidenote"><div class="l_slidenote_android_labelsv2">Demo - KitchenSink: label_linkify.js<br>iOS supports similar auto-linking on text areas<br/>Ti 3.0: Android now supports autolinking on textareas</div></div>
+				</section>
+				
+				<section>
+					<h2 class="l_toast">Toast Notifications</h2>
+					<p class="l_toast_image"><img src="images/toast.png" style="margin-top:5px;height:380px;float:right;"/></p>
+					<p align="left" class="l_simple_txt">Simple text display over all activities</p><br>
+					<p align="left" class="l_control_pos">Can control positioning on screen</p><br>
+					<p align="left" class="l_render_ios">Rendering will be different based on OS version and skin</p><br>
+					<pre style="width:75%;margin-left:10px;"><code contenteditable>
+var n = Ti.UI.createNotification({message:"Howdy folks"});
+n.duration = Ti.UI.NOTIFICATION_DURATION_LONG; 
+// or NOTIFICATION_DURATION_SHORT
+
+// Setup the X & Y Offsets
+n.offsetX = 100;
+n.offsetY = 75;
+
+n.show();
+					</code></pre>
+
+					<div class="slidenote"><div class="l_slidenote_toast">Demo: KitchenSink Platform>Notifications<br>And see notification.js<br>The offsetX and offSetY coordinates are relative to the default location for the notification<br>and corresponds to the center point of the notification bubble</div></div>
+				</section>
+				
+				<section>
+					<h2 class="l_hijack">Hijacking the Back Button</h2>
+					<p align="left" class="l_override_back">Sometimes you want to override back button for your activity to provide better behavior</p><br>
+					<p align="left" class="l_wizard">Example: Wizard interface, where you want “back” to go back to a previous state in the UI</p><br>
+					<p align="left" class="l_careful">Careful about this!  Users expect back to go back to another activity (most of the time)</p><br>
+					<p align="left" class="l_demo_back">Demo: back button event</p><br>
+					<div class="slidenote"><div class="l_slidenote_hijackv2"><ul><li><b>Demo</b>AndroidBackDemo project on the TCMD github repository<br>https://github.com/appcelerator-training/tcmd_certification/blob/master/workspace/AndroidBackDemo.zip</li><li>View hijacks the back button &amp; closes<br>Then restores it so you can close the window</li><li>In the event listener, you can monitor the other hardware buttons in the form:<br>androidcamera<br>androidhome (colon removed in Ti 3.0, e.g. was android:camera)</li></ul></div></div>
+				</section>
+				
+				<!-- - - - - - - - - - - - - - - - - NEW TOPIC - - - - - - - - - - - - - - - - -->
+				<section>
+					<h1 class="topicH1 l_topic"><img src="../images/topic.png"/>Topic</h1>
+					<h5 style="clear:both;" class="l_nonvisual">Non-visual APIs</h5>
+					<div class="slidenote"><div class="l_slidenote_nonvisual"></div></div>
+				</section>
+
+				
+				<section>
+					<h2 class="l_launch_act">Launching Activities</h2>
+					<p align="left" class="l_launch_other">You can launch other apps (activities) from JS</p><br>
+					<p align="left" class="l_intent_pass">Need to have an intent object to pass</p><br>
+					<p align="left" class="l_many_built">Many built in intents to use</p><br>
+					<p align="left" class="l_forging_ti">Forging Titanium #9 - Android Intents Cookbook</p><br>
+					<p class="l_launch_act_url" style="font-size:0.7em;margin-top:20px;"><a href='http://bit.ly/ryOSW4'>http://bit.ly/ryOSW4 </a></p>
+					<div class="slidenote"><div class="l_slidenote_launch_act">An app is made up from one or more activities: one to list email messages, one to compose a message, one to read a message, etc.<br>Other apps can start an activity within your app and your app can start activities in other apps<br>This gives a way to share functionality and make it appear to be part of your app</div></div>
+				</section>
+
+				<section>
+					<h2 style="" class="l_intentexample">Example</h2>
+					<pre style=""><code contenteditable>
+// create an Android intent whose action is to send plain text data
+var intent = Ti.Android.createIntent({
+  action: Ti.Android.ACTION_SEND,
+  type: 'text/plain'
+});
+// define two extra fields for the intent
+intent.putExtra(Ti.Android.EXTRA_SUBJECT, 'Isn\'t This Cool!');
+intent.putExtra(Ti.Android.EXTRA_TEXT, $.message.value);
+
+try {
+  Ti.Android.currentActivity.startActivity(intent);
+} catch (ex) {
+  /* Handle Exception if no suitable apps installed */
+  Ti.UI.createNotification({ message : 'No sharing apps installed!' }).show();
+}
+
+					</code></pre>
+					<div class="slidenote"><div class="l_slidenote_intentexample"></div></div>
+				</section>
+				
+				<section>
+					<h2 class="l_service_supp">Service Support</h2>
+					<p align="left" class="l_js_service">You can have JS-based services running in the background</p><br>
+					<p align="left" class="l_can_comm">Can communicate with it from your main application</p><br>
+					<p align="left" class="l_demo_bg">Demo: background service</p><br>
+					<div class="slidenote"><div class="l_slidenote_service_supp">Demo KitchenSink<br>See android_services.js and Resources/android/testservice.js<br>Plus see entry in tiapp.xml</div></div>
+				</section>
+				
+				<section>
+					<h2 class="l_calendar_int">Calendar and Event Integration</h2>
+					<p align="left" class="l_android_excl">Android exclusive feature, can't do it on iOS</p><br>
+					<p align="left" class="l_add_events">Add events to calendars, and alarms for status bar</p><br>
+					<p align="left" class="l_calendar_module">Ti.Android.Calendar module</p><br>
+					<div class="slidenote"><div class="l_slidenote_scalendar_int"></div></div>
+				</section>
+				
+				<section>
+					<h2 class="l_app_resources">Application Resources</h2>
+					<p align="left" class="l_js_r">JS access to R.java - http://developer.android.com/reference/android/R.html</p><br>
+					<p align="left" class="l_drawable">R.drawable - built in icons for ImageView, etc.</p><br>
+					<p align="left" class="l_r_string">R.string - OS localized string for 'OK', 'Cancel', etc</p><br>
+					<p align="left" class="l_android_docs">Android docs required to see properties</p><br>
+					<p align="left" class="l_demo_resources_js">Demo: R resources in JS</p><br>
+					<div class="slidenote"><div class="l_slidenote_app_resources">Resources are assets, such as images, strings, layouts, animations, etc that are maintained external from your app so that you can swap, maintain, management outside of your code<br>R is the class that represents resources in your app<br>Accessible in Ti. via Android.R class, see http://developer.appcelerator.com/apidoc/mobile/latest/Titanium.App.Android.R-object<br>Demo: KitchenSink android_menu_2.js, line 24<br>Uses some of the built-in icons</div></div>
+				</section>
+
+				<section>
+					<h2 style="" class="l_splashscreens">Using a 9-patch for the Splash Screen</h2>
+					<ol style="width:80%;">
+						<li class="l_splashstep1">Create a 9-patch image using draw9patch utility</li>
+						<li class="l_splashstep2">Copy to platform/android/res/drawable[-xdpi]</li>
+						<li class="l_splashstep3">Rename it to splash.9.png</li>
+						<li class="l_splashstep4">Create a theme.xml file, put it in platform/android/res/values</li>
+					</ol>
+					<pre style=""><code contenteditable>
+&lt;?xml version="1.0" encoding="utf-8"?>
+&lt;resources>
+&lt;style name="Theme.Titanium" parent="android:Theme">
+    &lt;item name="android:windowBackground">@drawable/splash&lt;/item>
+    &lt;item name="android:windowNoTitle">true&lt;/item>
+&lt;/style>
+&lt;/resources>
+					</code></pre>
+					<div class="slidenote"><div class="l_slidenote_splashscreens"></div></div>
+				</section>
+
+				<section>
+					<h2 style="" class="l_external">Installing to the SD card</h2>
+					<ul style="width:80%;">
+						<li class="l_external1">Use tool-api-level 8 or higher</li>
+						<li class="l_external2">Set minSdkVersioin to 7 or higher</li>
+						<li class="l_external3">Add the following to the AndroidManifest.xml</li>
+					</ul>
+					<pre style=""><code contenteditable>
+&lt;android xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;&gt;
+   &lt;tool-api-level&gt;8&lt;/tool-api-level&gt;
+   &lt;manifest android:installLocation=&quot;preferExternal&quot;&gt;
+      &lt;uses-sdk android:minSdkVersion=&quot;7&quot; /&gt;
+   &lt;/manifest&gt;
+&lt;/android&gt;
+					</code></pre>
+					<div class="slidenote"><div class="l_slidenote_external"></div></div>
+				</section>
+
+
+				
+				<section>
+					<h1 class="l_qa">Q&amp;A</h1>
+					<div class="slidenote"><div class="l_slidenote_qa"></div></div>
+				</section>
+				
+				<section>
+					<h1 class="l_lab_goals">Lab Goals</h1>
+					<ul style="width:80%;">
+						<li class="l_lab1">Share data with an Intent</li>
+						<li class="l_lab2">Hide the keyboard using the Android-specific technique</li>
+						<li class="l_lab3">Use the Android-specific technique to prevent the soft keyboard from covering the text area</li>
+						<li class="l_lab4">Install the app to the external storage location</li>
+					</ul>
+					<p class="l_labURL" style="font-size:0.7em;margin-top:20px;"><a href='https://wiki.appcelerator.org/display/td/350+-+Android+API+Deep+Dive'>wiki.appcelerator.org/display/td/350+-+Android+API+Deep+Dive</a></p>
+					<div class="slidenote"><div class="l_slidenote_lab_goals">In this lab, you will enable an app to share text with other apps on the user's device. The app provides a simple text box. You'll plug in the code to share the text that users enter via an intent.</div></div>
+				</section>
+				
+			</div>
+
+			<!-- MAKE NO CHANGES BELOW THIS LINE -->
+
+			<!-- Appc logo and presenter notes -->
+			<div id="appclogo"><a href="../index.html"><img src="../images/appu_thumb.png"/></a></div>
+			<a id="presenternotes" onClick="openPresenterNotes()"><img src="../images/presenternotes.png" title='Open Presenter Notes Window' alt='Presenter notes'/></a>
+
+			<!-- The navigational controls UI -->
+			<aside class="controls">
+				<a class="left" href="#">&#x25C4;</a>
+				<a class="right" href="#">&#x25BA;</a>
+				<a class="up" href="#">&#x25B2;</a>
+				<a class="down" href="#">&#x25BC;</a>
+			</aside>
+
+			<!-- Displays presentation progress, max value changes via JS to reflect # of slides -->
+			<div class="progress"><span></span></div>
+			
+		</div>
+		
+		<script src="../../presentation-engine/reveal.js/js/reveal.js"></script>
+		<script src="../../presentation-engine/reveal.js/lib/highlight.js"></script>
+		<script>
+			// Parse the query string into a key/value object
+			var query = {};
+			location.search.replace( /[A-Z0-9]+?=(\w*)/gi, function(a) {
+				query[ a.split( '=' ).shift() ] = a.split( '=' ).pop();
+			} );
+
+			Reveal.initialize({
+				// Display controls in the bottom right corner
+				controls: true,
+
+				// Display a presentation progress bar
+				progress: true,
+
+				// If true; each slide will be pushed to the browser history
+				history: true,
+
+				// Flags if mouse wheel navigation should be enabled
+				mouseWheel: true,
+
+				// Apply a 3D roll to links on hover
+				rollingLinks: true,
+
+				// UI style
+				theme: query.theme || 'default', // default/neon
+
+				// Transition style
+				transition: query.transition || 'default' // default/cube/page/concave/linear(2d)
+			});
+
+			hljs.initHighlightingOnLoad();
+		</script>
+		<script src="../../presentation-engine/js/localize.js"></script>
+		<script>
+			var presenterNotesWindow = null;
+			function openPresenterNotes() {
+				presenterNotesWindow = window.open('presenternotes.html', presenterNotesWindow, "location=0,menubar=no,toolbar=no,height=480,width=640");
+			}
+			var s = (function load(){
+				var s = {};
+				if(window.outerHeight){
+					s = { w: window.outerWidth, h: window.outerHeight};
+				}
+				else {
+					s = { w: document.body.clientWidth, h: document.body.clientHeight};
+				}
+				return s;
+			})();
+			if(s.w < 1000 || s.h < 800) {
+				var slides = document.querySelectorAll( '#reveal .slides' );
+				for( var i = 0, len = slides.length; i < len; i++ ) {
+					slides[i].classList.add( 'smallscreen' );
+			    }
+			}
+		</script>
+	</body>
+</html>

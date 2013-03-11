@@ -1,0 +1,298 @@
+<!doctype html>  
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title class="l_labname">Lab - API Deep Dive - TableView</title>
+		<meta name="description" content="Advanced Titanium Mobile Development, Advanced UI Development">
+    	<meta name="author" content="Appcelerator, Inc." />
+		
+		<link href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+		<link rel="stylesheet" href="../../presentation-engine/reveal.js/css/reset.css">
+		<link rel="stylesheet" href="../../presentation-engine/reveal.js/css/main.css">
+		<link rel="stylesheet" href="../css/magula.css">
+		<link rel="stylesheet" href="../css/presentation.css">
+		<script type="text/javascript" src="../../presentation-engine/js/l10n.js"></script>
+		<script type="text/javascript" src="i18n/lablocalizations.js"></script>
+		<style>
+		html, body {
+			overflow: always !important;
+		}
+		.slides {
+			top: 40% !important;
+		}
+		</style>
+		<script>
+		function loadStyleSheet(url){
+		    if(document.createStyleSheet) {
+		        try {document.createStyleSheet(url);} catch (e) { }
+		    }
+		    else{
+		        var css;
+		        css         = document.createElement('link');
+		        css.rel     = 'stylesheet';
+		        css.type    = 'text/css';
+		        css.media   = "all";
+		        css.href    = url;
+		        document.getElementsByTagName("head")[0].appendChild(css);
+		    }
+		}
+		var browserlang = document.documentElement.lang || String.locale || 'en-US';
+		loadStyleSheet('../css/'+browserlang+'.css');
+		</script>
+		<link rel="stylesheet" href="../../presentation-engine/reveal.js/css/print.css" media="print">
+	</head>
+	
+	<body>
+		<div id="reveal">	
+			<!-- Any section element inside of this container is displayed as a slide -->
+
+			<!--
+				LAB FILE INSTRUCTIONS:
+					- Set the <title> tag to this lesson's US English title
+					- Set the <meta description tag to the US English course & lesson title
+					- Add one <section></section> for each slide. Slides can contain most any valid HTML
+					- Each text tag (<p> or <li> or <h1> etc.) must have a class name that begins with
+						"l_" and is unique. Each of those class names must be added to the i18n/localizations.js
+						file and their values must be set equal to the US English version of the strings. That 
+						file is used for translation and its contents OVERRIDES the text in this file.
+					- Each slide must have a <div class="slidenote"></div> container, which can be empty. These
+						are used for presenter notes. They also must be given unique "l_" classnames and strings
+						provided in the localizations.js file.
+					- Please use inline CSS on the slides to size & arrange contents.
+					- Graphics should be placed in the images folder and cropped/sized appropriately.
+					- Assume a 1024 x 768 display resolution
+					- A link to the index.html for each lesson must be added in order to the coursename/index.html
+						title slide.
+			-->
+			
+			
+<div class="slides">
+<div id="labwrapper">			
+<section>
+
+<!-- YOUR LAB CONTENT GOES HERE -->
+<h1 class="l_labname">Lab: API Deep Dive - TableView</h1>
+<p class="l_mission"><img src='https://wiki.appcelerator.org/download/attachments/14090413/Screenshot_13.png?version=1&modificationDate=1308316403000' style='height:300px;float:right;margin-top:-40px;margin-bottom: 10px;'><img src='https://wiki.appcelerator.org/download/attachments/14090413/Screenshot_12.png?version=1&modificationDate=1308316394000' style='height:300px;float:right;margin-top:-40px;margin-bottom: 10px;'><strong>Mission: </strong>In this lab assignment, you will implement a customized TableView.</p>
+
+<p class="l_specification"><strong>Specification: </strong> In this lab assignment, you will create a custom table that doesn’t fill the entire viewport. The table will contain customized rows with background images that differ based on the row’s location within the table. Each row will contain two images and two labels. When you tap a row, an event listener will implement these actions:
+<ul>
+	<li class="l_spec1">If the "letter ball" is tapped, the graphics will cycle through A-B-C then back to A to repeat.</li>
+	<li class="l_spec2">If the right image is clicked, it will change blue to red and vice-versa.</li>
+	<li class="l_spec3">Tapping either of the labels changes the row's background color briefly, but doesn't alter the labels.</li>
+</ul>
+	
+	</p>
+
+<table>
+	<tr>
+		<td colspan="2" class="labinstructions l_labstep1">1. Download the starting point files from <a href='http://assets.appcelerator.com.s3.amazonaws.com/app_u/atmd_labs/Starting/320_tableviews.zip'>S3: 320_tableviews (starting)</a>.  The archive includes the necessary graphics.</td>
+	</tr>
+	<tr>
+		<td class="tdfiller"><!-- leave empty--></td>
+		<td class="labexplanations l_labstepexplanation1"></td>
+	</tr>
+<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+<tr>
+	<td colspan="2" class="labinstructions l_labstep2">2. Create a new Alloy project with a name and App ID of your choice. Copy the downloaded graphics to the app/assets folder.</td>
+</tr>
+<tr>
+	<td class="tdfiller"><!-- leave empty--></td>
+	<td class="labexplanations l_labstepexplanation2"></td>
+</tr>
+<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+<tr>
+	<td colspan="2" class="labinstructions l_labstep3">3. In the index view, define a label and tableview. Create a second view/controller called row. It will define your custom rows.</td>
+</tr>
+<tr>
+	<td class="tdfiller"><!-- leave empty--></td>
+	<td class="labexplanations l_labstepexplanation3"></td>
+</tr>
+<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+<tr>
+	<td colspan="2" class="labinstructions l_labstep4">4. Modify the index and row style files to set the basic styles for the window, table, and rows. You'll define the first &amp; last rows' styling in the row controller.</td>
+</tr>
+<tr>
+	<td class="tdfiller"><!-- leave empty--></td>
+	<td class="labexplanations l_labstepexplanation4">
+					<ul style="width:80%;">
+						<li class="l_labstepexplfour1">The window's background should display the gradientBackground.png image.</li>
+						<li class="l_labstepexplfour2">Label text: 'Custom Table', color #3e3f87, bold 18dp text, set 1dp down and 10dp left.</li>
+						<li class="l_labstepexplfour3">Table: fill 90% of the width and 85% of the height, offset 45dp from the top with a transparent background.</li>
+						<li class="l_labstepexplfour4">On iOS, the table's separator style should be set to none.</li>
+					</ul>
+		
+	</td>
+</tr>
+<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+<tr>
+	<td colspan="2" class="labinstructions l_labstep5">5. Specify the row.tss file as follows:</td>
+</tr>
+<tr>
+	<td class="tdfiller"><!-- leave empty--></td>
+	<td class="labexplanations l_labstepexplanation5"><pre><code>
+".row": {
+	backgroundImage:'middleRow.png',
+	selectedBackgroundImage:'middleRowSelected.png',
+	backgroundColor:'transparent',
+	height:74
+},
+".left": {
+	height:64,
+	width:64,
+	top:8,
+	left:8
+},
+".right": {
+	image:'notificationBadge.png',
+	height:22,
+	width:25,
+	top:32,
+	right:10,
+	myImage:'blue'
+},
+".title": {
+	font:{
+		fontSize:16,
+		fontWeight:'bold'
+	},
+	color:'black',
+	top:20,
+	left:75,
+	height:Ti.UI.SIZE
+},
+".subtitle": {
+	font:{
+		fontSize:13,
+		fontWeight:'bold'
+	},
+	color:'black',
+	top:42,
+	left:75,
+	height:Ti.UI.SIZE
+}
+		
+	</code></pre></td>
+</tr>
+<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+<tr>
+	<td colspan="2" class="labinstructions l_labstep6">6. The rest of the work will be in the index and row controllers. In the index controller, you will populate the table and set the event listener. Follow these instructions:</td>
+</tr>
+<tr>
+	<td class="tdfiller"><!-- leave empty--></td>
+	<td class="labexplanations l_labstepexplanation6">Use a for-loop to create an array of 8 rows for your table, instantiating a new row view in each iteration of the loop. Set the primary label to “This is row” plus the row-number indicator. Set the secondary label to “Subtitle” and the row-number indicator. Set the myImage value to either ‘a’ or ‘b’ depending on whether your loop counter is odd or even. (Hint: use the modulus operator, %, to calculate this odd/even value.)
+	Push one additional custom row into the rows array. This row should pass these values:<br/><ul><li>row number: ‘last’</li><li>primary label: ‘This is the last row’</li><li>secondary label: ‘The last subtitle’</li><li>myImage: ‘c’</li></ul></td>
+</tr>
+<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+<tr>
+	<td colspan="2" class="labinstructions l_labstep7">7. Still in the index controller, add the event listener. Your goal is to use a single listener on the table rather than setting listeners on each row (or child component).</td>
+</tr>
+<tr>
+	<td class="tdfiller"><!-- leave empty--></td>
+	<td class="labexplanations l_labstepexplanation7">In the click listener, check the myImage property of the event source. Using a switch or if-else test, determine if myImage is set equal to a, b, c, blue, or red. If a, b, or c, swap the left image such that imageA becomes imageB, imageB becomes imageC, and imageC becomes imageA again. If the myImage property equals blue, the right image should change to images/notificationUnreadBadge.png otherwise it should swap back to images/notificationBadge.png.</td>
+</tr>
+<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+<tr>
+	<td colspan="2" class="labinstructions l_labstep8">8. Next, you'll work in the row controller to define the characteristics of each row as it's instantiated. You'll need a handle to the arguments passed in (e.g. <code>var args = arguments[0] || {};</code>). </td>
+</tr>
+<tr>
+	<td class="tdfiller"><!-- leave empty--></td>
+	<td class="labexplanations l_labstepexplanation8">Set the primary and secondary labels to the values passed in via the arguments. Set the left images statically in the controller: imageA.png or imageB.png, or imageC.png for the last row. Each image should have a custom property named myImage that is set equal to the myImage parameter passed in via the arguments. The row should have a custom property <code>num</code>, which is the row number. Finally, set the row background images appropriate for the first or last row in the table. (See the images you downloaded for the file names.)</td>
+</tr>
+<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+<tr>
+	<td colspan="2" class="labinstructions l_labstep9">9. When you're done, build the project for either the iOS Simulator or Android emulator. Correct any code mistakes, if necessary. Confirm that your event listener functions properly (see the specification above).</td>
+</tr>
+<tr>
+	<td class="tdfiller"><!-- leave empty--></td>
+	<td class="labexplanations l_labstepexplanation9"></td>
+</tr>
+</table>
+
+<h2 class="l_summary">Summary</h2>
+<p class="l_summarypara">When completed, your app should match the specification and screenshot above.</p>
+
+<h2 class="l_resources">Resources</h2>
+
+<ul>
+	<li class="l_resources1">TableView API docs: http://developer.appcelerator.com/apidoc/mobile/latest/Titanium.UI.TableView-object</li>
+	<li class="l_resources2">TableViewRow API docs: http://developer.appcelerator.com/apidoc/mobile/latest/Titanium.UI.TableViewRow-object</li>
+	<li class="l_resources4">Finished code: <a href="http://assets.appcelerator.com.s3.amazonaws.com/app_u/atmd_labs/Finished/320_tableviews.zip">S3: 320_tableviews (finished)</a></li>
+</ul>
+
+
+<!-- MAKE NO CHANGES BELOW THIS LINE -->
+</section>
+</div>
+</div>
+
+			<!-- Appc logo and presenter notes -->
+			<div id="appclogo"><a href="../index.html"><img src="../images/appu_thumb.png"/></a></div>
+
+			<!-- The navigational controls UI -->
+			<aside class="controls">
+				<a class="left" href="#">&#x25C4;</a>
+				<a class="right" href="#">&#x25BA;</a>
+				<a class="up" href="#">&#x25B2;</a>
+				<a class="down" href="#">&#x25BC;</a>
+			</aside>
+
+			<!-- Displays presentation progress, max value changes via JS to reflect # of slides -->
+			<div class="progress"><span></span></div>
+			
+		</div>
+		
+		<script src="../../presentation-engine/reveal.js/js/reveal.js"></script>
+		<script src="../../presentation-engine/reveal.js/lib/highlight.js"></script>
+		<script>
+			// Parse the query string into a key/value object
+			var query = {};
+			location.search.replace( /[A-Z0-9]+?=(\w*)/gi, function(a) {
+				query[ a.split( '=' ).shift() ] = a.split( '=' ).pop();
+			} );
+
+			Reveal.initialize({
+				// Display controls in the bottom right corner
+				controls: true,
+
+				// Display a presentation progress bar
+				progress: true,
+
+				// If true; each slide will be pushed to the browser history
+				history: true,
+
+				// Flags if mouse wheel navigation should be enabled
+				mouseWheel: true,
+
+				// Apply a 3D roll to links on hover
+				rollingLinks: true,
+
+				// UI style
+				theme: query.theme || 'default', // default/neon
+
+				// Transition style
+				transition: query.transition || 'default' // default/cube/page/concave/linear(2d)
+			});
+
+			hljs.initHighlightingOnLoad();
+		</script>
+		<script src="../../presentation-engine/js/localize.js"></script>
+		<script>
+		var s = (function load(){
+			var s = {};
+			if(window.outerHeight){
+				s = { w: window.outerWidth, h: window.outerHeight};
+			}
+			else {
+				s = { w: document.body.clientWidth, h: document.body.clientHeight};
+			}
+			return s;
+		})();
+		if(s.w < 1000 || s.h < 800) {
+			var slides = document.querySelectorAll( '#reveal .slides' );
+			for( var i = 0, len = slides.length; i < len; i++ ) {
+				slides[i].classList.add( 'smallscreen' );
+		    }
+		}
+		</script>
+	</body>
+</html>
