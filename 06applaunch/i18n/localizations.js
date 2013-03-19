@@ -5,8 +5,8 @@
 */
 String.toLocaleString({
 	"en-US": {
-		"%l_filetitle": "App Launch Options",
-		"%l_lessontitle": "App Launch Options",
+		"%l_filetitle": "App Interconnections",
+		"%l_lessontitle": "App Interconnections",
 		"%l_subtitle": "Titanium Certified Expert (TCE) Training"
 	}
 });

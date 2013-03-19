@@ -2,8 +2,8 @@
 <html>
 	<head>
 		<meta charset="utf-8">
-		<title>LessonTitle</title>
-		<meta name="description" content="LessonTitle, Titanium Certified Expert (TCE) Training">
+		<title>Custom UI Components</title>
+		<meta name="description" content="Custom UI Components, Titanium Certified Expert (TCE) Training">
     	<meta name="author" content="Appcelerator, Inc." />
 		
 		<link href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
@@ -61,7 +61,7 @@
 			<div class="slides">
 				
 				<section>
-					<h1 style="margin-top:100px;" class="l_lessontitle">LessonTitle</h1>
+					<h1 style="margin-top:100px;" class="l_lessontitle">Custom UI Components</h1>
 					<h5 class="l_subtitle">Titanium Certified Expert (TCE) Training</h5>
 					<script>
 						// DO NOT REMOVE THIS, MUST BE INCLUDED WITH THE FIRST SLIDE
@@ -75,26 +75,192 @@
 				<section id="agenda">
 					<h1 style="margin-top:50px;" class="l_agenda_title">In this lesson, you will:</h1>
 			    	<ul>
-			    		<li class="l_agenda1"></li>
-			    		<li class="l_agenda2"></li>
-			    		<li class="l_agenda3"></li>
+			    		<li class="l_agenda1">Identify the building blocks of custom UI components</li>
+			    		<li class="l_agenda2">Implement a custom component built with traditional API techniques</li>
+			    		<li class="l_agenda3">Implement an Alloy widget</li>
 			    	</ul>
 					<div class="slidenote">
 						<div class="l_slidenote_agenda"></div>
 					</div>
 				</section>
 
-
-<!-- LESSONS MAY HAVE A DEMO (NOT REQUIRED) IN WHICH THE INSTRUCTOR WILL DEMONSTRATE A SAMPLE APP AND ITS CODE TO ILLUSTRATE THE MATERIALS COVERED IN THE LESSON -->
 				<section>
-					<h2 style="" class="l_demo">Demo</h2>
+					<h2 style="" class="l_examples">Examples</h2>
+				    <img src="images/calendar.png" style="position:absolute;top:120px; left:40%;"  class="fragment noborder"/>
+				    <img src="images/combobox.png" style="position:absolute;top:120px; left:40%;"  class="fragment noborder"/>
+				    <img src="images/pulltorefresh.png" style="position:absolute;top:120px; left:40%;"  class="fragment noborder"/>
+				    <img src="images/starrating.png" style="position:absolute;top:120px; left:40%;" class="fragment noborder"/>
+					<div class="slidenote"><div class="l_slidenote_examples"></div></div>
+				</section>
+
+				<section>
+					<h2 style="" class="l_benefits">Why Custom Components?</h2>
 					<ul style="width:80%;">
-						<li class="l_demo1">What you will demo</li>
-						<li class="l_demo2"></li>
-						<li class="l_demo3"></li>
-						<li class="l_demo4"></li>
+						<li class="l_benefits1">Create unified UI/UX across platforms</li>
+						<li class="l_benefits2">Apply brand styling to your UI components</li>
+						<li class="l_benefits3">Simplify reusability</li>
+						<li class="l_benefits4">Invent your own UX/UI component</li>
+						<li class="l_benefits5">Cons: More work, more maintenance</li>
 					</ul>
-					<div class="slidenote"><div class="l_slidenote_demo"></div></div>
+					<div class="slidenote"><div class="l_slidenote_benefits"></div></div>
+				</section>
+
+				<section>
+					<h2 class="l_creating">Creating Custom Components</h2>
+				    <img src="images/tictactoe.png" style="width:240px;float:right;" class="noborder"/>
+					<ul style="width:60%;">
+						<li class="l_creating1">Building blocks: Views, ImageViews, Buttons, Labels</li>
+						<li class="l_creating2">Which? The one that's closest to your needs</li>
+						<li class="l_creating3">Set styles, add eventListeners</li>
+						<li class="l_creating4">Generalize them as much as possible and DESIGN THE API</li>
+						<li class="l_creating5">Navigation components (e.g. custom tab controllers) are extra work</li>
+					</ul>
+					<div class="slidenote"><div class="l_slidenote_creating">Choose the base components that provide the most built-in functionality, then tweak to your needs. In the screen, which shows a TicTacToe game, I used labels for the "blocks" rather than views containing a label &mdash; that saved nine UI components! <br/><br/>With custom navigation components, you lose built-in behavior &mdash; sliding behavior, back button behavior, currentTab/currentWindow, etc.</div></div>
+				</section>
+
+				<!-- - - - - - - - - - - - - - - - - NEW TOPIC - - - - - - - - - - - - - - - - -->
+				<section>
+					<h1 class="topicH1 l_topic"><img src="../images/topic.png"/>Topic</h1>
+					<h5 style="clear:both;" class="l_traditionaltopic">Traditional API-based Components</h5>
+					<div class="slidenote"><div class="l_slidenote_traditionaltopic"></div></div>
+				</section>
+
+				<section>
+					<h2 style="" class="l_traditional">Traditional API</h2>
+					<ul style="width:80%;">
+						<li class="l_traditional1">CommonJS module</li>
+						<li class="l_traditional2">Use in either traditional or Alloy project</li>
+						<li class="l_traditional3">Many community-contributed components</li>
+						<li class="l_traditional4"><code>require()</code> in and then use like built-in components</li>
+					</ul>
+					<div class="slidenote"><div class="l_slidenote_traditional"></div></div>
+				</section>
+
+				<section>
+					<h2 style="" class="l_creatingapi">Creating a Traditional Component</h2>
+					<ul style="width:40%;float:left;">
+						<li class="l_creatingapi1">Use the 'factory' pattern with your CommonJS module</li>
+						<li class="l_creatingapi2">Don't extend the Titanium proxies</li>
+						<li class="l_creatingapi3">Instantiate with <code>new</code></li>
+					</ul>
+					<pre style="width:550px;float:right;"><code contenteditable>
+var foo = 'common to all instances';
+function MyComponent() {
+  var bar = 'redefined w/each instance';
+  var self = {};
+  self.view = Ti.UI.createView();
+  self.doSomething = function(args) {
+    // some method of your custom component
+  }
+  return self;
+}
+module.exports = MyComponent;
+
+					</code></pre>
+					<div class="slidenote"><div class="l_slidenote_creatingapi">Create a CommonJS module that follows the factory/constructor pattern. <br/><br/>Don't extend the Titanium proxies, such as views, buttons, etc., with methods or custom properties. It's better to use a wrapper object as shown here. </div></div>
+				</section>
+
+				<!-- - - - - - - - - - - - - - - - - TRY IT SLIDE - - - - - - - - - - - - - - - - -->
+				<section>
+					<h1 class="topicH1 l_topic" style="margin-top: 10px;"><img src="../images/laptop.png"/>Try it</h1>
+					<h5 style="clear:both;margin-bottom:30px;width:80%;" class="l_tryittrad">Explore a traditional component</h5>
+					<ol style="width:80%;">
+						<li class="l_tryittrad1">Import the labcode/demos/starapi project</li>
+						<li class="l_tryittrad2">Examine app.js to see how to use the component</li>
+						<li class="l_tryittrad3">Explore rating.js to see how it's made</li>
+						<li class="l_tryittrad4">Run the project in the simulator/emulator</li>
+					</ol>
+					<div class="slidenote"><div class="l_slidenote_tryittrad">Students should do this, and you should demo or talk through the steps as they go.</div></div>
+				</section>
+
+
+				<!-- - - - - - - - - - - - - - - - - NEW TOPIC - - - - - - - - - - - - - - - - -->
+				<section>
+					<h1 class="topicH1 l_topic"><img src="../images/topic.png"/>Topic</h1>
+					<h5 style="clear:both;" class="l_alloywidgets">Alloy Widgets</h5>
+					<div class="slidenote"><div class="l_slidenote_alloywidgets"></div></div>
+				</section>
+
+
+				<section>
+					<h2 style="" class="l_widgets">Alloy Widgets</h2>
+					<ul style="width:80%;">
+						<li class="l_widgets1">Self-contained components</li>
+						<li class="l_widgets2">Can be easily dropped into an Alloy project</li>
+						<li class="l_widgets3">Write your own, or use the ones published by Appcelerator</li>
+						<li class="l_widgets4">Can't use in traditional projects</li>
+						<li class="l_widgets5">Many listed at <a href="https://github.com/AppceleratorSolutions/AlloyWidgets">github.com/AppceleratorSolutions/AlloyWidgets</a></li>
+					</ul>
+					<div class="slidenote"><div class="l_slidenote_widgets"></div></div>
+				</section>
+
+				<section>
+					<h2 style="" class="l_usingwidgets">Using Widgets</h2>
+					<ol style="width:40%;float:left;">
+						<li class="l_usingwidgets1">Configure dependency in app/config.json</li>
+						<li class="l_usingwidgets2">Download code to app/widgets folder*</li>
+						<li class="l_usingwidgets3">Add tag to appropriate view</li>
+						<li class="l_usingwidgets4">Call widget's <code>init()</code> method in controller</li>
+						<li style="list-style-type:none !important;font-style:italic;text-align: left;font-size: 80%;padding-top:50px;">* Except those distributed with Alloy </li>
+					</ol>
+					<pre style="width:550px;float:right;"><code contenteditable>
+// config.json
+{
+    "global": {},
+    "env:development": {},
+    "env:test": {},
+    "env:production": {},
+    "os:ios": {},
+    "os:android": {},
+    "dependencies": {
+        "com.appcelerator.buttongrid":"1.0"
+    }
+}
+
+// index.xml
+&lt;Widget id="buttongrid" 
+   src="com.appcelerator.buttongrid"/>
+
+					</code></pre>
+					<div class="slidenote"><div class="l_slidenote_usingwidgets">The widget author defines the name and version that you enter in config.json; not all use the reverse-domain name scheme shown here. For most widgets, you'll download the code to a widgets folder within your project. Check the widget docs for the tag to use. Widgets that are included with Alloy itself will be downloaded automatically when you build your project.</div></div>
+				</section>
+
+				<section>
+					<h2 style="" class="l_widgetprocess">Widget Creation Process</h2>
+					<ol style="width:60%;float:left;">
+						<li class="l_widgetprocess1">Create a standard mobile project</li>
+						<li class="l_widgetprocess2">Right-click <strong>app</strong>, choose <strong>New Widget</strong></li>
+						<li class="l_widgetprocess3">Edit widget.json as needed</li>
+						<li class="l_widgetprocess4">Implement your functionality in the widget's views, styles, and controllers</li>
+						<li class="l_widgetprocess5">Test by building your mobile project</li>
+						<li class="l_widgetprocess6">Distribute by sharing your widget's folder</li>
+					</ol>
+				    <img src="images/widgetfiles.png" style="width:300px;float:right;"/>
+					<div class="slidenote"><div class="l_slidenote_widgetprocess">You must start with a mobile project so you have a framework within which to test your widget. When you create a widget, your project's config.json is updated automatically with the necessary dependency. </div></div>
+				</section>
+
+				<section>
+					<h2 style="" class="l_wdifferences">Differences with Widgets</h2>
+					<ul style="width:80%;">
+						<li class="l_wdifferences1">Main controller is widget.js/widget.xml rather than index.js/index.xml</li>
+						<li class="l_wdifferences2">Instantiate "sub-views" with <code>Alloy.createWidget('myWidget', 'myButton')</code></li>
+						<li class="l_wdifferences3">Controller methods are private unless you prefix with <code>exports</code></li>
+						<li class="l_wdifferences4">You must use <code>WPATH('images/foo.png')</code> to reference assets</li>
+					</ul>
+					<div class="slidenote"><div class="l_slidenote_wdifferences"></div></div>
+				</section>
+
+				<!-- - - - - - - - - - - - - - - - - TRY IT SLIDE - - - - - - - - - - - - - - - - -->
+				<section>
+					<h1 class="topicH1 l_topic" style="margin-top: 10px;"><img src="../images/laptop.png"/>Try it</h1>
+					<h5 style="clear:both;margin-bottom:30px;width:80%;" class="l_tryitwidget">Explore a widget</h5>
+					<ol style="width:80%;">
+						<li class="l_tryitwidget1">Import the labcode/demos/starwidget project</li>
+						<li class="l_tryitwidget2">Examine index view and controller to see how to use the component</li>
+						<li class="l_tryitwidget3">Explore the contents of the widgets folder to see how it's made</li>
+						<li class="l_tryitwidget4">Run the project in the simulator/emulator</li>
+					</ol>
+					<div class="slidenote"><div class="l_slidenote_tryitwidget">Students should do this, and you should demo or talk through the steps as they go.</div></div>
 				</section>
 
 				
@@ -103,9 +269,9 @@
 					<h1 style="" class="l_summary">Summary</h1>
 					<p class="l_summarypara">In this lesson, you:</p>
 			    	<ul>
-			    		<li class="l_summary1">past_tense_of_agenda</li>
-			    		<li class="l_summary2">past_tense_of_agenda</li>
-			    		<li class="l_summary3">past_tense_of_agenda</li>
+			    		<li class="l_summary1">Identified the building blocks of custom UI components</li>
+			    		<li class="l_summary2">Implemented a custom component built with traditional API techniques</li>
+			    		<li class="l_summary3">Implemented an Alloy widget</li>
 			    	</ul>
 					<div class="slidenote">
 						<div class="l_slidenote_summary"></div>
@@ -124,10 +290,9 @@
 					<p class="l_labintro">In this lab, you will:</p>
 
 					<ul style="margin-bottom:40px;">
-						<li class="l_labobjective1"></li>
-						<li class="l_labobjective2"></li>
-						<li class="l_labobjective3"></li>
-						<li class="l_labobjective4"></li>
+						<li class="l_labobjective1">Build a simple Alloy widget</li>
+						<li class="l_labobjective2">You will implement basic UI functionality (no backend / networking functionality)</li>
+						<li class="l_labobjective3">Implement that widget in a project</li>
 					</ul>
 					<p class="l_labURL" style="margin-top:20px;">Lab: <a href='https://wiki.appcelerator.org/display/td/'>wiki.appcelerator.org/display/td/</a></p>
 					<div class="slidenote"><div class="l_slidenote_lab"></div></div>
