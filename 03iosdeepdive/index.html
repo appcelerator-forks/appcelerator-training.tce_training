@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="utf-8">
 		<title>iOS Deep Dive</title>
-		<meta name="description" content="iOS Deep Dive, Advanced Titanium Mobile Development">
+		<meta name="description" content="iOS Deep Dive, Titanium Certified Expert (TCE) Training">
     	<meta name="author" content="Appcelerator, Inc." />
 		
 		<link href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
@@ -62,7 +62,7 @@
 				
 				<section>
 					<h1 style="margin-top:100px;" class="l_lessontitle">iOS Deep Dive</h1>
-					<h5 class="l_subtitle">Advanced Titanium Mobile Development</h5>
+					<h5 class="l_subtitle">Titanium Certified Expert (TCE) Training</h5>
 					<script>
 						// DO NOT REMOVE THIS, MUST BE INCLUDED WITH THE FIRST SLIDE
 						if( navigator.userAgent.match( /(iPhone|iPad|iPod|Android)/i ) )
@@ -72,14 +72,10 @@
 				</section>
 				
 				<section id="agenda">
-					<h1 style="margin-top:50px;" class="l_agenda_title">Agenda</h1>
+					<h1 style="margin-top:50px;" class="l_agenda_title">In this lesson, you will:</h1>
 			    	<ul style="width:100%; margin-left:30px;">
-			    		<li class="l_agenda1">iOS Platform Characteristics</li>
-			    		<li class="l_agenda2">iOS-specific API Overview</li>
-			    		<li class="l_agenda3">Key APIs</li>
-						<li class="l_agenda4">Deep Dive: iOS Properties</li>
-						<li class="l_agenda5">Examples in Action</li>
-						<li class="l_agenda6">Lab Exercise Overview</li>
+			    		<li class="l_agenda1">Explore iOS Platform Characteristics</li>
+			    		<li class="l_agenda3">Explore Key UI and non-UI APIs</li>
 			    	</ul>
 					
 					<div class="slidenote">
@@ -299,45 +295,6 @@ win.add(tb);
 					<div class="slidenote"><div class="l_slidenote_ui_tabbar"><ul><li>Also known as 'segmented controls'</li><li>Maintains state &mdash; like radio buttons</li><li>Used for closely related, but mutually exclusive choices.</li><li>All segments in a segmented control have equal width</li><li>Segments can contain text or images, but not both</li></ul></div></div>
 				</section>
 				
-				<section>
-					<h2 class="l_ui_switch">UI: Switch</h2>
-					<ul style="width:50%;float:left;">
-						<li class="l_switch1">Presents two mutually exclusive choices</li>
-						<li class="l_switch2">On iOS, can't change labels</li>
-						<li class="l_switch3">Android &amp; Mobile Web offer more flexible options</li>
-						<li style="list-style-type:none;"><img src="images/switches.png" style="width:200px;margin-left:25px;"/></li>
-					</ul>
-					<div style="width:50%;float:right;">
-<pre><code contenteditable class="">
-var switch = Ti.UI.createSwitch({
-   value: true
-});
-switch.addEventListener('change', function(e){
-   if(e.value === true) {
-      // switch is on ...
-   }
-});
-win.add(switch);
-
-</code></pre>
-					</div>
-					<div class="slidenote"><div class="l_slidenote_ui_switch"><ul><li>Not iOS specific</li><li>Can't change 'On' and 'Off' labels on iOS</li><li>On Android &amp; Mobile Web you can use a checkbox style and change the labels</li><li>Add <code>change</code> event listener to switch and check <code>value</code> property to determine state</li></ul></div></div>
-				</section>
-				
-				<section>
-					<h2 class="l_ui_slider">UI: Slider</h2>
-					<p class="l_ui_slider_image"><img src="images/ui-slider.png" style="margin-top:5px;width:300px;"/></p>
-<pre><code contenteditable class="l_slider_code">
-var slider = Ti.UI.createSlider({
-   min: 0, max: 10,
-   value: 3,
-   thumbImage: 'images/skull.png'
-});
-win.add(slider);
-
-</code></pre>
-					<div class="slidenote"><div class="l_slidenote_ui_slider">A slider consists of a track and a thumb (a circular control that the user can slide) and optional images that convey the meaning of the right and left values. When people drag the thumb along the slider, the value or process is updated continuously and is displayed in the track.</div></div>
-				</section>
 				
 				<section>
 					<h2 class="l_ui_ipad">UI: iPad-Specific APIs</h2>
@@ -724,6 +681,7 @@ Ti.App.iOS.addEventListener('notification',
 
 			<!-- Appc logo and presenter notes -->
 			<div id="appclogo"><a href="../index.html"><img src="../images/appu_thumb.png"/></a></div>
+			<a id="firstslide" onClick="Reveal.navigateTo(0,0);"><img src="../images/agt_desktop_enhancements.png" title='First slide' alt='First'/></a>
 			<a id="presenternotes" onClick="openPresenterNotes()"><img src="../images/presenternotes.png" title='Open Presenter Notes Window' alt='Presenter notes'/></a>
 
 			<!-- The navigational controls UI -->

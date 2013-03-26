@@ -103,13 +103,13 @@
 
 				<section>
 					<h2 style="" class="l_commonschemes">Common Schemes</h2>
-<table border="0" cellspacing="5" cellpadding="5">
+<table border="0" cellspacing="5" cellpadding="5" width="100%" style="width:100%;">
 	<tr><th>App</th><th>Scheme</th><th>Example</th></tr>
-	<tr><td>Maps</td><td style="width:220px;">iOS: maps://<br/>Android: http://</td><td>maps://maps.google.com/maps?q=440+Bernardo+Ave,+Mountain+View<br/>html://maps.google.com/maps?q=440+Bernardo+Ave,+Mountain+View</td></tr>
-	<tr><td>SMS</td><td>sms://</td><td>sms://+1234567890</td></tr>
+	<tr><td>Maps</td><td style="width:220px;"><span style="color:#326A95;">iOS: maps://<br/><br/>comgooglemaps://</span><br/><span style="color:#309149;">Android: http://</span></td><td><span style="color:#326A95;">maps://maps.google.com/maps?q=440+Bernardo+Ave,+Mountain+View</span><br/><span style="color:#326A95;">comgooglemaps://?center=40.76581,-73.97586&zoom=14</span><br/><span style="color:#309149;">html://maps.google.com/maps?q=440+Bernardo+Ave,+Mountain+View</span></td></tr>
+	<tr><td>SMS</td><td>sms:</td><td>sms:+1234567890 &nbsp; (no // is used)</td></tr>
 	<tr><td>Phone</td><td>tel://</td><td>tel://408-555-1212</td></tr>
-	<tr><td>Mail</td><td>mailto://</td><td></td></tr>
-	<tr><td>App Store</td><td>iOS: http://<br/>Android: market://</td><td>http://itunes.apple.com/us/app/legoland-california-official/id452395530?mt=8<br/>market://details?id=com.zc.android</td></tr>
+	<tr><td>Mail</td><td>mailto://</td><td>mailto://fake@example.com?subject=Hello</td></tr>
+	<tr><td>App Store</td><td><span style="color:#326A95;">iOS: http://</span><br/><br/><span style="color:#309149;">Android: market://</span></td><td><span style="color:#326A95;">http://itunes.apple.com/us/app/legoland-california-official/id452395530?mt=8</span><br/><span style="color:#309149;">market://details?id=com.zc.android</span></td></tr>
 </table>
 					<div class="slidenote"><div class="l_slidenote_commonschemes"></div></div>
 				</section>
@@ -133,9 +133,10 @@ function doClickMaps(e) {
 					<h2 style="" class="l_schemelists">Scheme Lists</h2>
 					<ul style="width:80%;">
 						<li class="l_schemelists1">http://wiki.akosma.com/IPhone_URL_Schemes</li>
-						<li class="l_schemelists2">http://developer.apple.com/library/ios/#featuredarticles/iPhoneURLScheme_Reference/Articles/iTunesLinks.html#//apple_ref/doc/uid/TP40007896-SW1</li>
-						<li class="l_schemelists3"></li>
-						<li class="l_schemelists4"></li>
+						<li class="l_schemelists2">Apple: http://goo.gl/T9r0O</li>
+						<li class="l_schemelists3">http://handleopenurl.com</li>
+						<li class="l_schemelists4">http://applookup.com</li>
+						<li class="l_schemelists5">http://schemes.zwapp.com</li>
 					</ul>
 					<div class="slidenote"><div class="l_slidenote_schemelists">There is no formal registry and no means to prevent duplications. Best to check one of these sources before creating a custom URL scheme of your own to minimize the chance of a collision.</div></div>
 				</section>
