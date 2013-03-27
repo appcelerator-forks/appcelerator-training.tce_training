@@ -106,31 +106,8 @@
 				</section>
 				
 				<section>
-					<h2 class="l_ios_api" style="margin-bottom:60px;">iOS-Specific API Overview</h2>
-					<div style="float:left;width:45%;">
-						<ul>
-							<lh style="margin-left:-30px;text-decoration:underline;" class="l_iosapiLH">User Interface</lh>
-							<li class="l_iosapi1">Titanium.UI</li>
-							<li class="l_iosapi2">Titanium.UI.iOS</li>
-							<li class="l_iosapi3">Titanium.UI.iPhone</li>
-							<li class="l_iosapi4">Titanium.UI.iPad</li>
-						</ul>
-					</div>
-					<div style="float:left;width:45%;">
-						<ul>
-							<lh style="margin-left:-30px;text-decoration:underline;" class="l_iosapiLH2">Functionality</lh>
-							<li class="l_iosapi5">Titanium.App.iOS</li>
-							<li class="l_iosapi6">Titanium.Contacts</li>
-							<li class="l_iosapi7">Titanium.Media</li>
-							<li class="l_iosapi8">Titanium.Network</li>
-						</ul>
-					</div>
-					<div class="slidenote"><div class="l_slidenote_ios_api">iOS-specific APIs can be broken out into 2 segments: form and function</div></div>
-				</section>
-				
-				<section>
 					<h2 class="l_key_api">Key User Interface APIs</h2>
-					<ul style="width:100%;">
+					<ul style="width:80%;">
 						<li class="l_keyapi1">Ti.UI.iPhone.NavigationGroup</li>
 						<li class="l_keyapi2">Ti.UI.iOS.Toolbar</li>
 						<li class="l_keyapi3">Ti.UI.iOS.TabbedBar</li>
@@ -143,7 +120,7 @@
 				
 				<section>
 					<h2 class="l_ios_nav">UI: Navigation Group</h2>
-					<p class="l_ios_nav_image"><img src="images/ios-nav.png" style="margin-top:5px;height:350px;"/></p>
+					<p class="l_ios_nav_image"><img src="images/ios-nav.png" style="margin-top:5px;height:350px;" class="noborder"/></p>
 					<p class="l_ios_nav_explanation">A Navigation Group implements a specialized view that manages the navigation of hierarchical content</p>
 					<div class="slidenote"><div class="l_slidenote_ios_nav">A Navigation Group implements a specialized view that manages the navigation of hierarchical content. A Navigation Group is very similar to Tab Bars with the exception that they do not maintain a group of windows with a interface bar at the bottom</div></div>
 				</section>
@@ -185,7 +162,7 @@ nav.open(win2);
 
 </code></pre>
 
-					<p class="l_os_nav_eg_2_image"><img src="images/nav_dashboard2.png" style="margin-top:5px;height:450px;backgroundColor:#fff;"/></p>
+					<p class="l_os_nav_eg_2_image"><img src="images/nav_dashboard2.png" style="margin-top:5px;height:450px;"/></p>
 					<div class="slidenote"><div class="l_slidenote_ios_nav_eg_2">To add another window to the stack, create it and then call open</div></div>
 				</section>
 				
@@ -386,7 +363,7 @@ Ti.UI.iPhone.appBadge = null;
 				
 				<section>
 					<h2 class="l_ui_cover">UI: CoverFlow View</h2>
-					<p class="l_ui_cover_image" style="width:35%;float:right"><img src="images/coverflow.png" style="margin-top:5px;height:300px;"/></p>
+					<img src="images/coverflow.png" style="margin-top:5px;width:300px;float:right;" class="noborder"/>
 <pre><code contenteditable class="l_coverflow_code" style="width:62%;float:left;">
 var cover = Ti.UI.iOS.createCoverFlowView({
    images: ['a.png', 'b.png', 'c.png'],
@@ -407,7 +384,7 @@ win.add(cover);
 						<li class="l_dash4">Scrolling container</li>
 					</ul>
 
-					<p class="l_ui_dashboard_image" style="width:35%;float:right;"><img src="images/dashboard.png" style="margin-top:5px;height:350px;"/></p>
+					<img src="images/dashboard.png" style="margin-top:5px;width:300px;float:right;" class="noborder"/>
 					<div class="slidenote"><div class="l_slidenote_ui_dashboard">This isn't setting or accessing the actual Springboard<br>Just presenting a similar view</div></div>
 				</section>
 				
@@ -545,9 +522,51 @@ Ti.App.iOS.addEventListener('notification',
 </code></pre>
 					<div class="slidenote"><div class="l_slidenote_localnotification">Local notifications let you schedule user interaction. A background service could alert the user when it's done. You might set an alarm at a specific datetime or interval.</div></div>
 				</section>
+
+				<section>
+					<h2 style="" class="l_push">Push Notifications</h2>
+					<ul style="width:80%;">
+						<li class="l_push1">Register with Apple</li>
+						<li class="l_push2">Create APNS certificate</li>
+						<li class="l_push3">Need fully-qualified app name, not wildcard</li>
+						<li class="l_push4">Need server-side to generate notification (e.g. ACS, custom)</li>
+					</ul>
+					<div class="slidenote"><div class="l_slidenote_push"></div></div>
+				</section>
+
+				<section>
+					<h2 style="" class="l_pushcode">Push Notifications - Code</h2>
+					<pre style=""><code contenteditable>
+Ti.Network.registerForPushNotifications({  
+  types: [  
+    Ti.Network.NOTIFICATION_TYPE_BADGE,  
+    Ti.Network.NOTIFICATION_TYPE_ALERT  
+  ],  
+  success:function(e) {  
+    var deviceToken = e.deviceToken;  
+    Ti.API.info("Push notification device token is: "+deviceToken);  
+  },  
+  error:function(e) {  
+    Ti.API.info("Error during registration: "+e.error);  
+  },  
+  callback:function(e) {  
+    // called when a push notification is received.  
+    var data = JSON.parse(e.data);  
+    if(data.badge > 0) {  
+      Ti.UI.iPhone.appBadge = data.badge;  
+    }
+    if(data.message) {
+      alert(data.message);
+    }
+  }  
+});   
+
+					</code></pre>
+					<div class="slidenote"><div class="l_slidenote_pushcode"></div></div>
+				</section>
 				
 				<section>
-					<h2 class="l_key_api_con">Key APIs - Contacts, Media, Network</h2>
+					<h2 class="l_key_api_con">Additional APIs - Contacts, Media, Network</h2>
 					<ul style="width:60%;">
 						<lh class="l_cmn1" style="font-weight:bold;margin-left:-30px;text-decoration:underline;">Contacts</lh>
 						<li class="l_cmn2">Ti.Contacts.Group</li>
@@ -562,86 +581,6 @@ Ti.App.iOS.addEventListener('notification',
 					</ul>
 
 					<div class="slidenote"><div class="l_slidenote_key_api_con">Your app can participate in the Apple Bonjour (self-configuring, discoverable) networking environment for printing and other services.</div></div>
-				</section>
-				
-				<section>
-					<h2 class="l_deep_ios">Deep Dive: iOS-Specific Properties</h2>
-					<p class="l_deep_ios_image"><img src="images/deep-ios.png" style="margin-top:5px;height:450px;"/></p>
-					<div class="slidenote"><div class="l_slidenote_deep_ios">Do a quick walk through of the various iPhone related properties.  It's good to point out that these variables exist</div></div>
-				</section>
-				
-				<section>
-					<h2 class="l_deep_ios">Deep Dive: iOS-Specific Properties</h2>
-					<p class="l_deep_ios_2_image"><img src="images/deep-ios-2.png" style="margin-top:5px;height:450px;"/></p>
-					<div class="slidenote"><div class="l_slidenote_deep_ios_2"></div></div>
-				</section>
-				
-				<section>
-					<h2 class="l_deep_ios">Deep Dive: iOS-Specific Properties</h2>
-					<p class="l_deep_ios_3_image"><img src="images/deep-ios-3.png" style="margin-top:5px;height:450px;"/></p>
-					<div class="slidenote"><div class="l_slidenote_deep_ios_3"></div></div>
-				</section>
-				
-				<section>
-					<h2 class="l_deep_ios">Deep Dive: iOS-Specific Properties</h2>
-					<p class="l_deep_ios_4_image"><img src="images/deep-ios-4.png" style="margin-top:5px;height:450px;"/></p>
-					<div class="slidenote"><div class="l_slidenote_deep_ios_4"></div></div>
-				</section>
-				
-				<section>
-					<h2 class="l_deep_ios">Deep Dive: iOS-Specific Properties</h2>
-					<p class="l_deep_ios_5_image"><img src="images/deep-ios-5.png" style="margin-top:5px;height:450px;"/></p>
-					<div class="slidenote"><div class="l_slidenote_deep_ios_5"></div></div>
-				</section>
-				
-				
-				<section>
-					<h2 class="l_deep_ios">Deep Dive: iOS-Specific Properties</h2>
-					<p class="l_deep_ios_7_image"><img src="images/deep-ios-7.png" style="margin-top:5px;height:450px;"/></p>
-					<div class="slidenote"><div class="l_slidenote_deep_ios_7"></div></div>
-				</section>
-
-				<section>
-					<h2 class="l_deep_ios">Deep Dive: iOS-Specific Properties</h2>
-					<p class="l_deep_ios_56_image"><img src="images/ios_systembutton.png" style="margin-top:5px;height:450px;"/></p>
-					<div class="slidenote"><div class="l_slidenote_deep_ios_56"></div></div>
-				</section>
-				
-				<section>
-					<h2 class="l_deep_ios">Deep Dive: iOS-Specific Properties</h2>
-					<p class="l_deep_ios_8_image"><img src="images/deep-ios-8.png" style="margin-top:5px;height:450px;"/></p>
-					<div class="slidenote"><div class="l_slidenote_deep_ios_8"></div></div>
-				</section>
-				
-			
-				<section>
-					<h2 class="l_deep_ios">Deep Dive: iOS-Specific Properties</h2>
-					<p class="l_deep_ios_9_image"><img src="images/deep-ios-9.png" style="margin-top:5px;height:450px;"/></p>
-					<div class="slidenote"><div class="l_slidenote_deep_ios_9"></div></div>
-				</section>
-				
-				<section>
-					<h2 class="l_deep_ios">Deep Dive: iOS-Specific Properties</h2>
-					<p class="l_deep_ios_10_image"><img src="images/deep-ios-10.png" style="margin-top:5px;height:450px;"/></p>
-					<div class="slidenote"><div class="l_slidenote_deep_ios_10"></div></div>
-				</section>
-				
-				<section>
-					<h2 class="l_deep_ios">Deep Dive: iOS-Specific Properties</h2>
-					<p class="l_deep_ios_11_image"><img src="images/deep-ios-11.png" style="margin-top:5px;height:450px;"/></p>
-					<div class="slidenote"><div class="l_slidenote_deep_ios_11"></div></div>
-				</section>
-				
-				<section>
-					<h2 class="l_deep_ios">Deep Dive: iOS-Specific Properties</h2>
-					<p class="l_deep_ios_12_image"><img src="images/deep-ios-12.png" style="margin-top:5px;height:450px;"/></p>
-					<div class="slidenote"><div class="l_slidenote_deep_ios_12"></div></div>
-				</section>
-				
-				<section>
-					<h2 class="l_deep_ios">Deep Dive: iOS-Specific Properties</h2>
-					<p class="l_deep_ios_13_image"><img src="images/deep-ios-13.png" style="margin-top:5px;height:450px;"/></p>
-					<div class="slidenote"><div class="l_slidenote_deep_ios_13"></div></div>
 				</section>
 				
 				<section>

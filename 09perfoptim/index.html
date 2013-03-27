@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="utf-8">
 		<title class="l_lessontitle">Performance and Optimization</title>
-		<meta name="description" content="Performance Optimization, Advanced Titanium Mobile Development">
+		<meta name="description" content="Performance Optimization, Titanium Certified Expert (TCE) Training">
     	<meta name="author" content="Appcelerator, Inc." />
 		
 		<link href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
@@ -62,7 +62,7 @@
 				
 				<section>
 					<h1 style="margin-top:100px;" class="l_lessontitle">Performance and Optimization</h1>
-					<h5 class="l_subtitle">Advanced Titanium Mobile Development</h5>
+					<h5 class="l_subtitle">Titanium Certified Expert (TCE) Training</h5>
 					<script>
 						// DO NOT REMOVE THIS, MUST BE INCLUDED WITH THE FIRST SLIDE
 						if( navigator.userAgent.match( /(iPhone|iPad|iPod|Android)/i ) )
@@ -72,49 +72,132 @@
 				</section>
 				
 				<section id="agenda">
-					<h1 style="margin-top:50px;" class="l_agenda_title">Agenda</h1>
+					<h1 style="margin-top:50px;" class="l_agenda_title">In this lesson, you will:</h1>
 			    	<ul style="width:100%;margin-left:75px;">
-			    		<li class="l_agenda1">Performance tips and tricks</li>
-			    		<li class="l_agenda2V2">Memory management</li>
-			    		<li class="l_agenda3">Dos and Don'ts</li>
-			    		<li class="l_agenda4">Lab</li>
+			    		<li class="l_agenda1">Manage and profile memory in a Titanium app</li>
+			    		<li class="l_agenda2V2">Identify performance best practices</li>
+			    		<li class="l_agenda3"></li>
+			    		<li class="l_agenda4"></li>
 			    	</ul>
 					
 					<div class="slidenote">
 						<!-- Please use a classname that relates to the associated slide content. For example, this
 							slide is the agenda, thus the class is l_slidenote_agenda
 						 -->
-						<div class="l_slidenote_agenda"></div></div>
+						<div class="l_slidenote_agenda">For small to medium apps, performance optimization and memory management are usually not significant concerns. But as your apps grow and become more complex, Titanium can't shield you from the need to manage these factors. In this lesson, we'll learn how to manage the memory of our applications, and we'll identify various best practices that you should implement in your apps.</div></div>
 				</section>
 
-
+				<!-- - - - - - - - - - - - - - - - - NEW TOPIC - - - - - - - - - - - - - - - - -->
 				<section>
-					<h2 class="l_perf_opt">Performance Optimization in Ti</h2>
-					<p align="left" class="l_small_med">For small-medium apps, not a concern usually</p><br>
-					<p align="left" class="l_apps_complex">As apps become complex, Titanium can't shield you from memory management</p><br>
-					<p align="left" class="l_computation">Computation is usually not bottleneck, RAM is</p><br>
-					<p align="center" class="l_managing_memory">Managing memory usually means management of UI components</p>
-					<div class="slidenote"><div class="l_slidenote_perf_opt">Need to worry about running out of resources<br>The biggest concern is running out of memory<br>Mostly that means getting rid of things you no longer need<br/>Your apps can have as little as 12 MB of memory in which to run. See the docs for full info on memory allotments for the various platforms.</div></div>
-				</section>
-				
-				<section>
-					<h2 class="l_js_garbage">JavaScript Garbage Collection</h2>
-					<p align="left" class="l_auto">Automatic (you don't have to release memory)</p><br>
-					<p align="left" class="l_obj_collect">Objects collected when no references remain</p><br>
-					<p align="left" class="l_mark">'Mark and sweep'</p><br>
-					<p align="left" class="l_force">Force by removing all references</p>
-					<div class="slidenote"><div class="l_slidenote_js_garbage">To understand memory management in Titanium, you need to understand it in JavaScript<br/>Garbage collection is automatic, you don't have to manually track and release memory<br>Objects are GC'd when no references remain<br>Mark &amp; Sweep:<ul><li>JS stops and scans</li><li>Marks all objects except those in use</li><li>Objects marked are instructed to shut down &amp; destroy</li><li>App execution resumes</li></ul><br>Force an object to be GC'd by removing all references to it<br>Can be tough as references can be 'hidden' in event listeners, closures, etc.</div></div>
+					<h1 class="topicH1 l_topic"><img src="../images/topic.png"/>Topic</h1>
+					<h5 style="clear:both;" class="l_memmgmt">Memory Management</h5>
+					<div class="slidenote"><div class="l_slidenote_memmgmt"></div></div>
 				</section>
 
 				<section>
-					<h2 class="l_when_does">When Does Titanium Clean Up?</h2>
-					<p align="left" class="l_window_closed">When a window is closed (UI is cleaned up)</p><br>
-					<p align="left" class="l_var_null">When a variable holding a proxy object is set to null</p><br>
-					<p align="left" class="l_children">Nulling a container (window or view) can clean up its children &mdash; if no external references remain</p><br>
-					<p align="left" class="l_note">Note: Showing/hiding views will improve DRAW SPEED, but memory will still be in use</p>
-					<p align="center" class="l_vimeo_url">http://vimeo.com/29804284 (Codestrong - Memory leaks talk)</p>
-					<div class="slidenote"><div class="l_slidenote_when_does">Titanium needs to signal the native code when to release objects. It does so when:<br><ul><li>A window is closed; the object it contains are generally removed and memory freed</li><li>You manually set a reference to null (proxy objects are the JS objects that represent the native equivalent)</li></ul><br>Use DDMS and Instruments to monitor memory usage, see when &amp; where you're running out of memory<br>Then you can take manual actions to clean up<br><br>Optional: Demo AppLeak project and fixing memory leaks now</div></div>
+					<h2 style="" class="l_memlimits">Memory Limitations</h2>
+					<p style="font-weight:bold;text-align:center;font-size:larger;">Computation is usually not the bottleneck, RAM is</p>
+<table border="0" cellspacing="5" cellpadding="5">
+	<tr><th>iOS</th><th>Android</th></tr>
+	<tr>
+		<td style="width:45%;vertical-align:top;">
+			<ul style="width:80%;margin-left:20px;">
+				<li class="l_memlimios1">iPhone ~12 MB</li>
+				<li class="l_memlimios2">iPad ~30-50 MB</li>
+				<li class="l_memlimios3" style="list-style-type: none;">&nbsp;</li>
+				<li class="l_memlimios4" style="list-style-type: none;font-style: italic;">* Apple does not publish information about their app termination threshold</li>
+			</ul>
+		</td>
+		<td style="width:45%;vertical-align:top;">
+			<ul style="width:90%;">
+				<li class="l_memlimand1">Froyo/Gingerbread (2.2/2.3) - 24 MB</li>
+				<li class="l_memlimand2">ICS - 24 MB</li>
+				<li class="l_memlimand3">ICS w/ "large heap" - 128 MB</li>
+			</ul>
+		</td>
+	</tr>
+</table>					<div class="slidenote"><div class="l_slidenote_memlimits"></div></div>
 				</section>
+
+				<section>
+					<h2 style="" class="l_managing">Managing Memory</h2>
+					<ul style="width:80%;">
+						<li class="l_managing1">Understand JavaScript garbage collection</li>
+						<li class="l_managing2">Understand native-layer memory deallocation</li>
+						<li class="l_managing3">Write high-quality code</li>
+						<li class="l_managing4">Profile your app</li>
+					</ul>
+					<div class="slidenote"><div class="l_slidenote_managing">To manage your app's memory use, you must understand how memory is allocated and deallocated in the JavaScript and native layers of a Titanium app. You must write leak-free, quality code. And you should profile your app's memory use to detect (then fix) memory leaks</div></div>
+				</section>
+
+				<section>
+					<h2 style="" class="l_jsgarbage">JavaScript Garbage Collection</h2>
+					<ul style="width:80%;">
+						<li class="l_jsgarbage1">Automatic (no manual allocation/deallocation)</li>
+						<li class="l_jsgarbage2">'Mark and Sweep' stops execution periodically &amp; briefly</li>
+						<li class="l_jsgarbage3">Interpreter decides when and how</li>
+						<li class="l_jsgarbage4">Objects collected when no references remain</li>
+						<li class="l_jsgarbage5">Nothing in the global space is ever collected!</li>
+						<li class="l_jsgarbage6">"Force" collection by encapsulating within functions or modules that will go out of scope</li>
+						<li class="l_jsgarbage7">Or, set variables to <code>null</code></li>
+					</ul>
+					<div class="slidenote"><div class="l_slidenote_jsgarbage">Before we can talk about avoiding memory leaks, we need to understand how JavaScript cleans up variable references and memory.<br/><br/>JavaScript uses a "stop the world" automatic garbage collection routine to clean up memory. It sweeps through memory, marking objects in use; then tears down any that are unmarked (and hence unused). Nothing in the global scope can be collected because there will always be a reference to the object. Within functions or other scopes, you can force collection by encapsulating within functions or modules that will go out of scope.</div></div>
+				</section>
+
+				<section>
+					<h2 style="" class="l_native">Titanium Native Layer</h2>
+					<p class="l_nativepara" style="text-align: center; font-weight: bold; margin: 20px auto;">Object collected/nulled in JS signals native to deallocate</p>
+					<pre style=""><code contenteditable>
+$.win.close(); // &larr; its children can be collected
+$.imageview = null;  // &larr; native proxy can be deallocated
+(function() {
+  var win = Ti.UI.createWindow();
+  win.open();  // &larr; when user closes this window, it will be collected
+})();
+
+					</code></pre>
+					<div class="slidenote"><div class="l_slidenote_native">Titanium needs to signal the native code when to release objects. It does so when:<br><ul><li>A window is closed; the object it contains are generally removed and memory freed</li><li>You manually set a reference to null (proxy objects are the JS objects that represent the native equivalent)</li></ul><br>Use DDMS and Instruments to monitor memory usage, see when &amp; where you're running out of memory<br>Then you can take manual actions to clean up<br><br>Optional: Demo AppLeak project and fixing memory leaks now</div></div>
+				</section>
+
+				<section>
+					<h2 style="" class="l_avoidingleaks">Avoiding Memory Leaks</h2>
+					<ul style="width:80%;">
+						<li class="l_avoidleaks1">Don't store variables in the global scope</li>
+						<li class="l_avoidleaks2">Set objects = null when no longer needed</li>
+						<li class="l_avoidleaks3">Watch for "hidden" references in functions, closures, event listeners, accidental global assignments</li>
+					</ul>
+					<div class="slidenote"><div class="l_slidenote_avoidingleaks">These are some techniques to minimize wasted memory and avoid leaks. Setting objects to null doesn't actually remove the object. But it minimizes it's memory use. We'll cover how to profile an app in the advanced course.</div></div>
+				</section>
+
+				<section>
+					<h2 style="" class="l_memsize">Limit Images</h2>
+					<ul style="width:40%;float:left;">
+						<li class="l_memsize1">Images are bitmap in memory</li>
+						<li class="l_memsize2">No compression in emory</li>
+						<li class="l_memsize3">File format doesn't matter</li>
+						<li class="l_memsize4">Lazy load images &mdash; when you need them</li>
+						<li class="l_memsize5">Then unload / destroy images you no longer need them</li>
+					</ul>
+					<pre style="width:550px;float:right;"><code contenteditable>
+200 by 200 px image
+= 40,000 pixels x 32 bits per pixel
+= 1,280,000 bits
+= 160,000 Bytes
+= 156.25 KB
+= ~1/6th MB
+					</code></pre>
+					<div class="slidenote"><div class="l_slidenote_memsize">Images might be stored in a compressed format (such as PNG or JPG) but in memory, they are expanded to a bitmap. There's no compression of image data in memory. Consider a 'small' 200 pixel square image. It expands to 156 KB in memory. Limiting memory use can mean limiting the number of images you load at a given time.</div></div>
+				</section>
+
+				<section>
+					<h2 style="" class="l_profiledemo">Demo: Profiling an App</h2>
+					<ul style="width:80%;">
+						<li class="l_profiledemo1">iOS: Use Instruments &mdash; either Allocations or Leaks</li>
+						<li class="l_profiledemo2">Android: Use Monitor (more difficult)</li>
+					</ul>
+					<div class="slidenote"><div class="l_slidenote_profiledemo"></div></div>
+				</section>
+
 				
 				<!-- - - - - - - - - - - - - - - - - NEW TOPIC - - - - - - - - - - - - - - - - -->
 				<section>
@@ -124,11 +207,14 @@
 				</section>
 
 				<section>
-					<h2 class="l_js_tips">JavaScript loading tips</h2>
-					<p align="left" class="l_only_include">Defer loading a script until it is <em>actually needed</em></p><br>
-					<p align="left" class="l_ti_includeX">require() is best, Ti.include() is okay, but &ldquo;eval() is evil&rdquo;<br/>require() is evaluated once and cached</p><br>
-					<p align="left" class="l_dont_parse">Don't parse JSON packaged with your app - put it inline in JavaScript</p>
-					<div class="slidenote"><div class="l_slidenote_js_tips">Defer loading when possible<br>require()'d modules are not re-evaluated, though objects might need to be re-instantiated<br/>Don't use eval() unless you must<br/>parsing JSON is much slower than working with inline JS variables<br/>The DB is generally faster than parsine JSON<br>Older 'hack' of adding objects, functions, and values to Ti.App is no longer recommended. Generally this is disallowed and it can lead to many potentials for problems and crashes.</div></div>
+					<h2 class="l_jstips">JavaScript loading tips</h2>
+					<ul style="width:80%;">
+						<li class="l_jstips1">Defer loading a script until it is <em>actually needed</em></li>
+						<li class="l_jstips2">Use <code>require()</code> to capitalize on caching</li>
+						<li class="l_jstips3">Avoid <code>Ti.include()</code>, remember <code>eval()</code> is "evil"</li>
+						<li class="l_jstips4">Use Alloy's conditionals, e.g. IS_IOS, IS_ANDROID</li>
+					</ul>
+					<div class="slidenote"><div class="l_slidenote_js_tips">Defer loading when possible<br>require()'d modules are not re-evaluated, though objects might need to be re-instantiated<br/>Don't use eval() unless you must<br/>parsing JSON is much slower than working with inline JS variables<br/>The DB is generally faster than parsing JSON</div></div>
 				</section>
 
 				<section>
@@ -187,33 +273,55 @@ table.setData(data);
 				
 				<section>
 					<h2 class="l_tableview_per">Table View Performance</h2>
-					<p align="left" class="l_classnameexplanation">className allows Titanium to cheat a bit</p><br>
-					<p align="left" class="l_set_all">Set all rows at the same time, don't call append 300 times</p><br>
-					<p align="left" class="l_only_load">Only load as much data as needed</p><br>
-					<p align="left" class="l_if_your">If your table has 1,000s of custom rows, you might need to rethink your UX design</p><br>
+					<ul style="width:40%;float:left;">
+						<li class="l_tableview1">className allows Titanium to reuse native objects</li>
+						<li class="l_tableview2">setData() or table.data faster than append()</li>
+						<li class="l_tableview3">Load only as much data as needed</li>
+						<li class="l_tableview4">If your table has 1,000s of custom rows, you might need to rethink your UX design</li>
+						<li class="l_tableview5">Use the ListView instead</li>
+					</ul>
+					<pre style="width:550px;float:right;"><code contenteditable>
+<!-- in View XML -->
+&lt;TableView id="table">
+  &lt;TableViewRow className="anystring"/>
+&lt;/TableView>
+					</code></pre>
 					<div class="slidenote"><div class="l_slidenote_tableview_per"><ul><li>Adding className enables Ti &amp; underlying OS to reuse table row objects and optimize memory</li><li>A setData() call for a lot of rows is faster than repeated appendRow() calls</li><li>Perhaps you can use alternate UI paradigm to create smaller tables</li><li><b>Dawson's Lazy Loaded Tables http://j.mp/rbL32h</b></li></ul></div></div>
 				</section>
 				
 				<section>
 					<h2 class="l_db_per">Database Performance</h2>
-					<p align="left" class="l_sql_fast">SQL Queries are fast - use these rather than in-memory sorting of JS arrays, etc.</p><br>
-					<p align="left" class="l_sql_transations">Wrap multiple inserts in a transaction</p><br>
-					<p align="left" class="l_ram">Avoid loading Blobs into memory &mdash; RAM is the bottleneck</p><br>
-					<p align="left" class="l_conn_mgmt">Open/close connections with each use</p><br>
-					<p align="left" class="l_sqlitefaq">SQLite Optimization FAQ - http://j.mp/HFxVZ8</p>
+					<ul style="width:80%;">
+						<li class="l_database1">SQL Queries are fast - use these rather than in-memory sorting of JS arrays, etc.</li>
+						<li class="l_database2">Wrap multiple inserts in a transaction</li>
+						<li class="l_database3">Avoid loading Blobs into memory &mdash; don't store in database</li>
+						<li class="l_database4">Open/close connections with each use</li>
+						<li class="l_database5">SQLite Optimization FAQ - http://j.mp/HFxVZ8</li>
+					</ul>
 					<div class="slidenote"><div class="l_slidenote_db_per"><ul><li>Filter data in SQL rather than via JS (sorting, searching, etc.)</li><li>Transactions bundle many DB operations into a single operation = much faster</li><li>Don't use 'select * from table' if you store blobs in your tables</li><li>Open/closing connections is generally more memory friendly than any performance benefits you'd get from keeping a connection open</li></ul></div></div>
 				</section>
 				
 				<section>
 					<h2 class="l_net_per">Network Performance</h2>
-					<p align="left" class="l_wifi">Don't assume wifi &mdash; test on cell networks</p><br>
-					<p align="left" class="l_decrease">Decrease service payload sizes</p><br>
-					<p align="left" class="l_existing">Existing web service APIs aren't generally optimized for mobile - make mobile service APIs such that:</p><br>
-					<ul style="width:100%;margin-left:30px;">
-					<li class="l_as_few">As few requests are made as possible</li>
-					<li class="l_as_small">The data sets being returned are as small as possible<br/>(JSON helps for this)</li>
+				    
+					<ul style="width:90%;">
+						<li class="l_network1">Don't assume WiFi &mdash; test on cell networks<br/><ul style="margin:5px 0 10px 60px;"><li>OS X: Network Link Conditioner</li><li>Windows: Monitor/DDMS</li><li>Field testing best</li></ul><img src="images/netlinkcond.png" style="width:380px;float:right;" class="noborder"/></li>
+						<li class="l_network2">Decrease service payload sizes</li>
+						<li class="l_network2"> ... but make as few requests as possible</li>
+						<li class="l_network3">Use JSON as transport<br/><span style="font-size:smaller;font-style:italic;">set up server-side proxy for SOAP/XML services</span></li>
 					</ul>
 					<div class="slidenote"><div class="l_slidenote_net_per"><ul><li>Test in a real-world networking environment (in various data coverage areas)</li><li>Use DDMS &amp; other tools to simulate poorer network conditions</li><li>Decrease payload size (use JSON rather than SOAP for example)</li><li>If you have a lot of data to transfer, a few larger network requests is better than multiple smaller data transfers</li><li>Saves on battery if nothing else (min. time of radio on per network request can suck juice if you have lots of network requests)</li></ul></div></div>
+				</section>
+
+				<section>
+					<h2 style="" class="l_netlinkconditioner">Installing Network Link Conditioner</h2>
+					<ol style="width:80%;">
+						<li class="l_netlinkconditioner1">Open Xcode</li>
+						<li class="l_netlinkconditioner2">Choose Xcode > Open Developer Tool > More Developer Tools</li>
+						<li class="l_netlinkconditioner3">Download <strong>Hardware IO Tools for Xcode</strong></li>
+						<li class="l_netlinkconditioner4">Double-click <strong>Network Link Conditioner.prefpane</strong></li>
+					</ol>
+					<div class="slidenote"><div class="l_slidenote_netlinkconditioner"></div></div>
 				</section>
 
 				<section>
@@ -228,7 +336,29 @@ table.setData(data);
 					</ul>
 					<div class="slidenote"><div class="l_slidenote_battery">Diagram from Google is for AT&amp;T cell radio, but similar case would exist for wifi and for iOS too.<br/>There's a delay transitioning between radio states. Example: per Google, if you query the network every 18 seconds you'll keep the radio continuously in the active state &mdash; continual battery drain <ul><li>Transfer in bursts</li><li>Don't poll the network without considering radio delays</li><li>Prefetch and cache</li><li>Disable location listeners as soon as you can</li></ul></div></div>
 				</section>
-				
+
+				<section>
+					<h2 style="" class="l_uioptim">UI Optimization</h2>
+					<ul style="width:80%;">
+						<li class="l_uioptim1">Avoid compositing operations: transparency, rounded corners, gradients, drop shadows</li>
+						<li class="l_uioptim2">Set a BG color to match parent container &mdash; default is transparent</li>
+						<li class="l_uioptim3">Avoid multiple layout passes: Ti.UI.SIZE/FILL or '80%'</li>
+						<li class="l_uioptim4">Position at integer coordinates, e.g.<br/><code>$.view.top = Math.round(calculatedPosition)</code></li>
+						<li class="l_uioptim5">Use correctly sized images to limit runtime scaling</li>
+					</ul>
+					<div class="slidenote"><div class="l_slidenote_uioptim"></div></div>
+				</section>
+
+				<section>
+					<h2 style="" class="l_iossim">Viewing Inefficiencies in iOS Simulator</h2>
+				    <img src="images/iossimdebug.png" style="width:350px;float:right;" class="noborder"/>
+					<ul style="width:60%;float:left">
+						<li class="l_ossim1">Debug > Color Blended Layers<br/>shows transparent/blended layers</li>
+						<li class="l_ossim2">Debug > Color Misaligned Images<br/>Magenta means subpixel misalignments, yellow means stretched/scaled images</li>
+					</ul>
+					<div class="slidenote"><div class="l_slidenote_iossim"></div></div>
+				</section>
+
 				<section>
 					<h1 class="l_qa">Q&amp;A</h1>
 					<div class="slidenote"><div class="l_slidenote_qa"></div></div>
@@ -249,6 +379,7 @@ table.setData(data);
 
 			<!-- Appc logo and presenter notes -->
 			<div id="appclogo"><a href="../index.html"><img src="../images/appu_thumb.png"/></a></div>
+			<a id="firstslide" onClick="Reveal.navigateTo(0,0);"><img src="../images/agt_desktop_enhancements.png" title='First slide' alt='First'/></a>
 			<a id="presenternotes" onClick="openPresenterNotes()"><img src="../images/presenternotes.png" title='Open Presenter Notes Window' alt='Presenter notes'/></a>
 
 			<!-- The navigational controls UI -->
