@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="utf-8">
 		<title>Animation</title>
-		<meta name="description" content="Animation, Advanced Titanium Mobile Development">
+		<meta name="description" content="Animation, Titanium Certified Expert (TCE) Training">
     	<meta name="author" content="Appcelerator, Inc." />
 		
 		<link href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
@@ -62,7 +62,7 @@
 				
 				<section>
 					<h1 style="margin-top:100px;" class="l_lessontitle">Animation</h1>
-					<h5 class="l_subtitle">Advanced Titanium Mobile Development</h5>
+					<h5 class="l_subtitle">Titanium Certified Expert (TCE) Training</h5>
 					<script>
 						// DO NOT REMOVE THIS, MUST BE INCLUDED WITH THE FIRST SLIDE
 						if( navigator.userAgent.match( /(iPhone|iPad|iPod|Android)/i ) )
@@ -72,12 +72,11 @@
 				</section>
 				
 				<section id="agenda">
-					<h1 style="margin-top:50px;" class="l_agenda_title">Agenda</h1>
+					<h1 style="margin-top:50px;" class="l_agenda_title">In this lesson, you will:</h1>
 			    	<ul style="width:100%; margin-left:30px;">
-			    		<li class="l_agenda1">Animation Key Concepts</li>
-			    		<li class="l_agenda2">Basic property animation</li>
-			    		<li class="l_agenda3">2d and 3d Matrix Animations</li>
-						<li class="l_agenda4">Lab</li>
+			    		<li class="l_agenda1">Learn key animation concepts</li>
+			    		<li class="l_agenda2">Animate the properties of views</li>
+			    		<li class="l_agenda3">Animate views with 2D and 3D matrix operations</li>
 			    	</ul>
 					
 					<div class="slidenote">
@@ -134,6 +133,25 @@ $.circle.animate(a);
 					<div class="slidenote"><div class="l_slidenote_basicobj"><ul><li>Animation object lets you apply the same animation to multiple elements.</li><li>Set properties at creation, or after the fact</li><li>autoreverse and repeat properties can be used without the animation object also (w/inline definition as on previous slide)</li></ul></div>
 				</div></section>
 
+				<section>
+					<h2 class="l_opacity">Using Opacity</h2>
+					<ul style="width:80%;">
+						<li class="l_opacity1">Opacity is an important property in animation</li>
+						<li class="l_opacity2">0 = invisible; 1 = fully opaque</li>
+						<li class="l_opacity3">Dimming objects indicates they are unavailable</li>
+						<li class="l_opacity4">Fading in/out views makes UI state changes less jarring</li>
+					</ul>
+					<pre style=""><code contenteditable>
+// fade out
+$.view.animate({
+  opacity: 0,
+  duration: 500
+});
+					</code></pre>
+
+					<div class="slidenote"><div class="l_slidenote_opacity">Animatable property<br>Has typical use scenarios &mdash; indicating a disabled or unavailable state<br><b>Demo</b><br>Use the finished code from Lab 340. Demonstrate working app, then examine app.js</div></div>
+				</section>	
+				
 				<section>
 					<h2 class="l_matrix">Matrix Animations</h2>
 					<p class="l_matrix_image"><img src="images/matrix.png" style="margin-top:5px;height:380px;float:right;"/></p>
@@ -217,38 +235,16 @@ $.cloud.animate(a);
 				</div></section>
 				
 				<section>
-					<h2 class="l_opacity">Using Opacity</h2>
-					<p align="left" class="l_opacity_imp">Opacity is an important property in animation</p><br>
-					<p align="left" class="l_values">Values:</p>
-					<ul style="width:100%; margin-left:80px;">
-			    		<li class="l_val0">0 is invisible</li>
-			    		<li class="l_val1">1 is totally opaque</li>
-			    	</ul><br>
-					<p align="left" class="l_dimming">Dimming objects indicates they are unavailable</p><br>
-					<p align="left" class="l_fading">Fading in/out views makes UI state changes less jarring</p><br>
-					<p align="left" class="l_demo_animating">Demo: animating the opacity property</p>
-					<div class="slidenote"><div class="l_slidenote_opacity">Animatable property<br>Has typical use scenarios &mdash; indicating a disabled or unavailable state<br><b>Demo</b><br>Use the finished code from Lab 340. Demonstrate working app, then examine app.js</div></div>
-				</section>	
-				
-				<section>
 					<h2 class="l_transitions">Transitions</h2>
-					<p align="left" class="l_ios_allows">iOS allows for animated transitions between views and windows</p><br>
-					<p align="left" class="l_can_open">Can open window with a transition</p><br>
-					<p align="left" class="l_can_transition">Can transition between child views</p><br>
-					<p align="left" class="l_demo_transitions">Demo: Using transitions on iOS</p>
-					<div class="slidenote"><div class="l_slidenote_transitions"><b>Demo</b>Use the finished code from Lab 340. Demonstrate working app, then examine app.js<br>OR<br>Demo: KitchenSInk<br><ul><li>Basic tab > Transitions</li><li>File is <b>transitions.js</b></li><li>~line 110 transition property in animate()</li></ul></div></div>
+					<ul style="width:80%;">
+						<li class="l_transitions1">iOS only feature</li>
+						<li class="l_transitions2">Built-in 3D transformations</li>
+						<li class="l_transitions3">Page curl, flip, etc.</li>
+						<li class="l_transitions4">Apply to Window or View</li>
+					</ul>
+					<div class="slidenote"><div class="l_slidenote_transitions"><b>Demo</b> KitchenSInk<br><ul><li>Basic tab > Transitions</li><li>File is <b>transitions.js</b></li><li>~line 110 transition property in animate()</li></ul></div></div>
 				</section>	
 				
-				<section>
-					<h2 class="l_common_anim">Common Animation Uses</h2>
-					<p align="left" class="l_window_transitions">Window Transitions (already demoed)</p><br>
-					<p align="left" class="l_view_opacity">View opacity (already demoed)</p><br>
-					<p align="left" class="l_slide_demo">Slide - Demo</p><br>
-					<p align="left" class="l_bounce_demo">Bounce/Grow/Shrink - Demo</p><br>
-					<p align="left" class="l_drag">Drag and Drop</p>
-					<div class="slidenote"><div class="l_slidenote_common_anim"><ul><li>Demo A: KitchenSink – Base UI tab, Animations > Basic</li><ul><li>file is: basic_animation.js</li></ul><li><Demo B: show the touchmove event listener</li><li>drop part would be the callback function: you'd determine the x/y and bounds of the dragged object, if it were in the right spot per your app's UI, then you'd take the appropriate actions</li><li>Drag &amp; drop is not an automated / built-in function. You have to manually build that functionality</li></ul></div></div>
-				</section>	
-
 				<section>
 					<h2 style="" class="l_alloyanim">Alloy Animation Built-ins</h2>
 					<ul style="width:80%;">
@@ -280,7 +276,18 @@ $.loginButton.addEventListener('click', function() {
 					</code></pre>
 					<div class="slidenote"><div class="l_slidenote_alloyanimexample"></div></div>
 				</section>
-				
+
+				<section>
+					<h2 style="" class="l_summary">Summary</h2>
+					<p class="l_summarypara">In this lesson, you:</p>
+					<ul style="width:80%;">
+			    		<li class="l_summary1">Learned key animation concepts</li>
+			    		<li class="l_summary2">Animated the properties of views</li>
+			    		<li class="l_summary3">Animated views with 2D and 3D matrix operations</li>
+					</ul>
+					<div class="slidenote"><div class="l_slidenote_summary"></div></div>
+				</section>
+
 				<section>
 					<h1 class="l_qa">Q&amp;A</h1>
 					<div class="slidenote"><div class="l_slidenote_qa"></div></div>
@@ -301,6 +308,7 @@ $.loginButton.addEventListener('click', function() {
 
 			<!-- Appc logo and presenter notes -->
 			<div id="appclogo"><a href="../index.html"><img src="../images/appu_thumb.png"/></a></div>
+			<a id="firstslide" onClick="Reveal.navigateTo(0,0);"><img src="../images/agt_desktop_enhancements.png" title='First slide' alt='First'/></a>
 			<a id="presenternotes" onClick="openPresenterNotes()"><img src="../images/presenternotes.png" title='Open Presenter Notes Window' alt='Presenter notes'/></a>
 
 			<!-- The navigational controls UI -->

@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="utf-8">
 		<title>Android API Deep Dive</title>
-		<meta name="description" content="Android API Deep Dive, Advanced Titanium Mobile Development">
+		<meta name="description" content="Android API Deep Dive, Titanium Certified Expert (TCE) Training">
     	<meta name="author" content="Appcelerator, Inc." />
 		
 		<link href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
@@ -62,7 +62,7 @@
 				
 				<section>
 					<h1 style="margin-top:100px;" class="l_lessontitle">Android API Deep Dive</h1>
-					<h5 class="l_subtitle">Advanced Titanium Mobile Development</h5>
+					<h5 class="l_subtitle">Titanium Certified Expert (TCE) Training</h5>
 					<script>
 						// DO NOT REMOVE THIS, MUST BE INCLUDED WITH THE FIRST SLIDE
 						if( navigator.userAgent.match( /(iPhone|iPad|iPod|Android)/i ) )
@@ -72,14 +72,13 @@
 				</section>
 				
 				<section id="agenda">
-					<h1 style="margin-top:50px;" class="l_agenda_title">Agenda</h1>
+					<h1 style="margin-top:50px;" class="l_agenda_title">In this lesson, you will:</h1>
 			    	<ul style="width:100%; margin-left:30px;">
-			    		<li class="l_agenda1">Platform characteristics</li>
-			    		<li class="l_agenda2">Android vocabulary</li>
-			    		<li class="l_agenda3">Android Specific Configuration Options</li>
-						<li class="l_agenda4">Android Specific UI APIs</li>
-						<li class="l_agenda5">Android Specific Non-visual APIs</li>
-						<li class="l_agenda6">Lab</li>
+			    		<li class="l_agenda1">Identify the strength and weaknesses of the Android platform</li>
+			    		<li class="l_agenda2">Explore Android components and vocabulary</li>
+			    		<li class="l_agenda3">Configure Android apps using native configuration techniques</li>
+						<li class="l_agenda4">Implement Android UI APIs</li>
+						<li class="l_agenda5">Implement Android non-visual APIs</li>
 			    	</ul>
 					
 					<div class="slidenote">
@@ -91,60 +90,60 @@
 				
 				<section>
 					<h2 class="l_android_strengths">Android Platform Strengths</h2>
-					<p align="left" class="l_open">Open nature (Hackable)</p><br>
-					<p align="left" class="l_variety">Variety of app distribution methods</p><br>
-					<p align="left" class="l_low_cost">Low cost handsets on a variety of hardware</p><br>
-					<p align="left" class="l_java">Java-based environment (common skill set)</p><br>
-					<p align="left" class="l_great">Many great Google apps</p>
+					<ul style="width:80%;">
+						<li class="l_android_strengths1">Open nature (hackable)</li>
+						<li class="l_android_strengths2">Variety of app distribution methods</li>
+						<li class="l_android_strengths3">Range of devices: low-cost to high-end</li>
+						<li class="l_android_strengths4">Java-based environment (common skill set)</li>
+						<li class="l_android_strengths4">Strongly integrated into the Google ecosystem (identity, Google Apps, data sharing)</li>
+					</ul>
 					<div class="slidenote"><div class="l_slidenote_android_strengths">Some carriers restrict installation of non-market apps</div></div>
 				</section>
 
 				<section>
-					<h2 class="l_ti_android_strengths">Ti Android Platform Strengths</h2>
-					<p align="left" class="l_ios_support">Lots of support for OS specific functionality, focus on 'best of breed' experience</p><br>
-					<p align="left" class="l_easy_dep">Easy deployment to devices for testing</p><br>
-					<p align="left" class="l_easy_distr">Easy to distribute apps for testing</p><br>
-					<p align="left" class="l_easy_market">Easy to deploy apps to market</p>
-					<div class="slidenote"><div class="l_slidenote_ti_android_strengths"></div></div>
-				</section>				
-				
-				<section>
 					<h2 class="l_android_weaknesses">Android Platform Weaknesses</h2>
-					<p align="left" class="l_open">Open nature (Hackable)</p><br>
-					<p align="left" class="l_large_dist">Large distribution of device screen types, hardware capabilities, OS versions...</p><br>
-					<p align="left" class="l_less_active">Less active app economy (fewer purchases)</p><br>
-					<p align="left" class="l_confusing">Confusing UX (Linux on a handset!)</p>
-					<div class="slidenote"><div class="l_slidenote_android_weaknesses"><ul><li>Carrier themes add a layer of complexity in UI design (button backgrounds or default text vary by carrier themes, for example)</li><li>UX is perhaps more confusing for novices, general public than for typical developer or tech geek</li></ul></div></div>
+					<ul style="width:80%;">
+						<li class="l_android_weaknesses1">Slow OS upgrades on user devices</li>
+						<li class="l_android_weaknesses2">Carrier themes add a layer of complexity in UI design</li>
+						<li class="l_android_weaknesses3">Large distribution of device screen types, hardware capabilities, etc.</li>
+						<li class="l_android_weaknesses4">Open nature (hackable)</li>
+						<li class="l_android_weaknesses5">Less active app economy (fewer 99-cent purchases)</li>
+					</ul>
+					<div class="slidenote"><div class="l_slidenote_android_weaknesses"></div></div>
 				</section>
 				
 				<section>
-					<h2 class="l_ti_android_weaknesses">Ti Android Platform Weaknesses</h2>
-					<p align="left" class="l_parity">API Parity - Platform diversity can make adding features slower</p><br>
-					<p align="left" class="l_builtin_ui">Not as many built-in UI components (platform weakness really)</p><br>
-					<p align="left" class="l_js_engine">JavaScript engine performance - V8 is fast!(but Rhino not so much)</p>
-					<div class="slidenote"><div class="l_slidenote_ti_android_weaknesses"><ul><li>API parity issues is basically a growing-pains result, we're doing our best to catch up and achieve parity</li><li>SDK 1.8 added V8 JS engine, which is much faster than Rhino</li><li>Rhino also supported for pre-Android 2.2 devices</li></ul></div></div>
+					<h1 class="l_many_dev" style="margin:100px auto 40px auto;">Many devices &amp; form factors</h1>
+					<p class="l_manydevpara1">Phones, tablets, various operating system versions, vendor skins, carrier add-ons, forked versions</p>
+					<p class="l_manydevpara2" style="margin-top:100px;">Need to test as widely as possible ... on device</p>
+					<div class="slidenote"><div class="l_slidenote_many_dev"></div></div>
 				</section>
 				
+				<!-- - - - - - - - - - - - - - - - - NEW TOPIC - - - - - - - - - - - - - - - - -->
 				<section>
-					<h1 class="l_many_dev">Many devices &amp; form factors - test!</h1>
-					<div class="slidenote"><div class="l_slidenote_many_dev">Phones, tablets, various operating system versions, vendor skins, carrier add-ons, forked versions<br>Need to test as widely as possible<br>Test on device</div></div>
+					<h1 class="topicH1 l_topic"><img src="../images/topic.png"/>Topic</h1>
+					<h5 style="clear:both;" class="l_androidcomponents">Android Components</h5>
+					<div class="slidenote"><div class="l_slidenote_androidcomponents"></div></div>
 				</section>
-				
+
+
 				<section>
 					<h2 class="l_android_key">Android Application Key Components</h2>
-					<ul style="width:100%; margin-left:30px;">
-			    		<li class="l_activities">Activities</li>
-			    		<li class="l_services">Services</li>
-			    		<li class="l_broadcast">Broadcast Receivers</li>
-						<li class="l_intents">Intents</li>
+					<div style="margin:10px auto; width: 80%">
+					<ul style="margin-bottom:40px;">
+			    		<li class="l_android_key1">Activities</li>
+			    		<li class="l_android_key2">Services</li>
+			    		<li class="l_android_key3">Broadcast Receivers</li>
+						<li class="l_android_key4">Intents</li>
+						<li class="l_android_key5">Pending Intents</li>
 			    	</ul>
-					<p align="left" class="l_necessary">It is necessary to understand and implement these in Ti to provide a native experience</p><br>
+					<p class="l_necessary" style="">It is necessary to understand and implement these in Ti to provide a truly native experience</p><br>
 					<p class="l_android_url" style="font-size:0.7em;margin-top:20px;"><a href='http://developer.android.com/guide/topics/fundamentals.html'>http://developer.android.com/guide/topics/fundamentals.html</a></p>
-					<div class="slidenote"><div class="l_slidenote_android_key"><ul><li>Every app has at least one activity and might implement the other components listed here. </li><li><b>READ THE ANDROID APP FUNDAMENTALS!  Don't cheat and hope Titanium will understand all of Aandroid for you!</b></li></ul></div></div>
+					</div>
+					<div class="slidenote"><div class="l_slidenote_android_key"><ul><li>Every app has at least one activity and might implement the other components listed here. </li><li><b>READ THE ANDROID APP FUNDAMENTALS!  Don't cheat and hope Titanium will understand all of Android for you!</b></li></ul></div></div>
 				</section>
 				
 				<section>
-					<h2 class="l_android_vocab">Android Vocabulary</h2>
 					<h2 style="margin-top:50px;" class="l_activity">Activity</h2>
 					<p align="left" class="l_activity_def" style="font-style:italic;">'An activity is a single, focused thing that the user can do. Almost all activities interact with the user, so the Activity class takes care of creating a window for you in which you can place your UI'</p><br>
 					<p class="l_activity_url" style="font-size:0.7em;margin-top:20px;"><a href='http://developer.android.com/reference/android/app/Activity.html'>http://developer.android.com/reference/android/app/Activity.html</a></p>
@@ -152,7 +151,6 @@
 				</section>
 				
 				<section>
-					<h2 class="l_android_vocab">Android Vocabulary</h2>
 					<h2 style="margin-top:50px;" class="l_service">Service</h2>
 					<p align="left" class="l_service_def" style="font-style:italic;">'A Service is an application component representing either an application's desire to perform a longer-running operation while not interacting with the user or to supply functionality for other applications to use.'</p><br>
 					<p class="l_service_url" style="font-size:0.7em;margin-top:20px;"><a href='http://developer.android.com/reference/android/app/Service.html'>http://developer.android.com/reference/android/app/Service.html</a></p>
@@ -160,7 +158,6 @@
 				</section>
 				
 				<section>
-					<h2 class="l_android_vocab">Android Vocabulary</h2>
 					<h2 style="margin-top:50px;" class="l_broadcast">Broadcast Receiver</h2>
 					<p align="left" class="l_broadcast_def" style="font-style:italic;">'A broadcast receiver is a component that responds to system-wide broadcast announcements'</p><br>
 					<p class="l_broadcast_url" style="font-size:0.7em;margin-top:20px;"><a href='http://developer.android.com/reference/android/content/BroadcastReceiver.html'>http://developer.android.com/reference/android/content/BroadcastReceiver.html</a></p>
@@ -168,27 +165,62 @@
 				</section>
 				
 				<section>
-					<h2 class="l_android_vocab">Android Vocabulary</h2>
 					<h2 style="margin-top:50px;" class="l_intent">Intent</h2>
 					<p align="left" class="l_intent_def" style="font-style:italic;">'Three of the core components of an application - activities, services, and broadcast receivers - are activated through messages, called intents.'</p><br>
 					<p class="l_intent_url" style="font-size:0.7em;margin-top:20px;"><a href='http://developer.android.com/guide/topics/intents/intents-filters.html'>http://developer.android.com/guide/topics/intents/intents-filters.html</a></p>
 					<div class="slidenote"><div class="l_slidenote_android_vocab_4"><ul><li>Intents are basically message objects that hold data which pass from one activity to a service, or one activity to another activity, etc.</li><li>Broadcasts are communicated in the form of events</li><li>For security reasons, your app can't directly start an activity in another app. Instead, you send an intent requesting that activity and the OS starts the activity on your app's behalf</li><li>You can request service from another activity directly (call on it) or you can publish an intent and a 'filter' describing the type of service you need and let the OS find appropriate activities for you (think of how the Share button works &mdash; your app is publishing some text and the OS is returning all the activities that could share that text: email, twitter, etc.</li></ul></div></div>
 				</section>
+
+				<section>
+					<h2 style="margin-top:50px" class="l_pendingintent">Pending Intent</h2>
+					<p align="left" class="l_pendingintentpara" style="font-style:italic;">A Pending Intent is an intent you give to another application to perform on your app's behalf at a future time.</p><br>
+					<p class="l_pendingintent_url" style="font-size:0.7em;margin-top:20px;"><a href='http://developer.android.com/reference/android/app/PendingIntent.html'>http://developer.android.com/reference/android/app/PendingIntent.html</a></p>
+					<div class="slidenote"><div class="l_slidenote_pendingintent">The key concepts here are: A) unlike with an intent, with a pending intent the other app can perform operations using your app's permissions (on your behalf), and B) that action could be at a later time.</div></div>
+				</section>
 				
 				<section>
-					<h1 class="l_all_these">All of these work in Ti</h1>
+					<h1 class="l_all_these">All of these work in Titanium</h1>
+				    <img src="images/tiandroiddocs.png" style="width:700px;"/>
 					<div class="slidenote"><div class="l_slidenote_all_these">Much of this goes on behind the scenes without you having to worry a lot over it. But you can manage the process and take specific actions to capitalize on this application architecture</div></div>
 				</section>
-				
+
+				<!-- - - - - - - - - - - - - - - - - NEW TOPIC - - - - - - - - - - - - - - - - -->
 				<section>
-					<h2 class="l_android_config">Android Configuration</h2>
-					<p align="left" class="l_core_os">Most of the core OS services are configured in AndroidManifest.xml</p><br>
-					<p align="left" class="l_tiapp">AndroidManifest.xml properties can be configured in tiapp.xml</p><br>
-					<p align="left" class="l_custom">You can also have a custom AndroidManifest.xml</p><br>
-					<p align="left" class="l_demo_tiapp">Demo: tiapp.xml config and custom AndroidManifest.xml</p>
-					<div class="slidenote"><div class="l_slidenote_android_config"><ul><li>Activities, services, &amp; content providers not defined in the manifest are not visible to the OS and therefore cannot be started</li><li>Titanium adds these elements, but you could also define or configure them yourself</li><li>Also use the manifest to define hardware needs (orientation, screen size &amp; density, platform version)</li></ul><b>Demo</b><ul><li>Show kitchen sink tiapp.xml &mdash; activity &amp; services configurations</li><li>Via finder, open KS/build/android/AndroidManifest.xml</li><li><intent-filter> describes the capabilities of your activities so the OS knows what type of intents they could respond to</li><li>Explain how you could create a custom manifest (covered in Orientation module)</li></ul></div></div>
+					<h1 class="topicH1 l_topic"><img src="../images/topic.png"/>Topic</h1>
+					<h5 style="clear:both;" class="l_androidconfiguration">Android Configuration</h5>
+					<div class="slidenote"><div class="l_slidenote_androidconfiguration"></div></div>
 				</section>
-				
+
+				<section>
+					<h2 style="" class="l_manifest">AndroidManifest.xml</h2>
+					<ul style="width:80%;">
+						<li class="l_manifest1">Native configurations done in AndroidManifest.xml</li>
+						<li class="l_manifest2">Most of those properties can be set in the tiapp.xml</li>
+						<li class="l_manifest3">Or, use a custom AndroidManifest.xml</li>
+						<li class="l_manifest4">Examples: app permissions, orientation handling, version number customization, native themes, tooling, etc.</li>
+					</ul>
+					<div class="slidenote"><div class="l_slidenote_manifest"></div></div>
+				</section>
+
+				<section>
+					<h2 style="" class="l_tiapp">Configuration in Tiapp.xml</h2>
+				    <img src="images/tiapp.png" style="width:700px;"/>
+					<ol style="width:80%;">
+						<li class="l_tiapp2">Build once to generate stock build/android/AndroidManifest.xml</li>
+						<li class="l_tiapp2">Copy pertinent tags from generated file</li>
+						<li class="l_tiapp1">In tiapp.xml, edit <code>&lt;android .../></code> to be block rather than closed tag</li>
+						<li class="l_tiapp2">Add <code>&lt;manifest>&lt;/manifest></code> tags</li>
+						<li class="l_tiapp3">Paste in generated code, edit as needed</li>
+					</ol>
+					<div class="slidenote"><div class="l_slidenote_tiapp"></div></div>
+				</section>
+
+				<section>
+					<h2 style="" class="l_custommanifest">Custom Android Manifest</h2>
+				    <img src="images/custommanifest.png" style="width:700px;"/>
+					<div class="slidenote"><div class="l_slidenote_custommanifest">Note that platform/android are at the same level as app and Resources, not inside either of those folders. You will have to create those folders too. </div></div>
+				</section>
+
 				<!-- - - - - - - - - - - - - - - - - NEW TOPIC - - - - - - - - - - - - - - - - -->
 				<section>
 					<h1 class="topicH1 l_topic"><img src="../images/topic.png"/>Topic</h1>
@@ -218,12 +250,18 @@
 				</section>
 				
 				<section>
-					<h2 class="l_hardware">Hardware Menu</h2>
-					<p align="left" class="l_menu_options">Menu of options displayed when hardware button is pressed</p><br>
-					<p align="left" class="">Associated with an activity (heavyweight Titanium Window)</p><br>
-					<p align="left" class="l_text_icons">Can configure text and icons</p><br>
-					<div class="slidenote"><div class="l_slidenote_hardware">Demo: KitchenSink &mdash; android_menu1, 2, and 3</div></div>
+					<h2 style="" class="l_hardwaremenu">Hardware Menu</h2>
+					<ul style="width:80%;">
+						<li class="l_hardwaremenu1">Menu of options displayed when "hardware" button is pressed</li>
+						<li class="l_hardwaremenu2">Associated with activity (heavyweight window)</li>
+						<li class="l_hardwaremenu3">Pre-ICS: shown at bottom of screen as slide up tray</li>
+						<li class="l_hardwaremenu4">ICS: either in Action Bar or in bottom bar as ellipsis button</li>
+					</ul>
+				    <img src="images/actionbarmenu.png" style="width:240px;"/>
+				    <img src="images/bottombarmenu.png" style="width:240px;"/>
+					<div class="slidenote"><div class="l_slidenote_hardwaremenu"></div></div>
 				</section>
+
 
 				<section>
 					<h2 style="" class="l_menuold">Menu Example - pre-ICS</h2>
@@ -264,11 +302,20 @@ var w = Ti.UI.createWindow({
 				<section>
 					<h2 style="" class="l_menuicsb">ICS Menu Example - Code</h2>
 					<pre style=""><code contenteditable>
+&lt;Menu>
+  &lt;MenuItem title="Compose" icon="/images/compose_icon.png"
+    showAsAction="Ti.Android.SHOW_AS_ACTION_IF_ROOM " 
+    onClick="doSomething"/>
+&lt;/Menu>
+
+					</code></pre>
+					<pre style=""><code contenteditable>
+// or in code is still valid
 $.win.activity.onCreateOptionsMenu = function(e) { 
     var menu = e.menu; 
     var menuItem = menu.add({ 
         title : "Compose", 
-        icon : "images/compose_icon.png", 
+        icon : "/images/compose_icon.png", 
         showAsAction : Ti.Android.SHOW_AS_ACTION_IF_ROOM 
     }); 
     menuItem.addEventListener("click", function(e) { 
@@ -279,6 +326,44 @@ $.win.activity.onCreateOptionsMenu = function(e) {
 					<div class="slidenote"><div class="l_slidenote_menuicsb"></div></div>
 				</section>
 				
+				<section>
+					<h2 style="" class="l_splashscreens">Using a 9-patch for the Splash Screen</h2>
+					<ol style="width:80%;">
+						<li class="l_splashstep1">Create a 9-patch image using draw9patch utility</li>
+						<li class="l_splashstep2">Copy to platform/android/res/drawable[-xdpi]</li>
+						<li class="l_splashstep3">Rename it to splash.9.png</li>
+						<li class="l_splashstep4">Create a theme.xml file, put it in platform/android/res/values</li>
+					</ol>
+					<pre style=""><code contenteditable>
+&lt;?xml version="1.0" encoding="utf-8"?>
+&lt;resources>
+&lt;style name="Theme.Titanium" parent="android:Theme">
+    &lt;item name="android:windowBackground">@drawable/splash&lt;/item>
+    &lt;item name="android:windowNoTitle">true&lt;/item>
+&lt;/style>
+&lt;/resources>
+					</code></pre>
+					<div class="slidenote"><div class="l_slidenote_splashscreens"></div></div>
+				</section>
+
+				<section>
+					<h2 style="" class="l_external">Installing to the SD card</h2>
+					<ul style="width:80%;">
+						<li class="l_external1">Use tool-api-level 8 or higher</li>
+						<li class="l_external2">Set minSdkVersioin to 7 or higher</li>
+						<li class="l_external3">Add the following to the AndroidManifest.xml</li>
+					</ul>
+					<pre style=""><code contenteditable>
+&lt;android xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;&gt;
+   &lt;tool-api-level&gt;8&lt;/tool-api-level&gt;
+   &lt;manifest android:installLocation=&quot;preferExternal&quot;&gt;
+      &lt;uses-sdk android:minSdkVersion=&quot;7&quot; /&gt;
+   &lt;/manifest&gt;
+&lt;/android&gt;
+					</code></pre>
+					<div class="slidenote"><div class="l_slidenote_external"></div></div>
+				</section>
+
 				<section>
 					<h2 class="l_android_labels">Android Labels</h2>
 					<p align="left" class="l_much_ios">Much more capable than iOS Labels</p><br>
@@ -312,11 +397,13 @@ n.show();
 				
 				<section>
 					<h2 class="l_hijack">Hijacking the Back Button</h2>
-					<p align="left" class="l_override_back">Sometimes you want to override back button for your activity to provide better behavior</p><br>
-					<p align="left" class="l_wizard">Example: Wizard interface, where you want “back” to go back to a previous state in the UI</p><br>
-					<p align="left" class="l_careful">Careful about this!  Users expect back to go back to another activity (most of the time)</p><br>
-					<p align="left" class="l_demo_back">Demo: back button event</p><br>
-					<div class="slidenote"><div class="l_slidenote_hijackv2"><ul><li><b>Demo</b>AndroidBackDemo project on the TCMD github repository<br>https://github.com/appcelerator-training/tcmd_certification/blob/master/workspace/AndroidBackDemo.zip</li><li>View hijacks the back button &amp; closes<br>Then restores it so you can close the window</li><li>In the event listener, you can monitor the other hardware buttons in the form:<br>androidcamera<br>androidhome (colon removed in Ti 3.0, e.g. was android:camera)</li></ul></div></div>
+					<ul style="width:80%;">
+						<li class="l_hijack1">Override default Back button behavior</li>
+						<li class="l_hijack2">Example: wizard interface where you want to go back a screen</li>
+						<li class="l_hijack3">Careful about user expectations</li>
+						<li class="l_hijack4">Demo: AndroidBackDemo</li>
+					</ul>
+					<div class="slidenote"><div class="l_slidenote_hijackv2"><ul><li><b>Demo</b>AndroidBackDemo project is part of the TCE repop</li><li>View hijacks the back button &amp; closes<br>Then restores it so you can close the window</li><li>In the event listener, you can monitor the other hardware buttons in the form:<br>androidcamera<br>androidhome (colon removed in Ti 3.0, e.g. was android:camera)</li></ul></div></div>
 				</section>
 				
 				<!-- - - - - - - - - - - - - - - - - NEW TOPIC - - - - - - - - - - - - - - - - -->
@@ -362,10 +449,41 @@ try {
 				
 				<section>
 					<h2 class="l_service_supp">Service Support</h2>
-					<p align="left" class="l_js_service">You can have JS-based services running in the background</p><br>
-					<p align="left" class="l_can_comm">Can communicate with it from your main application</p><br>
-					<p align="left" class="l_demo_bg">Demo: background service</p><br>
-					<div class="slidenote"><div class="l_slidenote_service_supp">Demo KitchenSink<br>See android_services.js and Resources/android/testservice.js<br>Plus see entry in tiapp.xml</div></div>
+					<ul style="width:90%;">
+						<li class="l_services1">Run JavaScript-based services in the background</li>
+						<li class="l_services2">Must be started by your app, but can survive when you exit the app</li>
+						<li class="l_services3">Runs on an interval you specify</li>
+						<li class="l_services4">Can access many non-UI Titanium APIs (networking, eventing, etc.)</li>
+					</ul>
+					<div class="slidenote"><div class="l_slidenote_service_supp">You can't access the UI from a service. And not all Ti APIs are supported, only those not reliant on an activity. Which are supported is not fully documented unfortunately.</div></div>
+				</section>
+
+				<section>
+					<h2 style="" class="l_serviceexample">Example</h2>
+					<pre style="width:480px;float:left;"><code contenteditable>
+// app/lib/logservice.js
+// This is the service, use non-UI Ti APIs
+Ti.API.info("Hello world, I'm a service");
+					</code></pre>
+					<pre style="width:520px;float:right;"><code contenteditable>
+&lt;!-- tiapp.xml -->
+&lt;android xmlns:android="http://schemas.android.com/apk/res/android">
+  &lt;services>
+    &lt;service url="logservice.js" 
+        type="interval"/>
+  &lt;/services>
+&lt;/android>
+					</code></pre>
+					<pre style="clear:both;"><code contenteditable>
+// in index.js or other controller
+var SECONDS = 10; // every 10 seconds
+var intent = Titanium.Android.createServiceIntent({
+  url: 'logservice.js'
+});
+intent.putExtra('interval', SECONDS * 1000); // Needs to be milliseconds
+Ti.Android.stopService(intent); // later, to stop the service!
+					</code></pre>
+					<div class="slidenote"><div class="l_slidenote_serviceexample">See http://docs.appcelerator.com/titanium/latest/#!/guide/Simple_Android_Services_in_Titanium for more information.</div></div>
 				</section>
 				
 				<section>
@@ -382,48 +500,21 @@ try {
 					<p align="left" class="l_drawable">R.drawable - built in icons for ImageView, etc.</p><br>
 					<p align="left" class="l_r_string">R.string - OS localized string for 'OK', 'Cancel', etc</p><br>
 					<p align="left" class="l_android_docs">Android docs required to see properties</p><br>
-					<p align="left" class="l_demo_resources_js">Demo: R resources in JS</p><br>
 					<div class="slidenote"><div class="l_slidenote_app_resources">Resources are assets, such as images, strings, layouts, animations, etc that are maintained external from your app so that you can swap, maintain, management outside of your code<br>R is the class that represents resources in your app<br>Accessible in Ti. via Android.R class, see http://developer.appcelerator.com/apidoc/mobile/latest/Titanium.App.Android.R-object<br>Demo: KitchenSink android_menu_2.js, line 24<br>Uses some of the built-in icons</div></div>
 				</section>
 
 				<section>
-					<h2 style="" class="l_splashscreens">Using a 9-patch for the Splash Screen</h2>
-					<ol style="width:80%;">
-						<li class="l_splashstep1">Create a 9-patch image using draw9patch utility</li>
-						<li class="l_splashstep2">Copy to platform/android/res/drawable[-xdpi]</li>
-						<li class="l_splashstep3">Rename it to splash.9.png</li>
-						<li class="l_splashstep4">Create a theme.xml file, put it in platform/android/res/values</li>
-					</ol>
-					<pre style=""><code contenteditable>
-&lt;?xml version="1.0" encoding="utf-8"?>
-&lt;resources>
-&lt;style name="Theme.Titanium" parent="android:Theme">
-    &lt;item name="android:windowBackground">@drawable/splash&lt;/item>
-    &lt;item name="android:windowNoTitle">true&lt;/item>
-&lt;/style>
-&lt;/resources>
-					</code></pre>
-					<div class="slidenote"><div class="l_slidenote_splashscreens"></div></div>
-				</section>
-
-				<section>
-					<h2 style="" class="l_external">Installing to the SD card</h2>
+					<h2 style="" class="l_summary">Summary</h2>
+					<p class="l_summarypara">In this lesson, you:</p>
 					<ul style="width:80%;">
-						<li class="l_external1">Use tool-api-level 8 or higher</li>
-						<li class="l_external2">Set minSdkVersioin to 7 or higher</li>
-						<li class="l_external3">Add the following to the AndroidManifest.xml</li>
+			    		<li class="l_summary1">Identified the strength and weaknesses of the Android platform</li>
+			    		<li class="l_summary2">Explored Android components and vocabulary</li>
+			    		<li class="l_summary3">Configured Android apps using native configuration techniques</li>
+						<li class="l_summary4">Implemented Android UI APIs</li>
+						<li class="l_summary5">Implemented Android non-visual APIs</li>
 					</ul>
-					<pre style=""><code contenteditable>
-&lt;android xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;&gt;
-   &lt;tool-api-level&gt;8&lt;/tool-api-level&gt;
-   &lt;manifest android:installLocation=&quot;preferExternal&quot;&gt;
-      &lt;uses-sdk android:minSdkVersion=&quot;7&quot; /&gt;
-   &lt;/manifest&gt;
-&lt;/android&gt;
-					</code></pre>
-					<div class="slidenote"><div class="l_slidenote_external"></div></div>
+					<div class="slidenote"><div class="l_slidenote_summary"></div></div>
 				</section>
-
 
 				
 				<section>
@@ -449,6 +540,7 @@ try {
 
 			<!-- Appc logo and presenter notes -->
 			<div id="appclogo"><a href="../index.html"><img src="../images/appu_thumb.png"/></a></div>
+			<a id="firstslide" onClick="Reveal.navigateTo(0,0);"><img src="../images/agt_desktop_enhancements.png" title='First slide' alt='First'/></a>
 			<a id="presenternotes" onClick="openPresenterNotes()"><img src="../images/presenternotes.png" title='Open Presenter Notes Window' alt='Presenter notes'/></a>
 
 			<!-- The navigational controls UI -->

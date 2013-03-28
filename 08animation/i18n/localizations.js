@@ -6,15 +6,14 @@
 String.toLocaleString({
 	"en-US": {
 		"%l_filetitle": "Animation",
-		"%l_subtitle": "Advanced Titanium Mobile Development",
+		"%l_subtitle": "Titanium Certified Expert (TCE) Training",
 		"%l_lessontitle": "Animation",
 		"%l_slidenote_titleslide": "<b>Module time: 60 mins</b><br/>(30 mins teaching, 30 mins lab)",
 
-		"%l_agenda_title": "Agenda",
-		"%l_agenda1": "Animation Key Concepts",
-		"%l_agenda2": "Basic property animation",
-		"%l_agenda3": "2d and 3d Matrix Animations",
-		"%l_agenda4": "Lab",
+		"%l_agenda_title": "In this lesson, you will",
+		"%l_agenda1": "Learn key animation concepts",
+		"%l_agenda2": "Animate the properties of views",
+		"%l_agenda3": "Animate views with 2D and 3D matrix operations",
 		"%l_slidenote_agenda": "",
 
 		"%l_overview": "Animation Overview",
@@ -83,14 +82,6 @@ String.toLocaleString({
 		"%l_can_transition": "Can transition between child views",
 		"%l_demo_transitions": "Demo: Using transitions on iOS",
 		"%l_slidenote_transitions": "<b>Demo</b>Use the finished code from Lab 340. Demonstrate working app, then examine app.js<br>OR<br>Demo: KitchenSInk<br><ul><li>Basic tab > Transitions</li><li>File is <b>transitions.js</b></li><li>~line 110 transition property in animate()</li></ul>",
-		
-		"%l_common_anim": "Common Animation Uses",
-		"%l_window_transitions": "Window Transitions (already demoed)",
-		"%l_view_opacity": "View opacity (already demoed)",
-		"%l_slide_demo": "Slide - Demo",
-		"%l_bounce_demo": "Bounce/Grow/Shrink - Demo",
-		"%l_drag": "Drag and Drop",
-		"%l_slidenote_common_anim": "<ul><li>Demo A: KitchenSink ñ Base UI tab, Animations > Basic</li><ul><li>file is: basic_animation.js</li></ul><li><Demo B: show the touchmove event listener</li><li>drop part would be the callback function: you'd determine the x/y and bounds of the dragged object, if it were in the right spot per your app's UI, then you'd take the appropriate actions</li><li>Drag & drop is not an automated / built-in function. You have to manually build that functionality</li></ul>",
 		
 		"%l_qa": "Q&amp;A",
 		"%l_slidenote_qa": "",

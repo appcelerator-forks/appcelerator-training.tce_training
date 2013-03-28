@@ -75,9 +75,7 @@
 					<h1 style="margin-top:50px;" class="l_agenda_title">In this lesson, you will:</h1>
 			    	<ul style="width:100%;margin-left:75px;">
 			    		<li class="l_agenda1">Manage and profile memory in a Titanium app</li>
-			    		<li class="l_agenda2V2">Identify performance best practices</li>
-			    		<li class="l_agenda3"></li>
-			    		<li class="l_agenda4"></li>
+			    		<li class="l_agenda2">Identify performance best practices</li>
 			    	</ul>
 					
 					<div class="slidenote">
@@ -136,10 +134,10 @@
 						<li class="l_jsgarbage1">Automatic (no manual allocation/deallocation)</li>
 						<li class="l_jsgarbage2">'Mark and Sweep' stops execution periodically &amp; briefly</li>
 						<li class="l_jsgarbage3">Interpreter decides when and how</li>
-						<li class="l_jsgarbage4">Objects collected when no references remain</li>
-						<li class="l_jsgarbage5">Nothing in the global space is ever collected!</li>
-						<li class="l_jsgarbage6">"Force" collection by encapsulating within functions or modules that will go out of scope</li>
-						<li class="l_jsgarbage7">Or, set variables to <code>null</code></li>
+						<li class="l_jsgarbage4 fragment">Objects collected when no references remain</li>
+						<li class="l_jsgarbage5 fragment">Nothing in the global space is ever collected!</li>
+						<li class="l_jsgarbage6 fragment">"Force" collection by encapsulating within functions or modules that will go out of scope</li>
+						<li class="l_jsgarbage7 fragment">Or, set variables to <code>null</code></li>
 					</ul>
 					<div class="slidenote"><div class="l_slidenote_jsgarbage">Before we can talk about avoiding memory leaks, we need to understand how JavaScript cleans up variable references and memory.<br/><br/>JavaScript uses a "stop the world" automatic garbage collection routine to clean up memory. It sweeps through memory, marking objects in use; then tears down any that are unmarked (and hence unused). Nothing in the global scope can be collected because there will always be a reference to the object. Within functions or other scopes, you can force collection by encapsulating within functions or modules that will go out of scope.</div></div>
 				</section>
@@ -173,7 +171,7 @@ $.imageview = null;  // &larr; native proxy can be deallocated
 					<h2 style="" class="l_memsize">Limit Images</h2>
 					<ul style="width:40%;float:left;">
 						<li class="l_memsize1">Images are bitmap in memory</li>
-						<li class="l_memsize2">No compression in emory</li>
+						<li class="l_memsize2">No compression in memory</li>
 						<li class="l_memsize3">File format doesn't matter</li>
 						<li class="l_memsize4">Lazy load images &mdash; when you need them</li>
 						<li class="l_memsize5">Then unload / destroy images you no longer need them</li>
@@ -357,6 +355,16 @@ table.setData(data);
 						<li class="l_ossim2">Debug > Color Misaligned Images<br/>Magenta means subpixel misalignments, yellow means stretched/scaled images</li>
 					</ul>
 					<div class="slidenote"><div class="l_slidenote_iossim"></div></div>
+				</section>
+
+				<section>
+					<h2 style="" class="l_summary">Summary</h2>
+					<p class="l_summarypara">In this lesson, you:</p>
+					<ul style="width:80%;">
+						<li class="l_summary1">Managed and profile memory in a Titanium app</li>
+						<li class="l_summary2">Identified performance best practices</li>
+					</ul>
+					<div class="slidenote"><div class="l_slidenote_summary"></div></div>
 				</section>
 
 				<section>
