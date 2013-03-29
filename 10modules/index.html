@@ -2,14 +2,14 @@
 <html>
 	<head>
 		<meta charset="utf-8">
-		<title>Extending Titanium</title>
-		<meta name="description" content="TExtending Titanium, Advanced Titanium Mobile Development">
+		<title>Using Modules in your Apps</title>
+		<meta name="description" content="Using Modules in your Apps, Titanium Certified Expert (TCE) Training">
     	<meta name="author" content="Appcelerator, Inc." />
 		
 		<link href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
 		<link rel="stylesheet" href="../../presentation-engine/reveal.js/css/reset.css">
 		<link rel="stylesheet" href="../../presentation-engine/reveal.js/css/main.css">
-		<link rel="stylesheet" href="../css/magula.css">
+		<link rel="stylesheet" href="../../presentation-engine/reveal.js/lib/zenburn.css">
 		<link rel="stylesheet" href="../css/presentation.css">
 		<script type="text/javascript" src="../../presentation-engine/js/l10n.js"></script>
 		<script type="text/javascript" src="i18n/localizations.js"></script>
@@ -61,340 +61,170 @@
 			<div class="slides">
 				
 				<section>
-					<h1 style="margin-top:100px;" class="l_lessontitle">Extending Titanium</h1>
-					<h5 class="l_subtitle">Advanced Titanium Mobile Development</h5>
+					<h1 style="margin-top:100px;" class="l_lessontitle">Using Modules in your Apps</h1>
+					<h5 class="l_subtitle">Titanium Certified Expert (TCE) Training</h5>
 					<script>
 						// DO NOT REMOVE THIS, MUST BE INCLUDED WITH THE FIRST SLIDE
 						if( navigator.userAgent.match( /(iPhone|iPad|iPod|Android)/i ) )
 						document.write( '<p style="color: rgba(0,0,0,0.3); text-shadow: none;">('+'Tap to navigate'+')</p>' );
 					</script>
-				<div class="slidenote"><div class="l_slidenote_titleslide"><b>Module time: 45 mins</b><br/>(15 mins teaching, 30 mins for lab)</div></div>
+				<div class="slidenote"><div class="l_slidenote_titleslide"><b>Module time: 30 mins</b><br/>(10 mins teaching, 20 mins for lab)</p></div>
 				</section>
 				
 				<section id="agenda">
-					<h1 style="margin-top:50px;" class="l_agenda_title">Agenda</h1>
+					<h1 style="margin-top:50px;" class="l_agenda_title">In this lesson, you will:</h1>
 			    	<ul style="width:100%; margin-left:30px;">
-			    		<li class="l_agenda1">Basic Titanium Internal Architecture</li>
-			    		<li class="l_agenda2">Object Model</li>
-			    		<li class="l_agenda3">Building Modules</li>
-						<li class="l_agenda4">Distributing and Installing Modules</li>
-						<li class="l_agenda5">Resources</li>
+			    		<li class="l_agenda1">Explore the purpose of modules and identify sources of modules</li>
+			    		<li class="l_agenda2">Install a module for use in a Titanium project</li>
 			    	</ul>
 					
 					<div class="slidenote">
 						<!-- Please use a classname that relates to the associated slide content. For example, this
 							slide is the agenda, thus the class is l_slidenote_agenda
 						 -->
-						<div class="l_slidenote_agenda">This lesson is a starting point for developers, not an extensive tutorial. Students with native programming knowledge will get the most from it.<br><br/>Basic Architecture &mdash; introduces internal Titanium implementation, including the Kroll microkernel<br><br/>Object Model &mdash; introduces the key objects and vocabulary for building modules<br><br/>Building modules &mdash; covers how to use titanium SDK to build/package modules<br><br/>Distributing and installing &mdash; covers custom module distribution and use<br><br/>Resources &mdash; docs and help resources available</div></div>
+						<div class="l_slidenote_agenda">You'll explore a few of the free modules available to community-level developers, as well as cover how to add a module to your project.</div></div>
 				</section>
 				
+				<!-- - - - - - - - - - - - - - - - - NEW TOPIC - - - - - - - - - - - - - - - - -->
 				<section>
-					<h1 class="l_disclaimer">Disclaimer!</h1>
-					<div class="slidenote"><div class="l_slidenote_disclaimer">The intent of this presentation is to brief you on the basics of how Titanium works and to point you in the right direction for further exploration. It is not a comprehensive treatment of the subject. Your instructor might not be an expert module developer.</div></div>
+					<h1 class="topicH1 l_topic"><img src="../images/topic.png"/>Topic</h1>
+					<h5 style="clear:both;" class="l_tour">Module Overview &amp; Quick-Tour</h5>
+					<div class="slidenote"><div class="l_slidenote_tour"></div></div>
 				</section>
-				
+
 				<section>
-					<h2 class="l_ti_arch">Titanium Architecture</h2>
-					<p align="left" class="l_we_know">We all know the basics...</p><br>
-					<p class="l_ti_main_arch_image"><img src="images/ti-main-arch.png" style="margin-top:5px;height:350px;"/></p>
-					<div class="slidenote"><div class="l_slidenote_ti_arch_1">Discuss titanium mobile app architecture &mdash; JavaScript files comprise application and communicate with native APIs through a bridge layer</div>
-				</div></section>
-				
-				<section>
-					<h2 class="l_ti_arch">Titanium Architecture</h2>
-					<p class="l_ti_arch_image"><img src="images/ti-arch.png" style="margin-top:5px;height:250px;float:right;"/></p>
-					<p align="left" class="l_but_now">...but now we need to understand the bridge</p><br>
-					<p align="left" class="l_how_is">How is a Titanium app packaged?</p><br>
-					<p align="left" class="l_how_do">How do I create new behaviors in native code?</p><br>
-					<p align="left" class="l_js_api">How do I create a JS API?</p>
-					<div class="slidenote"><div class="l_slidenote_ti_arch">In order to extend Titanium, we need to understand the bridge<br><br>we need to understand how a titanium app is packaged at a high level, and what those python scripts are doing to our JS project to package it up<br><br>we need to understand how native APIs are packed into a Titanium application<br><br>Finally, how do we expose native APIs to JavaScript and pass data between them?</div>
+					<h2 class="l_what_ti_plus">Titanium Modules</h2>
+					<p class="l_ti_plus_image"><img src="images/ti-plus.png" style="margin-top:5px;height:300px;float:right;"/></p>
+					<p align="left" class="l_val_add">Add 'missing' features</p><br>
+					<p align="left" class="l_narrow_use">Narrow use cases</p><br>
+					<p align="left" class="l_appc_created">Appcelerator &amp; Community created</p><br>
+					<p align="left" class="l_comm_created">Free, one-time, &amp; subscription-based</p>
+					<div class="slidenote"><div class="l_slidenote_ti_plus"><ul><li>Add features to Titanium not included in the core distribution</li><li>Typically narrowly focused on adding a specific feature, rather than a broad API addition</li><li>Some written by Appcelerator, others by the community. Available in a wide range of prices</li></ul></div>
 				</div></section>
 
 				<section>
-					<h2 class="l_when_app">When a Titanium app launches...</h2>
-					<p align="left" class="l_native_starts">Native app starts - activity is launched (Android) or app delegate is run (iOS)</p><br>
-					<p align="left" class="l_js_context">A JavaScript context is created (Rhino/V8 or JSCore)</p><br>
-					<p align="left" class="l_js_app">JS app is evaluated starting with app.js</p><br>
-					<p align="left" class="l_js_comm">JS Context communicates with C/Java code</p><br>
-					<p align="left" class="l_bridge">The 'bridge' between them is what we call Kroll</p><br>
-					<div class="slidenote"><div class="l_slidenote_when_app"></div></div>
+					<h2 class="l_plus_access">Module Distribution</h2>
+					<p align="left" class="l_licenses">Variety of licensing options</p><br>
+					<p align="left" class="l_distr_thru">Distributed through Marketplace</p><br>
+					<p align="left" class="l_otherdistro">Also, GitHub, Blogs, etc.</p><br>
+					<div class="slidenote"><div class="l_slidenote_plus_access">Variety of distribution methods are used. Modules can be sold or distributed via marketplace.appcelerator.com. Open-source and unofficial modules are often distributed by their authors via GitHub, blogs, and so forth.</div></div>
 				</section>
 				
 				<section>
-					<h2 class="l_the_kroll">The Kroll Microkernel</h2>
-					<p align="left" class="l_what_kroll">What is Kroll?</p>
-					<ul style="width:100%; margin-left:30px;">
-			    		<li class="l_met_process">Metallurgical process by which titanium (the element) is created</li>
-			    		<li class="l_name_given">The name given to the 'cross-language, cross-platform binding and invocation framework'</li>
-			    		<li class="l_microkernel">It is a microkernel</li>
-			    	</ul><br><br>
-					<p align="left" class="l_what_kernel">What is a kernel?</p>
-					<ul style="width:100%; margin-left:30px;">
-			    		<li class="l_in_os">In an OS, it is the bridge between software and hardware</li>
-			    		<li class="l_in_ti">In Titanium, it is the bridge between JavaScript &amp; native code</li>
-						<li class="l_kroll_url">https://github.com/appcelerator/kroll</li>
-			    		<li class="l_kernel_url">http://en.wikipedia.org/wiki/Kernel_(computing)</li>
-			    	</ul>
-					<div class="slidenote"><div class="l_slidenote_what_kernel"></div></div>
+					<h2 style="" class="l_appcopen">Appcelerator Open Source Modules</h2>
+				    <img src="images/appcopensource.png" style="width:650px;"/>
+					<div class="slidenote"><div class="l_slidenote_appcopen"></div></div>
 				</section>
-				
-				<section>
-					<h2 class="l_ti_mods">Titanium Modules</h2>
-					<p align="left" class="l_every_ti">Every Titanium module is plugged into Kroll's microkernel architecture</p><br>
-					<ul style="width:70%;list-style:none;text-align:right;">
-						<li class="l_timods1">iOS Header File <img src='images/iosheader.png' style='width:400px;vertical-align:middle;'/></li>
-						<li class="l_timods2">Java Class File  <img src='images/javaclass.png' style='width:400px;vertical-align:middle;'/></li>
-					</ul>
-					<div class="slidenote"><div class="l_slidenote_ti_mods">Titanium ObjC modules must extend TiModule<br>Titanium Java modules must extend KrollModule<br/><br/>Note that even titanium modules for UI, Database, etc have this same structure &mdash; as you get into module development, look to core modules to see how things are done in ObjC or Java</div>
-				</div>
-				</section>
-				
-				<section>
-					<h2 class="l_mod_obj">Module Object Model</h2>
-					<p align="left" class="l_proxy">Proxy - base class that represents the native binding between your JavaScript and native code (a module will have at least one proxy)</p><br>
-					<p align="left" class="l_view">View - actual native representation of a view object (for UI components)</p><br>
-					<p align="left" class="l_viewproxy">ViewProxy - represents model data (state of the View, in case the View must be released for memory management) and exposes the JavaScript API &amp; events</p><br>
-					<p align="left" class="l_module_spl">Module - specialized type of Proxy that describes a specific API set, or namespace</p><br>
-					<div class="slidenote"><div class="l_slidenote_mod_obj">The object model is slightly different between iOS and Android. In iOS, the top level module (i.e. Ti.MyModule) is just a Proxy.  In Android, it's called a 'Module'. They both function as top-level, static interfaces to native code<br><br/>A proxy is an object that interfaces directly with native code &mdash; non-visual modules will just use these objects<br>A visual module will need to implement a view, which is a native representation of a visual component, and a ViewProxy, which contains the state information for a View.  The View could be hidden and removed from memory, but the ViewProxy would still contain information about that view (like the title of a window, background color of a view, etc.)<br>View proxy is a sub class of proxy</div></div>
-				</section>
-				
-				<section>
-					<h2 class="l_mod_js">Module JavaScript Interfaces</h2>
-					<p align="left" class="l_proxy_props">Proxy objects can have public properties:</p><br>
-					<p align="left" class="l_osname">-  Ti.Platform.osname</p><br>
-					<p align="left" class="l_proxy_pub">Proxy objects can have public methods:</p><br>
-					<p align="left" class="l_create_win">-  Ti.UI.createWindow</p><br>
-					<p align="left" class="l_proxy_listen">Proxy objects can emit and listen for events:</p><br>
-					<p align="left" class="l_foo">-  Ti.App.addEventListener('foo', function(){});</p><br>
-					<div class="slidenote"><div class="l_slidenote_mod_js"></div></div>
-				</section>
-				
-				<section>
-					<h2 class="l_ios_proxy">iOS - Proxy Property</h2>
-					<p class="l_ios_proxy_explain">To expose a property, simply define an Objective-C property:</p>
-<pre><code contenteditable class="l_iosproxy_code">
-// From PlatformModule.h
-@property(readonly,nonatomic)  NSString *name;
-@property(readonly,nonatomic)  NSString *model;
-@property(readonly,nonatomic)  NSString *version;
-@property(readonly,nonatomic)  NSString *architecture;
-@property(readonly,nonatomic)  NSString *macaddress;
 
-</code></pre>
-
-					<p class="l_ios_proxy_explain2">Exposed in JavaScript as:</p>
-<pre><code contenteditable class="l_iosproxy_code2">
-var model = Ti.Platform.model;
-
-</code></pre>
-					<div class="slidenote"><div class="l_slidenote_ios_proxy">To expose a property, all you need to do is define it (as long as you've extended TiModule.h).</div>
-				</div>
-				</section>
-				
 				<section>
-					<h2 class="l_andr_proxy">Android - Proxy Property</h2>
-					<p class="l_andr_explain">To expose a property, annotate it's getter/setter with @Kroll.Property:</p>
-<pre><code contenteditable class="l_andr_code">
-// From PlatformModule.java
-@Kroll.getProperty @Kroll.method
-public String getModel() {
-   return TiPlatformHelper.getModel();
-}
-</code></pre>
-
-					<p class="l_andr_explain2">Exposed in JavaScript as:</p>
-<pre><code contenteditable class="l_andr_code2">
-var model = Ti.Platform.model;
-
-</code></pre>
-					<div class="slidenote"><div class="l_slidenote_andr_proxy">You create getter/setter methods which are exposed as properties (and methods) by the KrollModule. You must explicitly declare property as public for it to be visible in JavaScript land.</div>
-				</div>
+					<h2 style="" class="l_appcmktplace">Appcelerator Marketplace</h2>
+				    <img src="images/appcmarketplace.png" style="width:650px;"/>
+					<div class="slidenote"><div class="l_slidenote_appcmktplace"></div></div>
 				</section>
-				
-				<section>
-					<h2 class="l_ios_method">iOS - Proxy Method</h2>
-					<p class="l_ios_method_explain">To expose a method, simply define an Objective-C method:</p>
-<pre><code contenteditable class="l_iosmethod_code">
-// From PlatformModule.m
-- (NSNumber *)openURL:(NSArray*)args
-{
-   NSString *newUrlString = [args objectAtIndex:0];
-   NSURL * newUrl = [TiUtils toURL:newUrlString proxy:self];
-   BOOL result = NO;
-   if (newUrl != nil)
-   {
-      [[UIApplication sharedApplication] openURL:newUrl];
-   }
-   return [NSNumber numberWithBool:result];
-}
-</code></pre>
 
-					<p class="l_ios_method_explain2">Exposed in JavaScript as:</p>
-<pre><code contenteditable class="l_iosmethod_code2">
-Ti.Platform.openURL('http://www.google.com');
-
-</code></pre>
-					<div class="slidenote"><div class="l_slidenote_ios_method">Must implement one of a couple valid signatures (see the wiki)<br>One or more arguments passed in are all accessible via the single NSArray args array</div>
-				</div>
-				</section>
-				
 				<section>
-					<h2 class="l_andr_method">Android - Proxy Method</h2>
-					<p class="l_andr_method_explain">To expose a method, define a public method with @Kroll.method signature:</p>
-<pre><code contenteditable class="l_andrmethod_code">
-// From PlatformModule.java
-@Kroll.method
-public boolean openURL(String url) {
-   if (DBG) {
-         Log.d(LCAT, "Launching viewer for: " + url);
-   }
-   Uri uri = Uri.parse(url);
-   Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-   try {
-      getActivity().startActivity(intent);
-      return true;
-   } catch (ActivityNotFoundException e) {
-      Log.e(LCAT,"Activity not found: " + url, e);
-   }
-   return false;
-}
+					<h2 class="l_paypal">PayPal (iOS and Android)</h2>
+					<p class="l_paypal_image"><img src="images/paypal.png" style="margin-top:5px;height:200px;float:right;"/></p>
+					<p align="left" class="l_mob_payments">Mobile Payments Library</p><br>
+					<p align="left" class="l_merchant">Requires PayPal merchant account</p><br>
+					<p align="left" class="l_dev">In development, uses sandbox environment, in production uses live servers</p><br>
+					<div class="slidenote"><div class="l_slidenote_paypal"></div>Useful for physical purchases or donations<br>Can't be used for ebooks, unlocking app features, etc. because those uses would run afoul of Apple's StoreKit rules</div>
+					</section>
 
-</code></pre>
-					<p class="l_andr_method_explain2">Exposed in JavaScript as:</p>
-<pre><code contenteditable class="l_andrmethod_code2">
-Ti.Platform.openURL('http://www.google.com');
-
-</code></pre>
-					<div class="slidenote"><div class="l_slidenote_andr_method"></div>
-				</div>
-				</section>
-				
 				<section>
-					<h2 class="l_ios_event">iOS - Native Event Handlers</h2>
-<pre><code contenteditable class="l_iosevent_code">
-// From GeolocationModule.m
--(void)_listenerAdded:(NSString *)type count:(int)count
-{
-   BOOL startStop = NO;
-   if (count == 1 && [type isEqualToString:@'heading'])
-   {
-      startStop = YES;
-   }
-   else if (count == 1 && [type isEqualToString:@'location'])
-   {
-      startStop = YES;
-   }
-   if (startStop)
-   {
-      TiThreadPerformOnMainThread(^{[self startStopLocationManagerIfNeeded];}, NO);
-   }
-}
-
-</code></pre>
-					<div class="slidenote"><div class="l_slidenote_ios_event">To react to the adding or removing of event listeners, override the listenerAdded and listenerRemoved methods<br>These methods are automatically invoked when a corresponding JavaScript event listener is added or removed</div>
-				</div>
-				</section>
-				
-				<section>
-					<h2 class="l_andr_event">Android - Native Event Handlers</h2>
-<pre><code contenteditable class="l_androidevent_code">
-// From GeolocationModule.java
-@Override
-protected void eventListenerAdded(String event, int count, KrollProxy proxy)
-{
-   if (TiC.EVENT_HEADING.equals(event)) {
-      if (!compassListenersRegistered) {
-         tiCompass.registerListener();
-         compassListenersRegistered = true;
-      }
-
-   } else if (TiC.EVENT_LOCATION.equals(event)) {
-      // more here ... see GitHub
-   }
-
-   super.eventListenerAdded(event, count, proxy);
-}
-
-</code></pre>
-					<div class="slidenote"><div class="l_slidenote_andr_event"></div>
-				</div>
-				</section>
-				
-				<section>
-					<h2 class="l_add_event">Adding Event Handlers in JavaScript</h2>
-<pre><code contenteditable class="l_jsevent_code">
-Ti.Geolocation.addEventListener('heading', function(e) {
-   // do something with current heading
-});
-</code></pre>
-					<div class="slidenote"><div class="l_slidenote_add_event">This JS api is what corresponds to the native code on the two preceding slides</div>
-				</div>
-				</section>
-				
-				<section>
-					<h2 class="l_fire_event">Firing an Event on a Proxy Object</h2>
-					<p align="left" class="l_both_proxy">Both Proxy base classes have a 'fireEvent' method</p><br>
-					<p align="left" class="l_use_this">Use this to fire an event back up to a JavaScript object</p><br>
-					<p align="left" class="l_any_events">Any events fired from native land via 'fireEvent' can be listened for on a JavaScript object via 'addEventListener'</p><br>
-					<div class="slidenote"><div class="l_slidenote_fire_event"></div>
-				</div>
-				</section>
-				
-				<section>
-					<h2 class="l_type_bridge">Type Conversions Across The Bridge</h2>
-					<p align="left" class="l_both_platforms">Both platforms provide utilities for type conversion, both JS &rarr; Native Classes and Native Classes &rarr; JS</p><br>
-					<p align="left" class="l_some_simple">Some simple types like Strings and Booleans auto convert</p><br>
-					<p align="left" class="l_check_other">Check other module implementations for type conversion examples</p><br>
-					<div class="slidenote"><div class="l_slidenote_type_bridge"></div>
-				</div>
-				</section>
-				
-				<section>
-					<h2 class="l_build_module">Building your Module</h2>
+					<h2 style="" class="l_storekit">StoreKit &amp; In-App Billing</h2>
 					<ul style="width:80%;">
-						<li class="">Creating a Module Project:<br/><ul style='margin-left:30px;font-size:smaller;'><li>Studio: File, New, Titanium Module</li><li>Command line: use <code>titanium.py</code> in SDK folder</li></ul></li>
-						<li class="l_building2">Android modules developed in Eclipse</li>
-						<li class="l_building3">iOS modules developed in Xcode</li>
-						<li class="">Packaging a Module:<br/><ul style='margin-left:30px;font-size:smaller;'><li>Studio: Packaging icon, choose Package</li><li>Command line: Use <code>titanium.py</code></li></ul><br/><span style="font-size:smaller;">Either builds a .zip file</span></li>
+						<li class="l_storekit1">StoreKit &mdash; iTunes App Store integration</li>
+						<li class="l_storekit2">In-App Billing &mdash; Google Play integration</li>
+						<li class="l_storekit3">StoreKit can be used for in-app purchases, digital goods</li>
+						<li class="l_storekit4">Free from Appcelerator</li>
 					</ul>
-					<div class="slidenote"><div class="l_slidenote_build_module">When it comes time to write your own module, Studio provides wizards for creating and later packaging your module. You can also use the titanium.py script, which is included in the SDK folder, to perform those tasks. You'll do the actual module programming in Eclipse or Xcode.</div>
-				</div>
+					<div class="slidenote"><div class="l_slidenote_storekit">Tied to your iTunes account which is why you have to test on device. Setup of products done through app store portals</div></div>
 				</section>
+
+				<section>
+					<h2 style="" class="l_admodules">Advertising modules</h2>
+					<ul style="width:80%;">
+						<li class="l_ads1">Admob, Millennial Media, Greystripe, and InMobi from Appcelerator</li>
+						<li class="l_ads2">Tap for Tap, Flurry/AppCircle, and more from third-parties</li>
+						<li class="l_ads3">Some free, some not</li>
+					</ul>
+					<div class="slidenote"><div class="l_slidenote_admodules"></div></div>
+				</section>
+
+				<section>
+					<h2 style="" class="l_analytics">Analytics</h2>
+					<ul style="width:80%;">
+						<li class="l_analytics1">TestFlight</li>
+						<li class="l_analytics3">Flurry Analytics</li>
+						<li class="l_analytics4">Google Analytics</li>
+						<li class="l_analytics2">Appio Localytics</li>
+					</ul>
+					<div class="slidenote"><div class="l_slidenote_analytics"></div></div>
+				</section>
+
+				<section>
+					<h2 style="" class="l_community">Community Contributions</h2>
+				    <img src="images/community.png" style="width:650px;"/>
+					<div class="slidenote"><div class="l_slidenote_community"></div></div>
+				</section>
+
+				<section>
+					<h1 class="l_more_come">Many More!</h1>
+					<p class="l_more_img"><img src='images/marketplace.png' style='width:550px;'/></p>
+					<div class="slidenote"><div class="l_slidenote_more_come"></div>Appc has a dedicated module development team now, so this offering will continue to grow</div>
+				</section>
+
+				<!-- - - - - - - - - - - - - - - - - NEW TOPIC - - - - - - - - - - - - - - - - -->
+				<section>
+					<h1 class="topicH1 l_topic"><img src="../images/topic.png"/>Topic</h1>
+					<h5 style="clear:both;" class="l_installing">Installing Modules</h5>
+					<div class="slidenote"><div class="l_slidenote_installing"></div></div>
+				</section>
+
 				
 				<section>
-					<h2 class="l_distr_module">Distributing your Module</h2>
-					<ul style="width:80%;">
-						<li class="l_distro1">Post zip to your web site</li>
-						<li class="l_distro2">Share by email</li>
-						<li class="l_distro3">Post on GitHub</li>
-						<li class="l_distro4">Submit to Marketplace</li>
-					</ul>
-					<div class="slidenote"><div class="l_slidenote_distr_module">You have many options for distributing your module. These are a few of the more common.</div>
-				</div>
+					<h2 class="l_install_mod">Installing Module for a Single Project</h2>
+					<ol style="width:80%;">
+						<li class="l_install1">Download zip file</li>
+						<li class="l_install2">Place in project's root directory</li>
+						<li class="l_install3">Build once &mdash; to unzip and create necessary folders</li>
+						<li class="l_install4">Add to tiapp.xml and JavaScript</li>
+					</ol>
+					<div class="slidenote"><div class="l_slidenote_install_mod">Installing for all projects doesn't add overhead to your projects, so is probably the best option. We'll cover how to update tiapp.xml and JavaScript on an upcoming slide.</div></div>
 				</section>
 
 				<section>
-					<h1 style="" class="l_using">Using your Module</h1>
-					<ul style="width:80%;">
-						<li class="">Explode zip to:<br/><ul style='margin-left:30px;font-size:smaller;'><li>PROJECT/modules/<em>platform</em></li><li>SDK_HOME/modules/<em>platform</em></li></ul></li>
-						<li class="l_using2">Include in tiapp.xml</li>
-						<li class="l_using3">Require in JavaScript</li>
-						<li class="l_using4">Implement the module's API</li>
-					</ul>
-					<div class="slidenote"><div class="l_slidenote_using">Use your finished module just like any other module. Explode it to either your project or your SDK's modules directory. Include the tag in the tiapp.xml, require it in JavaScript, and implement its API.</div></div>
+					<h2 class="l_install_all">Installing Module for Multiple Projects</h2>
+					<ol style="width:80%;">
+						<li class="l_installall1">Download zip file</li>
+						<li class="l_installall2">Unzip to %TITANIUM_INSTALL_DIR%/modules directory</li>
+						<li class="l_installall3">Add to tiapp.xml and JavaScript</li>
+					</ol>
+				    <img src="images/moduleinstall.png" style="width:800px;" class="noborder"/>
+
+					<div class="slidenote"><div class="l_slidenote_installall">Any future projects you develop on this computer would then be able to use the module.<br/><br/>The Titanium install directory varies by platform and operating system version. For example, on OS X Lion, it would be ~/Library/Application Support/Titanium.</div></div>
 				</section>
 
 				<section>
-					<h2 class="l_resources">Resources</h2>
-					<ul style="width:80%;">
-						<li class="l_resources1">docs.appcelerator.com : Extending Titanium guide</li>
-						<li class="l_resources2">docs.appcelerator.com : Titanium API</li>
-						<li class="l_resources3">ModDevGuide: github.com/appcelerator/titanium_modules</li>
-						<li class="l_resources4">Titanium core modules: github.com/appcelerator/titanium_mobile</li>
-						<li class="l_resources5">Anything core Titanium does, you can do in your module</li>
+					<h1 style="" class="l_implementmodule">Load and Require Module</h1>
+					<ul style="width:80%;float:left;">
+						<li class="l_implement1"><img src='images/studio_modules.png' style='width:400px;float:right;'/>Declare in tiapp.xml</li>
+						<li class="l_implement2"><img src='images/module_require.png' style='clear:right;width:300px;float:right;'/>Require in JavaScript</li>
+						<li class="l_implement3">Implement</li>
 					</ul>
-					<div class="slidenote"><div class="l_slidenote_resources">The docs site has module building guides for both iOS and Android, Mobile Web in the works. There's also an API listing for both platforms in the docs. (Javadocs &amp; Xcode docs). See also the module development guide, with sample projects on GitHub.<br/><br/>Anything core Titanium does, you can do also. So check out the core Titanium code for techniques and features.</div>
-				</div>
+					<p align="left" class="l_use_mod" style="clear:both;padding-top:40px;">(Every marketplace module comes with example and doc)</p><br>
+					<div class="slidenote"><div class="l_slidenote_implementmodule"></div></div>
+				</section>
+
+				<section>
+					<h2 style="" class="l_summary">Summary</h2>
+					<p class="l_summarypara">In this lesson, you:</p>
+					<ul style="width:80%;">
+			    		<li class="l_summary1">Explored the purpose of modules and identified sources of modules</li>
+			    		<li class="l_summary2">Installed a module for use in a Titanium project</li>
+					</ul>
+					<div class="slidenote"><div class="l_slidenote_summary"></div></div>
 				</section>
 
 				<section>
@@ -404,11 +234,13 @@ Ti.Geolocation.addEventListener('heading', function(e) {
 				
 				<section>
 					<h1 class="l_lab_goals">Lab Goals</h1>
-					<p align="left" class="l_follow_steps">Follow the steps in the iOS (or Android) module development wiki guide</p><br>
-					<p align="left" class="l_create_sample">Create the sample module that guide describes</p><br>
-					<p align="left" class="l_use_that">Use that module in a Titanium project</p><br>
-					<p class="l_labURL" style="font-size:0.7em;margin-top:20px;"><a href='https://wiki.appcelerator.org/display/td/375+-+Extending+Titanium'>wiki.appcelerator.org/display/td/375+-+Extending+Titanium</a></p>
-					<div class="slidenote"><div class="l_slidenote_lab_goals">We will follow along with the module dev guides and try a custom module ourselves.  This is a 'kick the tires' type exercise</div></div>
+					<ul style="width:80%;">
+						<li class="l_goals1">Download and install a module from the Marketplace</li>
+						<li class="l_goals2">Implement it in an app</li>
+						<li class="l_goals3">Build for the simulator or emulator</li>
+					</ul>
+					<p class="l_labURL" style="font-size:0.7em;margin-top:20px;"><a href='https://wiki.appcelerator.org/display/td/370+-+Installing+and+using+a+Titanium+Module'>wiki.appcelerator.org/display/td/370+-+Installing+and+using+a+Titanium+Module</a></p>
+					<div class="slidenote"><div class="l_slidenote_lab_goals">The goal is to be able to install and use a module, any module. PayPal works well for demo since you can do it cross platform and it works on Simulator</div></div>
 				</section>
 				
 			</div>
@@ -417,6 +249,7 @@ Ti.Geolocation.addEventListener('heading', function(e) {
 
 			<!-- Appc logo and presenter notes -->
 			<div id="appclogo"><a href="../index.html"><img src="../images/appu_thumb.png"/></a></div>
+			<a id="firstslide" onClick="Reveal.navigateTo(0,0);"><img src="../images/agt_desktop_enhancements.png" title='First slide' alt='First'/></a>
 			<a id="presenternotes" onClick="openPresenterNotes()"><img src="../images/presenternotes.png" title='Open Presenter Notes Window' alt='Presenter notes'/></a>
 
 			<!-- The navigational controls UI -->

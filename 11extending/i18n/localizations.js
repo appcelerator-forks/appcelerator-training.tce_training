@@ -5,5 +5,9 @@
 */
 String.toLocaleString({
 	"en-US": {
-		"%l_labname": "Lab - ScrollView API Deep Dive",
-	}});
+		"%l_filetitle": "Extending Titanium",
+		"%l_subtitle": "Titanium Certified Expert (TCE) Training",
+		"%l_lessontitle": "Extending Titanium",
+		"%l_slidenote_titleslide": "<b>Module time: 45 mins</b><br/>(15 mins teaching, 30 mins for lab)",
+	}	
+});

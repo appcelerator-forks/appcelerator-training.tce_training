@@ -2,8 +2,8 @@
 <html>
 	<head>
 		<meta charset="utf-8">
-		<title class="l_labname">Lab - ScrollView API Deep Dive</title>
-		<meta name="description" content="Advanced Titanium Mobile Development, ScrollView API Deep Dive">
+		<title class="l_labname">Lab - Extending Titanium</title>
+		<meta name="description" content="Advanced Titanium Mobile Development, Extending Titanium">
     	<meta name="author" content="Appcelerator, Inc." />
 		
 		<link href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
@@ -71,101 +71,28 @@
 <section>
 
 <!-- YOUR LAB CONTENT GOES HERE -->
-<h1 class="l_labname">Lab: ScrollView API Deep Dive</h1>
-<p class="l_mission"><img src='https://wiki.appcelerator.org/download/attachments/14090415/20110623-p6a1spsixn1r5mrmfe1eswgwj5.jpg?version=1&modificationDate=1311617039000' style='height:300px;float:right;margin-top:-40px;margin-bottom: 10px;'><strong>Mission: </strong>In this lab, you will create an app that uses both a scroll view and a scrollable view. </p>
+<h1 class="l_labname">Lab: Extending Titanium</h1>
+<p class="l_mission">Titanium is built in a modular fashion. Even some of what you might think of as core functionality is actually implemented with modules. We further extend Titanium with the Titanium Plus modules. You can use that same architecture to create your own modules to extend the Titanium SDK.</p>
 
-<p class="l_specification"><strong>Specification: </strong>To successfully complete this lab, you need to create an app that meets these specifications:
-<ul>
-	<li>A scroll view will span the top edge of the screen and contain a list of player names.</li>
-	<li>A scrollable view will fill the bottom portion of the screen and contain a set of three pictures of a player.</li>
-	<li>Clicking a player's name in the scroll view will load his images in the scrollable view and switch to the first image in the stack.</li>
-</p>
+<p class="l_specification"><strong>Specification: </strong>Our wiki includes guides on writing your own modules. In this lab, you will work through the steps of either the iOS or Android module development guide. Those guides walk you through a 'Hello World' module project.</p>
+
+
 
 <table>
 	<tr>
-		<td colspan="2" class="labinstructions l_labstep1">1. Create a new Titanium Alloy project, giving it a name and app ID of your choice. Download the graphic files needed for this project from <a href='http://assets.appcelerator.com.s3.amazonaws.com/app_u/atmd_labs/Starting/335_scrolling.zip'>S3: 335_scrolling (assets)</a>. Extract them to your app's assets folder.</td>
+		<td colspan="2" class="labinstructions l_labstep1">Choose a platform (iOS or Android) then work through the steps in the module development guide. The guide will walk you through the process for setting up the titanium.py script to generate a module project, and package that module for distribution. Installing your module is just as easy as installing a Titanium Plus module. The goal for this lab is to follow our existing documentation to create a "Hello World" module for your desired platform.</td>
 	</tr>
 	<tr>
 		<td class="tdfiller"><!-- leave empty--></td>
 		<td class="labexplanations l_labstepexplanation1"></td>
 	</tr>
-<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-<tr>
-	<td colspan="2" class="labinstructions l_labstep2">2. In the index view, add your scroll view and scrollable view elements, giving them appropriate IDs. Inside the scroll view, add five labels: Harmon Killebrew (harmon), Kent Hrbek (kent), Kirby Puckett (kirby), Rod Carew (rod), and Tony Oliva (tony), where the text shown here in parentheses is set as a custom property named player on the respective labels. In the scrollable view, add three image views, which display the harmon1.jpg, harmon2.jpg, and harmon3.jpg files.</td>
-</tr>
-<tr>
-	<td class="tdfiller"><!-- leave empty--></td>
-	<td class="labexplanations l_labstepexplanation2"></td>
-</tr>
-<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-<tr>
-	<td colspan="2" class="labinstructions l_labstep3">3. In the index style file, set the styles shown here:</td>
-</tr>
-<tr>
-	<td class="tdfiller"><!-- leave empty--></td>
-	<td class="labexplanations l_labstepexplanation3"><pre style=""><code contenteditable>
-".container": {
-	backgroundColor:"black"
-},
-"#scrolly": {
-	contentWidth:Ti.UI.SIZE,
-	contentHeight:Ti.UI.SIZE,
-	top:0,
-	width:Ti.UI.FILL,
-	height:'30dp',
-	scrollType: 'horizontal',
-	backgroundColor: '#fff',
-	layout: 'horizontal'
-},
-"Label":{
-	width:Ti.UI.SIZE,
-	height:Ti.UI.SIZE,
-	color:'#000',
-	left:10,
-	top:0
-}
-"ImageView": {
-	height: Ti.UI.FILL
-},
-"#cards": {
-	top:'30dp',
-	height:Ti.UI.FILL,
-	showPagingControl:true,
-	pagingControlHeight:30,
-	backgroundColor: '#000'
-}
-
-</code></pre>
-	</td>
-</tr>
-<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-<tr>
-	<td colspan="2" class="labinstructions l_labstep4">4. In the index controller, add a click event listener to the scroll view. In its function, if the e.source.player property exists, set the three ImageView image properties equal to e.source.player + #.jpg (for example e.source.player + 1.jpg). This will load the three images for that player based on the custom player property associated with his label.</td>
-</tr>
-<tr>
-	<td class="tdfiller"><!-- leave empty--></td>
-	<td class="labexplanations l_labstepexplanation4"></td>
-</tr>
-<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-<tr>
-	<td colspan="2" class="labinstructions l_labstep5">5. Build your app for the simulator/emulator and test your work. Clicking a player's name should load his cards into the scrollable view.</td>
-</tr>
-<tr>
-	<td class="tdfiller"><!-- leave empty--></td>
-	<td class="labexplanations l_labstepexplanation5"></td>
-</tr>
-
 </table>
-
-<h2 class="l_summary">Summary</h2>
-<p class="l_summarypara">In this lab, you created a ScrollView that controls the contents of a ScrollableView.</p>
 
 <h2 class="l_resources">Resources</h2>
 
 <ul>
-	<li class="l_resources2">Guides: Scrolling Views</li>
-	<li class="l_resources3">APIdocs: ScrollView and ScrollableView</li>
-	<li class="l_resources1">Finished code: <a href='http://assets.appcelerator.com.s3.amazonaws.com/app_u/atmd_labs/Finished/335_scrolling.zip'>S3: 335_scrolling (finished)</a></li>
+	<li class="l_resources1">Android Module Developer Guide – <a href='http://wiki.appcelerator.org/display/guides/Android+Module+Development+Guide'>http://wiki.appcelerator.org/display/guides/Android+Module+Development+Guide</a></li>
+	<li class="l_resources2">iOS Module Developer Guide – <a href='http://wiki.appcelerator.org/display/guides/iOS+Module+Development+Guide'>http://wiki.appcelerator.org/display/guides/iOS+Module+Development+Guide</a></li>
 </ul>
 
 

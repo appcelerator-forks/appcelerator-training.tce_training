@@ -5,15 +5,38 @@
 */
 String.toLocaleString({
 	"en-US": {
-		"%l_labname": "Lab - Extending Titanium",
-		"%l_mission": "Titanium is built in a modular fashion. Even some of what you might think of as core functionality is actually implemented with modules. We further extend Titanium with the Titanium Plus modules. You can use that same architecture to create your own modules to extend the Titanium SDK.",
-		"%l_specification": "<strong>Specification: </strong>Our wiki includes guides on writing your own modules. In this lab, you will work through the steps of either the iOS or Android module development guide. Those guides walk you through a 'Hello World' module project.",
+		"%l_labname": "Lab - Installing and using a Titanium Module",
+		"%l_mission": "<img src='https://wiki.appcelerator.org/download/attachments/14090407/Screenshot_44.png?version=1&modificationDate=1311723223000' style='height:300px;float:right;margin-top:-40px;margin-bottom: 10px;'><strong>Mission: </strong>Titanium modules extend the core Ti functionality. Modules are available from the Marketplace. Some are free, while others have price tags associated. Each adds a specific area of capability to your iOS or Android apps. In this lab, you will download and implement the PayPal module.",
+		"%l_specification": "Specification: </strong>To successfully complete this lab, you must:",
+		"%l_spec1": "Have a Titanium developer account in order to log into the Marketplace.",
+		"%l_spec2": "Support subscribers may also log onto the support helpdesk and download the module from there.",
 		
-		"%l_labstep1": "1. Choose a platform (iOS or Android) then work through the steps in the module development guide. The guide will walk you through the process for setting up the titanium.py script to generate a module project, and package that module for distribution. Installing your module is just as easy as installing a Titanium Plus module. The goal for this lab is to follow our existing documentation to create a "Hello World" module for your desired platform.",
+		"%l_labstep1": "1. Download the PayPal module from the Marketplace or Support site. ",
 		"%l_labstepexplanation1": "",
 
+		"%l_labstep2": "2. In Studio, create a new project. Copy the module zip file you downloaded to the root of your project (same folder as tiapp.xml).",
+		"%l_labstepexplanation2": "",
+
+		"%l_labstep3": "3. Copy the contents of /modules/platform/ti.paypal/<em>VERSION</em>/example/ to the Resources directory of your project (overwrite the default app.js in that directory).",
+		"%l_labstepexplanation3": "",
+
+		"%l_labstep4": "4. In Studio, open the tiapp.xml file and using the controls on that page, add the PayPal module to the project. View the XML source after you've done that to see the module tag added to your tiapp.xml file.",
+		"%l_labstepexplanation4": "",
+
+		"%l_labstep5": "5. Open Resources/simple.js and in the payment block, delete the paymentSubtype line. Then, set recipient equal to kwhinn_1305818279_biz@appcelerator.com",
+		"%l_labstepexplanation5": "",
+
+		"%l_labstep6": "6. Build and test your app in the simulator/emulator. Activate the Simple tab then click the PayPal button. When prompted for the sender's email address, use kwhinn_1305817727_per@appcelerator.com with 11111111 as the password (that's eight number 1s).",
+		"%l_labstepexplanation6": "",
+
+		"%l_labstep7": "7. When you're done, build the project for either the iOS Simulator or Android emulator. Correct any code mistakes, if necessary. Test your work by using the Simple tab's controls to complete a fake transaction. (The app is in Sandbox mode, so no money will be transferred.)",
+		"%l_labstepexplanation7": "",
+
+		"%l_summary": "Summary",
+		"%l_summarypara": "In this lab, you ...",
+
 		"%l_resources": "Resources",
-		"%l_resources1": "Android Module Developer Guide – <a href='http://wiki.appcelerator.org/display/guides/Android+Module+Development+Guide'>http://wiki.appcelerator.org/display/guides/Android+Module+Development+Guide</a>",
-		"%l_resources2": "iOS Module Developer Guide – <a href='http://wiki.appcelerator.org/display/guides/iOS+Module+Development+Guide'>http://wiki.appcelerator.org/display/guides/iOS+Module+Development+Guide</a>",
+		"%l_resources1": "Finished code: <a href='http://wiki.appcelerator.org/download/attachments/14090407/PayPalModule.zip'>http://wiki.appcelerator.org/download/attachments/14090407/PayPalModule.zip</a>",
+		"%l_resources2": "",
 
 	}});
