@@ -75,10 +75,9 @@
 					<h1 style="margin-top:50px;" class="l_agenda_title">In this lesson, you will:</h1>
 			    	<ul style="width:100%; margin-left:30px;">
 			    		<li class="l_agenda1">Explore the basic Titanium internal architecture</li>
-			    		<li class="l_agenda2">Identify the components of the Titanium object model</li>
-			    		<li class="l_agenda3">List the steps for building a module</li>
-						<li class="l_agenda4">Describe the steps and requirements for distributing modules</li>
-						<li class="l_agenda5">Identify documentation resources</li>
+			    		<li class="l_agenda2">List the steps for building a module</li>
+			    		<li class="l_agenda3">Learn how to expose native functionality in your module</li>
+						<li class="l_agenda4">Identify documentation resources</li>
 			    	</ul>
 					
 					<div class="slidenote">
@@ -90,12 +89,13 @@
 				
 				<section>
 					<h1 class="l_disclaimer">Disclaimer!</h1>
+					<h5>This is an overview, not a comprehensive treatise</h5>
 					<div class="slidenote"><div class="l_slidenote_disclaimer">The intent of this presentation is to brief you on the basics of how Titanium works and to point you in the right direction for further exploration. It is not a comprehensive treatment of the subject. Your instructor might not be an expert module developer.</div></div>
 				</section>
 				
 				<section>
 					<h2 class="l_ti_arch">Titanium Architecture</h2>
-					<p align="left" class="l_we_know">We all know the basics...</p><br>
+					<p align="center" class="l_we_know">We all know the basics...</p><br>
 					<p class="l_ti_main_arch_image"><img src="images/ti-main-arch.png" style="margin-top:5px;height:350px;"/></p>
 					<div class="slidenote"><div class="l_slidenote_ti_arch_1">Discuss titanium mobile app architecture &mdash; JavaScript files comprise application and communicate with native APIs through a bridge layer</div>
 				</div></section>
@@ -129,15 +129,6 @@
 			    		<li class="l_krollbridge">It's the bridge between JavaScript and native code</li>
 			    	</ul>
 					<div class="slidenote"><div class="l_slidenote_what_kernel"></div></div>
-				</section>
-				
-				<section>
-					<h2 class="l_mod_obj">Module Object Model</h2>
-					<p align="left" class="l_proxy">Proxy - base class that represents the native binding between your JavaScript and native code (a module will have at least one proxy)</p><br>
-					<p align="left" class="l_view">View - actual native representation of a view object (for UI components)</p><br>
-					<p align="left" class="l_viewproxy">ViewProxy - represents model data (state of the View, in case the View must be released for memory management) and exposes the JavaScript API &amp; events</p><br>
-					<p align="left" class="l_module_spl">Module - specialized type of Proxy that describes a specific API set, or namespace</p><br>
-					<div class="slidenote"><div class="l_slidenote_mod_obj">The object model is slightly different between iOS and Android. In iOS, the top level module (i.e. Ti.MyModule) is just a Proxy.  In Android, it's called a 'Module'. They both function as top-level, static interfaces to native code<br><br/>A proxy is an object that interfaces directly with native code &mdash; non-visual modules will just use these objects<br>A visual module will need to implement a view, which is a native representation of a visual component, and a ViewProxy, which contains the state information for a View.  The View could be hidden and removed from memory, but the ViewProxy would still contain information about that view (like the title of a window, background color of a view, etc.)<br>View proxy is a sub class of proxy</div></div>
 				</section>
 				
 				<!-- - - - - - - - - - - - - - - - - NEW TOPIC - - - - - - - - - - - - - - - - -->
@@ -190,6 +181,15 @@
 					<div class="slidenote"><div class="l_slidenote_nativefunc"></div></div>
 				</section>
 
+				<section>
+					<h2 class="l_mod_obj">Module Object Model</h2>
+					<p align="left" class="l_proxy">Proxy - base class that represents the native binding between your JavaScript and native code (a module will have at least one proxy)</p><br>
+					<p align="left" class="l_view">View - actual native representation of a view object (for UI components)</p><br>
+					<p align="left" class="l_viewproxy">ViewProxy - represents model data (state of the View, in case the View must be released for memory management) and exposes the JavaScript API &amp; events</p><br>
+					<p align="left" class="l_module_spl">Module - specialized type of Proxy that describes a specific API set, or namespace</p><br>
+					<div class="slidenote"><div class="l_slidenote_mod_obj">The object model is slightly different between iOS and Android. In iOS, the top level module (i.e. Ti.MyModule) is just a Proxy.  In Android, it's called a 'Module'. They both function as top-level, static interfaces to native code<br><br/>A proxy is an object that interfaces directly with native code &mdash; non-visual modules will just use these objects<br>A visual module will need to implement a view, which is a native representation of a visual component, and a ViewProxy, which contains the state information for a View.  The View could be hidden and removed from memory, but the ViewProxy would still contain information about that view (like the title of a window, background color of a view, etc.)<br>View proxy is a sub class of proxy</div></div>
+				</section>
+				
 
 				<section>
 					<h2 class="l_mod_js">Our Goals &mdash; JavaScript interfaces</h2>
@@ -387,6 +387,7 @@ protected void eventListenerAdded(String event, int count, KrollProxy proxy)
 						<li class="l_resources3">ModDevGuide: github.com/appcelerator/titanium_modules</li>
 						<li class="l_resources4">Titanium core modules: github.com/appcelerator/titanium_mobile</li>
 						<li class="l_resources5">Anything core Titanium does, you can do in your module</li>
+						<li class="l_resources6">http://www.slideshare.net/omorandi/ticonf</li>
 					</ul>
 					<div class="slidenote"><div class="l_slidenote_resources">The docs site has module building guides for both iOS and Android, Mobile Web in the works. There's also an API listing for both platforms in the docs. (Javadocs &amp; Xcode docs). See also the module development guide, with sample projects on GitHub.<br/><br/>Anything core Titanium does, you can do also. So check out the core Titanium code for techniques and features.</div>
 				</div>
@@ -397,10 +398,9 @@ protected void eventListenerAdded(String event, int count, KrollProxy proxy)
 					<p class="l_summarypara">In this lesson, you:</p>
 					<ul style="width:80%;">
 			    		<li class="l_summary1">Explored the basic Titanium internal architecture</li>
-			    		<li class="l_summary2">Identified the components of the Titanium object model</li>
-			    		<li class="l_summary3">Listed the steps for building a module</li>
-						<li class="l_summary4">Described the steps and requirements for distributing modules</li>
-						<li class="l_summary5">Identified documentation resources</li>
+			    		<li class="l_summary2">Listed the steps for building a module</li>
+			    		<li class="l_summary3">Learned how to expose native functionality in your module</li>
+						<li class="l_summary4">Identifed documentation resources</li>
 					</ul>
 					<div class="slidenote"><div class="l_slidenote_summary"></div></div>
 				</section>
