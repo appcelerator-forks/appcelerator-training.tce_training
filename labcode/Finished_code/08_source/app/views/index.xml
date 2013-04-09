@@ -1,0 +1,7 @@
+<Alloy>
+	<Window class="container">
+		<Button id="btn_launchit" onClick="doClick" action="">Open Target app</Button>
+		<Button id="btn_launchmaps" onClick="doClick" action="maps">In Target app, open Maps</Button>
+		<Button id="btn_launchstore" onClick="doClick" action="youtube">In Target app, open YouTube</Button>
+	</Window>
+</Alloy>

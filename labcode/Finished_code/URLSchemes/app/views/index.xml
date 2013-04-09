@@ -1,0 +1,9 @@
+<Alloy>
+	<Window class="container">
+		<Button id="btn_maps" onClick="doClickMaps">Open Maps</Button>
+		<Button id="btn_sms" onClick="doClickSMS">Open SMS</Button>
+		<Button id="btn_dialer" onClick="doClickDialer">Open Dialer</Button>
+		<Button id="btn_youtube" onClick="doClickYouTube">Open YouTube</Button>
+		<Button id="btn_store" onClick="doClickStore">Open App Store / Market</Button>
+	</Window>
+</Alloy>

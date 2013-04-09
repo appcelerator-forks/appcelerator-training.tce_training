@@ -2,8 +2,8 @@
 <html>
 	<head>
 		<meta charset="utf-8">
-		<title class="l_labname">Lab: LABTITLE</title>
-		<meta name="description" content="Titanium Certified Developer, LABTITLE">
+		<title class="l_labname">Lab: App Interconnections</title>
+		<meta name="description" content="Titanium Certified Expert, App Interconnections">
     	<meta name="author" content="Appcelerator, Inc." />
 		
 		<link href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
@@ -19,6 +19,9 @@
 		}
 		.slides {
 			top: 40% !important;
+		}
+		pre {
+			font-size: 80% !important;
 		}
 		</style>
 		<script>
@@ -71,39 +74,242 @@
 <section>
 
 <!-- YOUR LAB CONTENT GOES HERE -->
-<h1 class="l_labname">Lab - TITLE</h1>
-<p class="l_mission"><strong>Mission: </strong>In this lab, you will </p>
+<h1 class="l_labname">Lab - App Interconnections</h1>
+<p class="l_mission"><strong>Mission: </strong>In this lab, you will write two interconnected apps: one app will be able to launch and pass data to the other app.</p>
 
-<p class="l_specification"><strong>Specification: </strong>what_you_have_to_do<br/><img src='labimages/FINISHED_SCREEN.png' height='300' align='right'/></p>
+<p class="l_specification"><strong>Specification: </strong><img src='http://assets.appcelerator.com.s3.amazonaws.com/app_u/tce_labs/Finished/08applaunch.png' height='300' align='right'/>You will write two apps, a "source" and "target" app. <br/><br/>
+The Target app will include five buttons, which when clicked will open various built-in or standard apps, such as Maps or SMS.<br/><br/>
+The Source app will include three buttons, which will launch the target app and optionally send it launch parameters to control the target app's actions.</p>
 
 <table>
-	<tr>
-		<td colspan="2" class="labinstructions l_step1">1. Download the starting file set from <a href='URL'>GitHub</a> or <a href='URL'>AWS/S3</a> and import the resulting files as a new Titanium Mobile project.</td>
-	</tr>
-	<tr>
-		<td class="tdfiller"><!-- leave empty--></td>
-		<td class="labexplanations l_stepexplanation1"></td>
-	</tr>
 <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 <tr>
-	<td colspan="2" class="labinstructions l_labstep2">2. </td>
+	<td colspan="2" class="labinstructions l_labstep1">1. You will create the Target app first. Create a new Alloy project named URLSchemes with an app ID of com.<em>yourname</em>.urlschemes. In its index view, add five buttons labeled as follows: Open Maps, Open SMS, Open Dialer, Open YouTube, and Open App Store / Market. To simplify layout, set the Window to 'vertical' layout and set a top of 20 or so for each button.</td>
+</tr>
+<tr>
+	<td class="tdfiller"><!-- leave empty--></td>
+	<td class="labexplanations l_labstepexplanation1"></td>
+</tr>
+<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+<tr>
+	<td colspan="2" class="labinstructions l_labstep2">2. Add a click event listener to each of the buttons. Then, in the index controller, use the <code>Ti.Platform.openURL()</code> function and the appropriate URL schemes to open the following apps: <br/>
+<ul style="margin-left:20px;">
+	<li>Maps: use maps:// or http:// for iOS &amp; Android respectively, use a map location of your choice (grab it from your browser)</li>
+	<li>SMS: use sms:+ and a number of your choice</li>
+	<li>Phone: use tel:// and a number of your choice</li>
+	<li>YouTube: use http:// and the URL to a video of your choice from YouTube (grab the URL with your browser)</li>
+	<li>Store: use http:// or market:// for iOS &amp; Android respectively. You can get an iTunes link with the <a href="http://itunes.apple.com/linkmaker/">iTunes Link Maker</a> site and a Play Market app ID from <a href="https://play.google.com/store/apps">Google Play</a>. </li>
+</ul><br/><p>Optionally, add if tests for the SMS, Phone, and Market buttons to determine if the app is running in the simulator/emulator (use ENV_DEV). If so, alert a message that the function will work only on device.</p>
+</td>
 </tr>
 <tr>
 	<td class="tdfiller"><!-- leave empty--></td>
 	<td class="labexplanations l_labstepexplanation2"></td>
 </tr>
+<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+<tr>
+	<td colspan="2" class="labinstructions l_labstep3">3. Build and test the app by clicking each of the buttons. The native app should be opened (if installed), though the SMS, dialer, and market buttons won't work on the simulator/emulator.</td>
+</tr>
+<tr>
+	<td class="tdfiller"><!-- leave empty--></td>
+	<td class="labexplanations l_labstepexplanation3"></td>
+</tr>
+<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+<tr>
+	<td colspan="2" class="labinstructions l_labstep4">4. Next, we'll modify the app so that it's configured to be launched by your second app. There are separate steps for iOS and Android.<br/><br/>For iOS: to the tiapp.xml file, add the following code, making sure that the app ID matches your app's actual app ID:<br/>
+<pre><code>
+&lt;ios>
+  &lt;key>CFBundleURLTypes&lt;/key>
+  &lt;array>
+    &lt;dict>
+      &lt;key>CFBundleURLName&lt;/key>
+      &lt;string>com.appcelerator.urlschemes&lt;/string>
+      &lt;key>CFBundleURLSchemes&lt;/key>
+      &lt;array>
+        &lt;string>Urlschemes&lt;/string>
+      &lt;/array>
+    &lt;/dict>
+  &lt;/array>
+&lt;/ios>
+</code></pre><br/>
+For Android: you must have built for the emulator at least once, the follow these steps:<br/>
+<ol style="margin-left:20px;list-style-type:lower-alpha;">
+	<li>Open build/android/AndroidManifest.xml</li>
+	<li>Copy the &lt;application> tag and all its contents</li>
+	<li>In tiapp.xml, modify the &lt;android> tag to remove the '/' that makes it an empty tag; add a closing &lt;/android> tag</li>
+	<li>Within that tag, add &lt;manifest>&lt;/manifest> tags</li>
+	<li>Within the manifest tags, paste the tags you copied from the generated manifest</li>
+	<li>Following the &lt;/intent-filter> closing tag, add the following code:<br/>
+<pre><code>
+&lt;intent-filter>
+  &lt;action android:name="android.intent.action.VIEW"/>
+  &lt;category android:name="android.intent.category.DEFAULT"/>
+  &lt;category android:name="android.intent.category.BROWSABLE"/>
+  &lt;data android:scheme="urlschemes" android:host=""/>
+&lt;/intent-filter>
+</code></pre>
+</li>
+</ol>
+</td>
+</tr>
+<tr>
+	<td class="tdfiller"><!-- leave empty--></td>
+	<td class="labexplanations l_labstepexplanation4"></td>
+</tr>
+<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+<tr>
+	<td colspan="2" class="labinstructions l_labstep5">5. To work around a tooling default, we'll need to build the project from the command line with an additional flag. First, clean the project in Studio. Then, open a terminal window and navigate to your project's root directory. Enter the following command (make sure to specify the appropriate target platform, though):<br/>
+<pre><code>
+titanium build --platform ios --force-copy
+</code></pre>
+<br/>By adding --force-copy, we tell the tooling to copy the source files to the built project rather than creating symbolic links to those files. Without this flag, the app will likely crash with a strange error when you open it from your other app.
+</td>
+</tr>
+<tr>
+	<td class="tdfiller"><!-- leave empty--></td>
+	<td class="labexplanations l_labstepexplanation5"></td>
+</tr>
+<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+<tr>
+	<td colspan="2" class="labinstructions l_labstep6">6. Create a second Alloy app with a name and app ID of your choice. This app should have three buttons: <em>Open Target app</em>; <em>In Target app, open Maps</em>; and <em>In Target app, open YouTube</em>. Add ids to each of those buttons, along with a onClick attribute that points to a doClick() function (all three buttons will be handled by the same function). Add a custom attribute named 'action' with a value of an empty string, 'maps', and 'youtube' respectively.</td>
+</tr>
+<tr>
+	<td class="tdfiller"><!-- leave empty--></td>
+	<td class="labexplanations l_labstepexplanation6"></td>
+</tr>
+<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+<tr>
+	<td colspan="2" class="labinstructions l_labstep7">7. In the root controller, write the doClick() function as follows:<br/>
+<ul style="margin-left:20px;">
+	<li>The function accepts an event object named 'e'</li>
+	<li>Add an <code>if(OS_IOS)</code> block with an else clause for Android</li>
+	<li>In the iOS portion of that block, call <code>Ti.Platform.openURL('Urlschemes://');</code></li>
+	<li>In the Android portion of that block, call <code>Ti.Platform.openURL('urlschemes://');</code> (with a lower-case 'u')</li>
+	
+</ul>
+</td>
+</tr>
+<tr>
+	<td class="tdfiller"><!-- leave empty--></td>
+	<td class="labexplanations l_labstepexplanation7"></td>
+</tr>
+<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+<tr>
+	<td colspan="2" class="labinstructions l_labstep8">8. That's all we'll rig up right now. Build your app from the command line using the techniques described in step 5 above. Once the app is running, tap the Open Target App button. Your first app (the URLSchemes app) should open. Close the simulator.</td>
+</tr>
+<tr>
+	<td class="tdfiller"><!-- leave empty--></td>
+	<td class="labexplanations l_labstepexplanation8"></td>
+</tr>
+<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+<tr>
+	<td colspan="2" class="labinstructions l_labstep9">9. Now we'll add in the passing of arguments and handling of them. In your second app, modify the doClick() function as follows:<br/>
+<pre><code>
+function doClick(e) {  
+  var action = e.source.action || '';
+  if(OS_IOS) {
+    if(Ti.Platform.canOpenURL('Urlschemes://')) {
+      Ti.Platform.openURL('Urlschemes://?'+action);
+    } else {
+      alert('You must install the Target app first');
+    }
+  } else {
+    var didItWork = Ti.Platform.openURL('urlschemes://?'+action);
+    if(!didItWork) {
+      alert('You need to install the Target app');
+      // in a live app, you'd want to provide a link to or open the Market
+      // such as Ti.Platform.openURL('market://details?id=com.company.yourapp');
+    }
+  }
+}
+</code></pre></td>
+</tr>
+<tr>
+	<td class="tdfiller"><!-- leave empty--></td>
+	<td class="labexplanations l_labstepexplanation9"></td>
+</tr>
+<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+<tr>
+	<td colspan="2" class="labinstructions l_labstep10">10. In your URLSchemes app, open the index controller. Add the following code before the open() call.<br/>
+<pre><code>
+function urlParser(url) {
+  url = url.replace(/[Uu]rlschemes:\/\/\?/,"");
+  return url.split('&');
+}
+
+// check for arguments passed to this app
+if(OS_IOS) {
+  function grabArguments() {
+    var args = Ti.App.getArguments();
+    if(args.url) {
+      // property present only if app has been launched from the other app
+      var parsedArgs = urlParser(args.url);
+      //alert(JSON.stringify(parsedArgs));
+      switch(parsedArgs[0]) {
+        case 'maps':
+          doClickMaps();
+        break;
+        case 'youtube':
+          doClickYouTube();
+        break;
+      }
+    }
+  }
+  // grab the arguments when the app is opened from a closed state
+  grabArguments();
+  // then, we need to explicitly handle a resumed app state. but
+  // be careful, we must listen for 'resumed' not 'resume'
+  // see http://docs.appcelerator.com/titanium/latest/#!/api/Titanium.App-event-resumed
+  Ti.App.addEventListener('resumed', grabArguments);
+} else {
+  // on Android ...
+  var activity = Ti.Android.currentActivity;
+  activity.addEventListener("create", function(e) {
+    var args = activity.getIntent().getData();
+    if(args && args != 'urlschemes://') {
+      var parsedArgs = urlParser(args);
+      //alert(JSON.stringify(parsedArgs));
+      switch(parsedArgs[0]) {
+        case 'maps':
+          doClickMaps();
+        break;
+        case 'youtube':
+          doClickYouTube();
+        break;
+      }
+    }
+  });
+}
+</code></pre>
+</td>
+</tr>
+<tr>
+	<td class="tdfiller"><!-- leave empty--></td>
+	<td class="labexplanations l_labstepexplanation10"></td>
+</tr>
+<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+<tr>
+	<td colspan="2" class="labinstructions l_labstep11">11. Build both apps using the command-line technique described above. In the "source" app, click either the <em>In Target app, open Maps</em> or <em>In Target app, open YouTube</em> buttons. The URLSchemes app should open, then immmediately the appropriate target app will be opened.</td>
+</tr>
+<tr>
+	<td class="tdfiller"><!-- leave empty--></td>
+	<td class="labexplanations l_labstepexplanation11"></td>
+</tr>
+
+
+
 
 </table>
 
 <h2 class="l_summary">Summary</h2>
-<p class="l_summarypara">In this lab, you  </p>
+<p class="l_summarypara">In this lab, you created two apps. One opened "stock" apps via their standard URL schemes. The other opened the first app, optionally passing parameters to it to control its operations. </p>
 
 <h2 class="l_resources">Resources</h2>
 
 <ul>
-	<li class="l_resources1">API docs: REFERENCE: <a href='URL'>URL</a></li>
-	<li class="l_resources2">Guides: TITLE: <a href='URL'>URL</a></li>
-	<li class="l_resources3">Finished code: <a href='URL'>Amazon S3</a></li>
+	<li class="l_resources1">API docs: Ti.Platform: <a href='http://docs.appcelerator.com/titanium/latest/#!/api/Titanium.Platform'>http://docs.appcelerator.com/titanium/latest/#!/api/Titanium.Platform</a></li>
+	<li class="l_resources2">BenCoding.com Blog: Opening Custom Url Schemas with Titanium: <a href='http://bencoding.com/2012/11/11/opening-custom-url-schemas-with-titanium/'>http://bencoding.com/2012/11/11/opening-custom-url-schemas-with-titanium/</a></li>
+	<li class="l_resources3">Finished code: <a href='http://assets.appcelerator.com.s3.amazonaws.com/app_u/tce_labs/Finished/08_source.zip'>Amazon S3: source app</a> <a href='http://assets.appcelerator.com.s3.amazonaws.com/app_u/tce_labs/Finished/URLSchemes.zip'>Amazon S3: URLSchemes (target) app</a></li>
 </ul>
 
 
