@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="utf-8">
 		<title class="l_labname">Lab - Extending Titanium</title>
-		<meta name="description" content="Advanced Titanium Mobile Development, Extending Titanium">
+		<meta name="description" content="Titanium Certified Expert, Extending Titanium">
     	<meta name="author" content="Appcelerator, Inc." />
 		
 		<link href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
@@ -72,20 +72,79 @@
 
 <!-- YOUR LAB CONTENT GOES HERE -->
 <h1 class="l_labname">Lab: Extending Titanium</h1>
-<p class="l_mission">Titanium is built in a modular fashion. Even some of what you might think of as core functionality is actually implemented with modules. We further extend Titanium with the Titanium Plus modules. You can use that same architecture to create your own modules to extend the Titanium SDK.</p>
+<p class="l_mission">You will build a simple "hello world" extension module for Titanium.</p>
 
-<p class="l_specification"><strong>Specification: </strong>Our wiki includes guides on writing your own modules. In this lab, you will work through the steps of either the iOS or Android module development guide. Those guides walk you through a 'Hello World' module project.</p>
+<p class="l_specification"><strong>Specification: </strong>Our wiki includes guides on writing your own modules, which is a bit outdated (Studio now includes tools to perform many of the command-line operations described in that guide). The guides still provide useful architectural information and descriptions of the process that make it a worthwhile resource. In this lab, you will work through the steps of either the iOS or Android module development guide. Those guides walk you through a "Hello World" module project.</p>
 
 
 
 <table>
-	<tr>
-		<td colspan="2" class="labinstructions l_labstep1">Choose a platform (iOS or Android) then work through the steps in the module development guide. The guide will walk you through the process for setting up the titanium.py script to generate a module project, and package that module for distribution. Installing your module is just as easy as installing a Titanium Plus module. The goal for this lab is to follow our existing documentation to create a "Hello World" module for your desired platform.</td>
-	</tr>
-	<tr>
-		<td class="tdfiller"><!-- leave empty--></td>
-		<td class="labexplanations l_labstepexplanation1"></td>
-	</tr>
+<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+<tr>
+	<td colspan="2" class="labinstructions l_labstep1">1. Our wiki includes guides on writing your own modules, which is a bit outdated (Studio now includes tools to perform many of the command-line operations described in that guide). The guides still provide useful architectural information and descriptions of the process that make it a worthwhile resource. In this lab, you will work through the steps of either the iOS or Android module development guide. Those guides walk you through a "Hello World" module project.</td>
+</tr>
+<tr>
+	<td class="tdfiller"><!-- leave empty--></td>
+	<td class="labexplanations l_labstepexplanation1"></td>
+</tr>
+<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+<tr>
+	<td colspan="2" class="labinstructions l_labstep2">2. In Studio, choose File, New Titanium Module Project. Use 'HelloModule' as the project name. Enter an app ID, such as com.<em>yourname</em>.hellomod  and select the target platform you want to build for.<br/>
+	    <ol style="margin-left:20px;">
+	      <li>For Android development, you'll need the Java Development tools. In the New Module Project dialog, click the Install JDT link and follow the steps on the resulting web page.</li>
+	      <li>Also for Android, confirm you have installed the necessary tools and components listed at <a href="http://docs.appcelerator.com/titanium/latest/#!/guide/Android_Module_Development_Guide-section-29004945_AndroidModuleDevelopmentGuide-InstallingtheNecessaryComponents">Installing the Necessary Components</a>
+	      </li>
+	      <li>Back in the New Module wizard, supply a version number and optionally the other information requested by the wizard.</li>
+	    </ol></td>
+</tr>
+<tr>
+	<td class="tdfiller"><!-- leave empty--></td>
+	<td class="labexplanations l_labstepexplanation2"></td>
+</tr>
+<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+<tr>
+	<td colspan="2" class="labinstructions l_labstep3">3. Follow the steps in the module development guide for your chosen platform (links below). <br/>
+	    <ol style="margin-left:20px;">
+	      <li>For iOS modules, start at approximately this step: <a href="http://docs.appcelerator.com/titanium/latest/#!/guide/iOS_Module_Development_Guide-section-29004946_iOSModuleDevelopmentGuide-OpentheTestModuleinXcode">Open in Xcode</a>
+	      </li>
+	      <li>For Android modules, start at approximately this step: <a href="http://docs.appcelerator.com/titanium/latest/#!/guide/Android_Module_Development_Guide-section-29004945_AndroidModuleDevelopmentGuide-ImportingaModuleintoEclipse">Importing into Eclipse</a>
+	      </li>
+	    </ol></td>
+</tr>
+<tr>
+	<td class="tdfiller"><!-- leave empty--></td>
+	<td class="labexplanations l_labstepexplanation3"></td>
+</tr>
+<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+<tr>
+	<td colspan="2" class="labinstructions l_labstep4">4. In Studio, package your module by using the Package menu (in App Explorer, this is the box-shaped icon to the right of the Debug and Run buttons).</td>
+</tr>
+<tr>
+	<td class="tdfiller"><!-- leave empty--></td>
+	<td class="labexplanations l_labstepexplanation4"></td>
+</tr>
+<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+<tr>
+	<td colspan="2" class="labinstructions l_labstep5">5. Create a Titanium mobile project to test your module<br/>
+	    <ol style="margin-left:20px;">
+	      <li>Place the module into the modules/platform_name folder in your project</li>
+	      <li>Update the tiapp.xml as necessary (use the Add Module button in the Modules section of the Tiapp.xml editor window).</li>
+	      <li>Require() in your module in the app.js</li>
+	    </ol></td>
+</tr>
+<tr>
+	<td class="tdfiller"><!-- leave empty--></td>
+	<td class="labexplanations l_labstepexplanation5"></td>
+</tr>
+<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+<tr>
+	<td colspan="2" class="labinstructions l_labstep6">6. Run your Titanium app in the simulator or emulator.</td>
+</tr>
+<tr>
+	<td class="tdfiller"><!-- leave empty--></td>
+	<td class="labexplanations l_labstepexplanation6"></td>
+</tr>
+
 </table>
 
 <h2 class="l_resources">Resources</h2>

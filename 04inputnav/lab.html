@@ -73,20 +73,23 @@
 <!-- YOUR LAB CONTENT GOES HERE -->
 <h1 class="l_labname">Lab: User Input Collection</h1>
 
-<p class="l_mission"><strong>Mission: </strong><img src="http://assets.appcelerator.com.s3.amazonaws.com/app_u/atmd_labs/Starting/lab330.png" style="float:right;width:240px;"/>In this lab you will set various keyboard options and conveniences to ease data entry.</p>
+<p class="l_mission"><strong>Mission: </strong><img src="http://assets.appcelerator.com.s3.amazonaws.com/app_u/tce_labs/Finished/04_inputnav.png" style="float:right;width:240px;" class="noborder"/>In this lab you will set various keyboard options and conveniences to ease data entry, and you will implement a few of the many UI controls available in Titanium.</p>
 
 <p class="l_specification"><strong>Specification: </strong>To successfully complete this lab, you must develop an app that meets the following description:</p>
 
 <ul style="width:70%">
-	<li class="l_spec1">App contains 5 input fields, each assigned different keyboard options (described below).</li>
-	<li class="l_spec2">The active text field remains visible when focused and is not covered by the soft keyboard.</li>
-	<li class="l_spec3">The window has a click event listener that will blur() all the fields to hide the keyboard.</li>
+	<li>Two tab, Alloy-based app. </li>
+	<li>Tab 1 will contain 5 input fields, each assigned different keyboard options (described below). <ul>
+			<li>The active text field remains visible when focused and is not covered by the soft keyboard.</li>
+			<li>The window has a click event listener that will blur() all the fields to hide the keyboard.</li>
+	</ul></li>
+	<li>Tab 2 will contain a switch, slider, and picker that log their values to the console when users interact with the controls</li>
 </ul>
 
 <table>
 <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 <tr>
-	<td colspan="2" class="labinstructions l_labstep1">1. Create a new Titanium Alloy project, giving it a name and app ID of your choice.</td>
+	<td colspan="2" class="labinstructions l_labstep1">1. Create a new Titanium Alloy project using the two-tab template, giving it a name and app ID of your choice.</td>
 </tr>
 <tr>
 	<td class="tdfiller"><!-- leave empty--></td>
@@ -94,7 +97,7 @@
 </tr>
 <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 <tr>
-	<td colspan="2" class="labinstructions l_labstep2">2. To the index view, add five text fields with ids normal, numeric, web, email, and password. Put them inside a scroll view.</td>
+	<td colspan="2" class="labinstructions l_labstep2">2. Assign a meaningful titles and IDs to the tabs and windows. On tab 1, add five text fields with ids normal, numeric, web, email, and password. Put them inside a scroll view within the window.</td>
 </tr>
 <tr>
 	<td class="tdfiller"><!-- leave empty--></td>
@@ -102,7 +105,7 @@
 </tr>
 <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 <tr>
-	<td colspan="2" class="labinstructions l_labstep3">3. In the index style, create style rules for your UI components. For all of the fields, set the width to 85% and height to 40dp, set the borderStyle to Ti.UI.INPUT_BORDERSTYLE_ROUNDED. Specify appropriate hintText for each of the fields. Then, set options for the fields as described:
+	<td colspan="2" class="labinstructions l_labstep3">3. In the index style, create style rules for your UI components. Set the scrollable view to use the vertical layout. For all of the fields, set the top to 40, width to 85%, height to 40dp, and the borderStyle to Ti.UI.INPUT_BORDERSTYLE_ROUNDED. Specify appropriate hintText for each of the fields. Then, set options for the fields as described:
 <table>
 	<tr>
 		<th>Field</th>
@@ -112,7 +115,6 @@
 		<td>normal</td>
 		<td>
 			<ul>
-				<li>top = 50dp</li>
 				<li>keyboard type = default</li>
 				<li>return key type = default</li>
 				<li>autocorrect = true</li>
@@ -124,7 +126,6 @@
 		<td>numeric</td>
 		<td>
 			<ul>
-				<li>top = 150dp</li>
 				<li>keyboard type = numbers/punctuation</li>
 				<li>return key type = 'Done'</li>
 			</ul>
@@ -134,7 +135,6 @@
 		<td>web</td>
 		<td>
 			<ul>
-				<li>top = 250dp</li>
 				<li>keyboard type = URL</li>
 				<li>return key type = 'Go'</li>
 			</ul>
@@ -144,7 +144,6 @@
 		<td>email</td>
 		<td>
 			<ul>
-				<li>top = 350dp</li>
 				<li>keyboard type = email</li>
 				<li>return key type = 'Send'</li>
 			</ul>
@@ -154,7 +153,6 @@
 		<td>password</td>
 		<td>
 			<ul>
-				<li>top = 450dp</li>
 				<li>keyboard type = default</li>
 				<li>autocorrect = false</li>
 				<li>autocapitalization = none</li>
@@ -171,7 +169,7 @@
 </tr>
 <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 <tr>
-	<td colspan="2" class="labinstructions l_labstep4">4. To the index controller, add a click event listener on the window. When the window is clicked, blur each of the text fields to hide the soft keyboard.</td>
+	<td colspan="2" class="labinstructions l_labstep4">4. To the index controller, add a click event listener on the window (tab 1's window). When the window is clicked, blur each of the text fields to hide the soft keyboard.</td>
 </tr>
 <tr>
 	<td class="tdfiller"><!-- leave empty--></td>
@@ -179,23 +177,51 @@
 </tr>
 <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 <tr>
-	<td colspan="2" class="labinstructions l_labstep5">5. Build your app for the simulator/emulator.</td>
+	<td colspan="2" class="labinstructions l_labstep5">5. To tab 2's window, add tags for a switch and slider, with suitable IDs. Make sure to set a value attribute on the switch (either true or false) or the switch might not show up. Add a two-column picker (you can use the code from the picker slide in this lesson). Make sure useSpinner is true for Android.</td>
 </tr>
 <tr>
 	<td class="tdfiller"><!-- leave empty--></td>
-	<td class="labexplanations l_labstepexplanation5">When you tap in a field, the appropriate keyboard type should be used, as should the correct return button type. Test the autocorrection and autocapitalization settings on the fields. Also, input to the password field should be obscured. Finally, the fields should remain visible when the soft keyboard is displayed.</td>
+	<td class="labexplanations l_labstepexplanation5"></td>
+</tr>
+<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+<tr>
+	<td colspan="2" class="labinstructions l_labstep6">6. In the index style, set the second tab's window to vertical layout mode. Give each control a top of 40. Set the slider's range from 0 to 10 with a starting value of 3. On Android, use the toggle button switch style.</td>
+</tr>
+<tr>
+	<td class="tdfiller"><!-- leave empty--></td>
+	<td class="labexplanations l_labstepexplanation6"></td>
+</tr>
+<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+<tr>
+	<td colspan="2" class="labinstructions l_labstep7">7. In the index controller, add 'change' event listeners to each of the controls. Log the value of the control to the console.</td>
+</tr>
+<tr>
+	<td class="tdfiller"><!-- leave empty--></td>
+	<td class="labexplanations l_labstepexplanation7"></td>
+</tr>
+
+<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+<tr>
+	<td colspan="2" class="labinstructions l_labstep8">8. Build your app for the simulator/emulator.</td>
+</tr>
+<tr>
+	<td class="tdfiller"><!-- leave empty--></td>
+	<td class="labexplanations l_labstepexplanation8">When you tap in a field, the appropriate keyboard type should be used, as should the correct return button type. Test the autocorrection and autocapitalization settings on the fields. Also, input to the password field should be obscured. The fields should remain visible when the soft keyboard is displayed.<br/><br/>On tab 2, changing any of the controls should log the values to the console.</td>
 </tr>
 
 </table>
 
 <h2 class="l_summary">Summary</h2>
-<p class="l_summarypara">In this lab, you implemented various keyboard and text field options that can ease data entry on the small screen.</p>
+<p class="l_summarypara">In this lab, you implemented various keyboard and text field options that can ease data entry on the small screen. You also implemented a switch, slider, and picker.</p>
 
 <h2 class="l_resources">Resources</h2>
 
 <ul>
 	<li class="l_resources1">API docs: TextField: <a href="http://docs.appcelerator.com/titanium/latest/#!/api/Titanium.UI.TextField">http://docs.appcelerator.com/titanium/latest/#!/api/Titanium.UI.TextField</a></li>
-	<li class="l_resources2">Finished app: <a href='http://assets.appcelerator.com.s3.amazonaws.com/app_u/atmd_labs/Finished/330_userinput.zip'>S3: 330_userinput (finished)</a></li>
+	<li class="l_resources2">API docs: Slider: <a href="http://docs.appcelerator.com/titanium/latest/#!/api/Titanium.UI.Slider">http://docs.appcelerator.com/titanium/latest/#!/api/Titanium.UI.Slider</a></li>
+	<li class="l_resources3">API docs: Switch: <a href="http://docs.appcelerator.com/titanium/latest/#!/api/Titanium.UI.Switch">http://docs.appcelerator.com/titanium/latest/#!/api/Titanium.UI.Switch</a></li>
+	<li class="l_resources4">API docs: Picker: <a href="http://docs.appcelerator.com/titanium/latest/#!/api/Titanium.UI.Picker">http://docs.appcelerator.com/titanium/latest/#!/api/Titanium.UI.Picker</a></li>
+	<li class="l_resources5">Finished app: <a href='http://assets.appcelerator.com.s3.amazonaws.com/app_u/tce_labs/Finished/04_inputnav.zip'>S3: 04_inputnav (finished)</a></li>
 </ul>
 
 

@@ -1,0 +1,5 @@
+<Alloy>
+	<Window class="container">
+		<Widget id="starwidget" src="starrating" max='5' initialRating='2.5'/>
+	</Window>
+</Alloy>

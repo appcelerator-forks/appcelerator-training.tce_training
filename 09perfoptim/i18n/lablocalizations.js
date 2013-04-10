@@ -44,13 +44,13 @@ String.toLocaleString({
 
 
 		"%l_androidnotesh2": "Android Notes",
-		"%l_androidnotes": "Memory leaks are a problem for Android, even though we didn't include steps for that platform in this lab. You can use the DDMS tool, and its Allocation Tracker component to watch for such leaks. Steps for Android are provided at <a href='http://docs.appcelerator.com/titanium/2.1/index.html#!/guide/Managing_Memory_and_Finding_Leaks-section-29004941_ManagingMemoryandFindingLeaks-MonitoringallocationsonAndroid'>http://docs.appcelerator.com/titanium/2.1/index.html#!/guide/Managing_Memory_and_Finding_Leaks-section-29004941_ManagingMemoryandFindingLeaks-MonitoringallocationsonAndroid</a>",
+		"%l_androidnotes": "Memory leaks are a problem for Android, even though we didn't include steps for that platform in this lab. You can use the Monitor/DDMS tool, and its Allocation Tracker component to watch for such leaks. Steps for Android are provided at <a href='http://docs.appcelerator.com/titanium/latest/#!/guide/Managing_Memory_and_Finding_Leaks-section-29004941_ManagingMemoryandFindingLeaks-MonitoringallocationsonAndroid'>http://docs.appcelerator.com/titanium/latest/#!/guide/Managing_Memory_and_Finding_Leaks-section-29004941_ManagingMemoryandFindingLeaks-MonitoringallocationsonAndroid</a>",
 
 		"%l_summary": "Summary",
 		"%l_summarypara": "The app-level listener added within build() remains in scope after the window is closed. This forces the objects the window contains to remain in scope, which means they cannot be garbage collected. When build() runs again, a new window and table are created, which also cannot be garbage collected. You've got a leak! By removing the event listener when the window closes, the rest of the objects can be marked as ready for garbage collection. Even though a new set of objects are created by build(), the old ones are gone from memory and this leak is fixed.",
 
 		"%l_resources": "Resources",
 		"%l_resources1": "Finished code: <a href='http://assets.appcelerator.com.s3.amazonaws.com/app_u/code/AppLeak_finished.zip'>http://assets.appcelerator.com.s3.amazonaws.com/app_u/code/AppLeak_finished.zip</a>",
-		"%l_resources2": "Guides: <a href='http://docs.appcelerator.com/titanium/2.1/index.html#!/guide/Managing_Memory_and_Finding_Leaks'>http://docs.appcelerator.com/titanium/2.1/index.html#!/guide/Managing_Memory_and_Finding_Leaks</a>",
+		"%l_resources2": "Guides: <a href='http://docs.appcelerator.com/titanium/latest/#!/guide/Managing_Memory_and_Finding_Leaks'>http://docs.appcelerator.com/titanium/latest/#!/guide/Managing_Memory_and_Finding_Leaks</a>",
 
 	}});
