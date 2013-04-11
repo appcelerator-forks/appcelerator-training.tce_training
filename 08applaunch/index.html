@@ -271,6 +271,18 @@ activity.addEventListener("create", function(e) {
 					<div class="slidenote"><div class="l_slidenote_androidarguments"></div></div>
 				</section>
 
+				<section>
+					<h2 style="" class="l_sanitize">"Sanitize" your inputs</h2>
+					<p class="l_sanitizepara">Just like with web applications, you should:</p>
+					<ul style="width:80%;">
+						<li class="l_sanitize1">Check for correct data types </li>
+						<li class="l_sanitize2">Don't 'blindly' pass arguments to database queries</li>
+						<li class="l_sanitize3">Confirm permissions and security</li>
+						<li class="l_sanitize4">Don't expose destructive actions via launch arguments</li>
+					</ul>
+					<div class="slidenote"><div class="l_slidenote_sanitize">We have to take care to sanitize any arguments received by our apps to be sure that we don't accidentally expose destructive actions. Apps are subject to the same types of SQL injection and parameter manipulation attacks that web applications must endure.</div></div>
+				</section>
+
 
 
 <!-- LESSONS MAY HAVE A DEMO (NOT REQUIRED) IN WHICH THE INSTRUCTOR WILL DEMONSTRATE A SAMPLE APP AND ITS CODE TO ILLUSTRATE THE MATERIALS COVERED IN THE LESSON -->
