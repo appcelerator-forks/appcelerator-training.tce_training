@@ -23,7 +23,7 @@
 	width: 240,
 	height: 240,
 	top: 10,
-	image: 'dylan.png'
+	image: '/dylan.png'
 },
 "#linernotes[platform=ios]":{
 	width: 240,

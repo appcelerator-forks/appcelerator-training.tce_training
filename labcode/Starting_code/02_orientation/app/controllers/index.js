@@ -5,9 +5,9 @@ notes[0] = 'Together Through Life is the 33rd studio album by Bob Dylan, release
 notes[1] = "Rumors of the album, reported in Rolling Stone magazine, came as a surprise, with no official press release until March 16, 2009 ‚Äî less than two months before the album's release date.";
 notes[2] = "In a conversation with music journalist Bill Flanagan, published on Bob Dylan's official website, Flanagan suggested a similarity of the new record to the sound of Chess Records and Sun Records, which Dylan acknowledged as an effect of 'the way the instruments were played.'";
 
-images[0] = 'dylan.png';
-images[1] = 'dylan1.png';
-images[2] = 'dylan2.png';
+images[0] = '/dylan.png';
+images[1] = '/dylan1.png';
+images[2] = '/dylan2.png';
 
 // handle the swipe event -- change the liner notes 
 // to a random member of the notes array
