@@ -105,45 +105,32 @@
 					<div class="slidenote"><div class="l_slidenote_ios_ui">A tab bar gives people the ability to switch between different subtasks, views, or modes.<br>Use a tab bar to give users access to different perspectives on the same set of data or different subtasks related to the overall function of your app. </div></div>
 				</section>
 				
+				<!-- - - - - - - - - - - - - - - - - NEW TOPIC - - - - - - - - - - - - - - - - -->
 				<section>
-					<h2 class="l_key_api">Key User Interface APIs</h2>
-					<ul style="width:80%;">
-						<li class="l_keyapi1">Ti.UI.iPhone.NavigationGroup</li>
-						<li class="l_keyapi2">Ti.UI.iOS.Toolbar</li>
-						<li class="l_keyapi3">Ti.UI.iOS.TabbedBar</li>
-						<li class="l_keyapi4">Ti.UI.iOS.CoverFlowView</li>
-						<li class="l_keyapi5">Ti.UI.DashboardView (not in iOS namespace)</li>
-						<li class="l_keyapi6">Ti.UI.iOS.AdView</li>
-					</ul>
-					<div class="slidenote"><div class="l_slidenote_key_apiV2">NavigationGroup is also supported on MobileWeb, but there's a Ti.UI.MobileWeb.NavigationGroup object for that.<br><br/>As of SK1.8, Toolbar, TabbedBar, and CoverFlowView were moved to iOS namespace<br><br/>DashboardView not there yet, but will probably be moved soon.</div></div>
+					<h1 class="topicH1 l_topic"><img src="../images/topic.png"/>Topic</h1>
+					<h5 style="clear:both;" class="l_keyapis">Key UI APIs</h5>
+					<div class="slidenote"><div class="l_slidenote_keyapis"></div></div>
 				</section>
-				
+
 				<section>
 					<h2 class="l_ios_nav">UI: Navigation Group</h2>
 					<p class="l_ios_nav_image"><img src="images/ios-nav.png" style="margin-top:5px;height:350px;" class="noborder"/></p>
 					<p class="l_ios_nav_explanation">A Navigation Group implements a specialized view that manages the navigation of hierarchical content</p>
-					<div class="slidenote"><div class="l_slidenote_ios_nav">A Navigation Group implements a specialized view that manages the navigation of hierarchical content. A Navigation Group is very similar to Tab Bars with the exception that they do not maintain a group of windows with a interface bar at the bottom</div></div>
+					<div class="slidenote"><div class="l_slidenote_ios_nav">A Navigation Group implements a specialized view that manages the navigation of hierarchical content. A Navigation Group is very similar to Tab Bars with the exception that they do not maintain a group of windows with a interface bar at the bottom.<br/><br/>NavigationGroup is also supported on MobileWeb, but there's a Ti.UI.MobileWeb.NavigationGroup object for that.</div></div>
 				</section>
 				
 				<section>
 					<h2 class="l_ios_nav_eg">UI: Navigation Group - Example</h2>
 <pre style="float:left;width:640px;"><code contenteditable class="l_navgroup_code1">
-// need a window for inside our nav group
-var innerWin = Ti.UI.createWindow({
-   backgroundColor: '#fff',
-   title: 'Dashboard',
-   barColor: #f5c115;
-});
-// create the nav group
-var nav = Ti.UI.iPhone.createNavigationGroup({
-   window: innerWin
-});
-
-// add the nav group to app's main window
-var outerWin = Ti.UI.createWindow();
-outerWin.add(nav);
-outerWin.open();
-
+&lt;Alloy>
+  &lt;Window id="index">
+    &lt;NavigationGroup id="navgroup" platform="ios">
+      &lt;Window title="Dashboard" id="win1">
+        &lt;Label>This is the first window&lt;/Label>
+      &lt;/Window>
+    &lt;/NavigationGroup>
+  &lt;/Window>
+&lt;/Alloy>
 </code></pre>
 					<p class="l_os_nav_eg_image" style="float:right;width:240px;"><img src='images/nav_dashboard.png' style='margin-top:5px;width:240px;'/></p>
 					<div class="slidenote"><div class="l_slidenote_ios_nav_eg">nav.window property defines the “home” window of the NavGroup<br>Code example doesn't show additional sub windows to the NavGroup<br>The NavGroup itself then needs to be added to a window</div></div>
@@ -153,30 +140,31 @@ outerWin.open();
 					<h2 class="l_ios_nav_eg2">UI: Navigation Group - Adding a Window</h2>
 <pre><code contenteditable class="l_navgroup_code2">
 // add windows to the nav group
+$.someButton.addEventListener('click', function(e) {
+   $.navgroup.open(Alloy.createController('win2').getView());
+});
+
+// or in traditional API code
 var win2 = Ti.UI.createWindow({
-   backgroundColor: '#fff',
    title: 'Details',
    barColor: #f5c115;
 });
-nav.open(win2);
+$.navgroup.open(win2);
 
 </code></pre>
 
-					<p class="l_os_nav_eg_2_image"><img src="images/nav_dashboard2.png" style="margin-top:5px;height:450px;"/></p>
+					<p class="l_os_nav_eg_2_image"><img src="images/nav_dashboard2.png" style="margin-top:5px;height:350px;"/></p>
 					<div class="slidenote"><div class="l_slidenote_ios_nav_eg_2">To add another window to the stack, create it and then call open</div></div>
 				</section>
 				
 				<section>
 					<h2 class="l_ios_nav_bar">UI: Navigation Bar - Example</h2>
 <pre><code contenteditable class="">
-// create buttons to go in the nav bar
-var back = Ti.UI.createButton({ title: 'Back' });
-
 // implement the buttons
-win.setLeftNavButton(back);
+$.win.setLeftNavButton($.baseUIButton);
 
 // add an image to the nav bar
-win.titleImage('/images/skull.png');
+$.win.titleImage('/images/skull.png');
 </code></pre>
 					<p class=""><img src="images/navbar_image.png" style="margin-top:5px;width:300px;"/></p>
 					<div class="slidenote"><div class="l_slidenote_ios_nav_bar">There are other components that you can set, such as <br>setTItleControl()<br>setTitleImage()<br>setTitle()</div></div>
@@ -197,35 +185,30 @@ win.titleImage('/images/skull.png');
 				
 				<section>
 					<h2 class="l_ui_toolbar">UI: Toolbars</h2>
-<pre><code contenteditable class="l_toolbar_code">
-// create buttons to go in the tool bar
-var camera = Ti.UI.createButton();
-var flexSpace = Ti.UI.createButton({
-   style:Ti.UI.iPhone.SystemButtonStyle.FLEXIBLE_SPACE
-});
-// other buttons would be defined here
-
-// implement the toolbar
-win.toolbar = [camera, flexSpace, tf, flexSpace, send];
-
+<pre style="width:60%;float:left;"><code contenteditable class="l_toolbar_code">
+&lt;Toolbar platform="ios">
+  &lt;Items>
+    &lt;Button id="camera"/>
+    &lt;FlexSpace/>
+    &lt;TextField id="tf"/>
+    &lt;FlexSpace/>
+    &lt;Button id="send"/>
+  &lt;/Items>
+&lt;/Toolbar>
 </code></pre>
-					<p class="l__ui_toolbar_2_image"><img src="images/ui-toolbar-2.png" style="margin-top:5px;height:240px;"/></p>
+					<p class="l__ui_toolbar_2_image"><img src="images/ui-toolbar-2.png" style="margin-top:5px;height:240px;float:right;"/></p>
 					<div class="slidenote"><div class="l_slidenote_ui_toolbar_2">win.setToolbar() method available too<br>Buttons are stored as an array of objects (NSArray)<br>win.toolbar property &mdash; setting that docks the toolbar to the bottom of the window<br>Otherwise you could position it anywhere (if you do win.add(toolbar))</div></div>
 				</section>
 				
 				<section>
 					<h2 class="l_ui_keyboardtoolbar">UI: Keyboard Toolbars</h2>
 <pre><code contenteditable class="l_keyboardtoolbar_code">
+// not supported through Alloy markup yet
 // create buttons to go in the tool bar
 var camera = Ti.UI.createButton();
-...
 
-// create the TextField or TextArea
-var textview = Ti.UI.createTextArea({
-   keyboardToolbar = [camera, flexSpace, tf, flexSpace, send],
-   keyboardToolbarColor: '#999',
-   keyboardToolbarHeight: 40
-});
+$.textfield.keyboardToolbar = [camera, flexSpace, tf, flexSpace, send];
+$.textfield.keyboardToolbarColor = '#999';
 
 </code></pre>
 					<p class="l_ui_toolbar_3_image"><img src="images/ui-toolbar-3.png" style="margin-top:5px;height:240px;"/></p>
@@ -237,13 +220,16 @@ var textview = Ti.UI.createTextArea({
 					<p class="l_buttonbartext">Related controls that don't maintain state</p>
 					<p class="l_ui_buttonbar_image"><img src="images/buttonbar.png" style="margin-top:5px;width:300px;"/></p>
 <pre><code contenteditable class="l_buttonbar_code">
-var bb = Ti.UI.createButtonBar({
-   labels: ['One', 'Two', 'Three', 'Four', 'Five'],
-   backgroundColor: 'maroon',
-   /* style is optional */
-   style: Ti.UI.iPhone.SystemButtonStyle.BAR
-});
-win.add(bb);
+&lt;ButtonBar platform="ios" onClick="doSomething">
+  &lt;Labels>
+    &lt;!-- Specify text with node text or "title" attribute. -->
+    &lt;Label>One&lt;/Label>
+    &lt;Label title="Two"/>
+    &lt;Label title="Three"/>
+    &lt;Label title="Four"/>
+    &lt;Label title="Five"/>
+  &lt;/Labels>
+&lt;/ButtonBar>
 
 </code></pre>
 					<div class="slidenote"><div class="l_slidenote_ui_buttonbar"><ul><li>Not like a radio button set &mdash; buttons don't maintain state and pressing one doesn't affect the others</li><li>Don't create separate buttons; supply an array of labels</li><li>Event listener on whole bar, where <code>index</code> property tells you which button was actually clicked</li><li>SystemButtonStyle is used to set more compact layout and is not required to make a button bar</li></ul></div></div>
@@ -252,12 +238,19 @@ win.add(bb);
 				<section>
 					<h2 class="l_ui_tabbar">UI: Tabbed Bar</h2>
 					<p class="l_tabbedbar_text">Like radio buttons, maintain state</p>
-
+					<p class="l_ui_tabbar_image" style="position:absolute; top:300px; right:10px;z-index:2;"><img src="images/tabbedbars.png" style="margin-top:5px;width:300px;background-color:#fff;border:1px solid black;"/></p>
 <pre><code contenteditable class="">
-var tb = Ti.UI.iOS.createTabbedBar({
-   labels: ['IMAP', 'POP', 'Exchange']
-});
-tb.addEventListener('click', function(e){
+&lt;TabbedBar platform="ios" onClick="doSomething">
+  &lt;Labels>
+    &lt;!-- Specify text with node text or "title" attribute. -->
+    &lt;Label>IMAP&lt;/Label>
+    &lt;Label title="POP"/>
+    &lt;Label title="Exchange"/>
+  &lt;/Labels>
+&lt;/TabbedBar>
+
+// in the controller
+function doSomething(e){
   switch(e.index) {
     case 0:
       // do stuff
@@ -268,7 +261,6 @@ win.add(tb);
 
 </code></pre>
 
-					<p class="l_ui_tabbar_image"><img src="images/tabbedbars.png" style="margin-top:5px;width:300px;"/></p>
 					<div class="slidenote"><div class="l_slidenote_ui_tabbar"><ul><li>Also known as 'segmented controls'</li><li>Maintains state &mdash; like radio buttons</li><li>Used for closely related, but mutually exclusive choices.</li><li>All segments in a segmented control have equal width</li><li>Segments can contain text or images, but not both</li></ul></div></div>
 				</section>
 				
@@ -282,26 +274,30 @@ win.add(tb);
 				
 				<section>
 					<h2 class="l_key_api_ti">Key APIs - Titanium.UI.iPad.Popover</h2>
-					<div style="width:65%;float:left;">
+					<div style="width:75%;float:left;">
 					<ul>
 						<li class="l_popover1">Transient view revealed by tap on control</li>
 						<li class="l_popover2">Hovers over app content</li>
 					</ul>
 <pre><code contenteditable class="l_popover_code">
-var popover = Ti.UI.iPad.createPopover({
-   height: 100,
-   width: 100
-});
-// contents of popover
-var innerView = Ti.UI.createView();
-popover.add(innerView);
+&lt;Popover title="Inbox" height="300" width="250">
+  &lt;LeftNavButton>
+    &lt;Button onClick="showAlert">My MobileMe Account&lt;/Button>
+  &lt;/LeftNavButton>
+  &lt;RightNavButton>
+    &lt;Button onClick="showAlert">Edit&lt;/Button>
+  &lt;/RightNavButton>
+
+  &lt;TableView>...
+&lt;/Popover>
 
 // view property controls where the
 // arrow points
-popover.show({view: button});
+var pop = Alloy.createController('popover').getView();
+pop.show({view:$.button});
 </code></pre>
 					</div>
-					<p class="l_key_api_ti_image" style="width:35%;float:right;"><img src="images/popover.png" style="margin-top:5px;width:300px;"/></p>
+					<p class="l_key_api_ti_image" style="width:25%;float:right;"><img src="images/popover.png" style="margin-top:5px;width:300px;"/></p>
 					<div class="slidenote"><div class="l_slidenote_key_api_ti"><ul><li>Like a dialog box</li><li>Always has an arrow pointing to the control that opened it</li><li>Contain a Ti.UI.View</li></ul></div></div>
 				</section>
 				
@@ -319,21 +315,22 @@ popover.show({view: button});
 				<section>
 					<h2 class="l_ti_splitwindow">Key APIs - Titanium.UI.iPad.SplitWindow</h2>
 <pre><code contenteditable class="l_splitwindow_code">
-// These will be the contents of the splitwindow
-var masterPane = Ti.UI.createView();
-var detailPane = Ti.UI.createView();
+&lt;Alloy>
+  &lt;SplitWindow platform="ios" formFactor="tablet">
+    &lt;!-- The 'masterView' window -->
+    &lt;Window id="master">
+      &lt;Label>This is the master&lt;/Label>
+    &lt;/Window>
 
-// create the splitwindow
-var splitwin = Ti.UI.iPad.createSplitWindow({
-   detailView: detailPane,
-   masterView: masterPane
-});
-
-// you don't add the splitwin to a win object
-// it is the top-level 'window' object
-splitwin.open();
-
+    &lt;!-- The 'detailView' window -->
+    &lt;Window id="detail">
+      &lt;Label>This is the detail&lt;/Label>
+    &lt;/Window>
+  &lt;/SplitWindow>
+&lt;/Alloy>
 </code></pre>
+					<p class="l_splitwinnote">SplitWindow is a top-level container; it doesn't go inside a window.</p>
+
 					<div class="slidenote"><div class="l_slidenote_ti_splitwindow_2"><ul><li>Contains two views: master and detail</li><li>These define a hierarchy: info selected in left (master) pane typically controls what is shown in the right (detail) pane</li><li>You have to code that relationship and associated actions</li><li>In general, indicate the current selection in the left pane in a persistent way.</li></ul></div></div>
 				</section>
 				
@@ -364,12 +361,18 @@ Ti.UI.iPhone.appBadge = null;
 				<section>
 					<h2 class="l_ui_cover">UI: CoverFlow View</h2>
 					<img src="images/coverflow.png" style="margin-top:5px;width:300px;float:right;" class="noborder"/>
-<pre><code contenteditable class="l_coverflow_code" style="width:62%;float:left;">
-var cover = Ti.UI.iOS.createCoverFlowView({
-   images: ['a.png', 'b.png', 'c.png'],
-   backgroundColor: '#000'
-});
-win.add(cover);
+<pre><code contenteditable class="l_coverflow_code" style="width:70%;float:left;">
+&lt;CoverFlowView id="coverflow" platform="ios">
+  &lt;Images>
+    &lt;!-- Assign image by node text or image attribute -->
+    &lt;Image>appc1.png&lt;/Image>
+    &lt;Image image="appc2.png"/>
+
+    &lt;!-- you can also change the width/height -->
+    &lt;Image width="100" height="100" image="appc3.png"/>
+    &lt;Image width="50" height="50">appc4.png&lt;/Image>
+  &lt;/Images>
+&lt;/CoverFlowView>
 
 </code></pre>
 					<div class="slidenote"><div class="l_slidenote_ui_cover">Cover art or gallery style, animated 3D UI component to display a series of images.<br/><br/>If an image is tapped, you can grab an index so you can branch code accordingly</div></div>
@@ -387,35 +390,30 @@ win.add(cover);
 					<img src="images/dashboard.png" style="margin-top:5px;width:300px;float:right;" class="noborder"/>
 					<div class="slidenote"><div class="l_slidenote_ui_dashboard">This isn't setting or accessing the actual Springboard<br>Just presenting a similar view</div></div>
 				</section>
-				
+
 				<section>
-					<h2 class="l_ui_dashboard">UI: Dashboard View</h2>
-<pre><code contenteditable class="l_dashboard_code">
-// create the button items to go in the dashboard
-var item = Ti.UI.createDashboardItem({
-   image: 'images/item1.png',
-   label: 'Home'
-});
+					<h2 style="" class="l_dashboardA">UI: Dashboard View</h2>
+					<pre style="width:100%;"><code contenteditable>
+&lt;Window>
+  &lt;RightButton>
+    &lt;Button id="editButton" onClick="toggleEditMode">Edit&lt;/Button>
+    &lt;/RightButton>
+  &lt;/Toolbar>
+  &lt;DashboardView id="dash" onEdit="handleEdit">
+    &lt;DashboardItem image="acct_off.png" selectedImage="acct_on.png" label="account"/>
+    &lt;DashboardItem image="calls_off.png" selectedImage="calls_on.png" label="calls"/>
+    &lt;DashboardItem image="cases_off.png" selectedImage="cases_on.png" label="cases"/>
+    &lt;DashboardItem image="tasks_off.png" selectedImage="tasks_on.png" label="tasks"/>
+  &lt;/DashboardView>
+&lt;/Window>
 
-// create the dashboard
-var dashboard = Ti.UI.createDashboardView({
-   data: [item],
-   wobble: true /* wobble while in edit mode */
-});
-win.add(dashboard);
-
-var isEditable = false;
-item.addEventListener('longpress', function() {
-  (isEditable) ? dashboard.stopEditing() : dashboard.startEditing();
-});
-dashboard.addEventListener('edit', function() {
-   // in edit mode, handle accordingly
-});
-
-</code></pre>
-					<div class="slidenote"><div class="l_slidenote_ui_dashboard_2"></div></div>
+// in the controller
+function toggleEditMode(e) {
+   isEditable ? $.dash.stopEditing() : $.dash.startEditing();
+}
+					</code></pre>
+					<div class="slidenote"><div class="l_slidenote_dashboardA"></div></div>
 				</section>
-				
 				
 				<section>
 					<h2 class="l_ui_adview">UI: AdView</h2>
@@ -433,8 +431,9 @@ dashboard.addEventListener('edit', function() {
 					<h2 class="l_ui_adview">UI: AdView</h2>
 <pre><code contenteditable class="l_adview_code">
 var iad = Ti.UI.iOS.createAdView({
-   width: 'auto',
-   height: 'auto',
+   width: Ti.UI.FILL,
+   height: Ti.UI.SIZE,
+   adSize: Ti.UI.iOS.AD_SIZE_PORTRAIT,
    bottom: -100
 });
 iad.addEventListener('load', function(){
@@ -446,23 +445,19 @@ iad.addEventListener('load', function(){
 iad.addEventListener('action', function(){
    mygame.pause(); // do something when ad is clicked
 });
-win.add(iad);
+$.win.add(iad);
 
 </code></pre>
 					<div class="slidenote"><div class="l_slidenote_ui_adview_3">Best to not show ad if nothing is loaded. Set to be off-screen and then move into view when an ad is loaded. Could also show at the top or elsewhere, doesn't have to be on the bottom. <br/><br/>You can tell when a user clicks on an ad, but can't tell what the ad is. Basically this is to pause action that shouldn't run while the ad is showing.</div></div>
 				</section>
-				
+
+				<!-- - - - - - - - - - - - - - - - - NEW TOPIC - - - - - - - - - - - - - - - - -->
 				<section>
-					<h2 class="l_key_api_pl">Platform Functionality APIs</h2>
-					<ul>
-						<li class="l_funcapi1">Ti.App.iOS</li>
-						<li class="l_funcapi2">Ti.Contacts</li>
-						<li class="l_funcapi3">Ti.Media</li>
-						<li class="l_funcaip4">Ti.Network</li>
-					</ul>
-					<div class="slidenote"><div class="l_slidenote_key_api_pl">Platform specific business logic methods are available for iOS</div></div>
+					<h1 class="topicH1 l_topic"><img src="../images/topic.png"/>Topic</h1>
+					<h5 style="clear:both;" class="l_functionalityapis">Functionality APIs</h5>
+					<div class="slidenote"><div class="l_slidenote_functionalityapis"></div></div>
 				</section>
-				
+
 				<section>
 					<h2 class="l_background">Background Services</h2>
 					<ul style="width:35%;float:left;">
@@ -564,31 +559,27 @@ Ti.Network.registerForPushNotifications({
 					</code></pre>
 					<div class="slidenote"><div class="l_slidenote_pushcode"></div></div>
 				</section>
-				
-				<section>
-					<h2 class="l_key_api_con">Additional APIs - Contacts, Media, Network</h2>
-					<ul style="width:60%;">
-						<lh class="l_cmn1" style="font-weight:bold;margin-left:-30px;text-decoration:underline;">Contacts</lh>
-						<li class="l_cmn2">Ti.Contacts.Group</li>
-						<li class="l_cmn3">Ti.Contacts.Person</li>
-						<lh class="l_cmn4" style="font-weight:bold;margin-left:-30px;text-decoration:underline;">Media</lh>
-						<li class="l_cmn5">Ti.Media.AudioRecorder</li>
-						<li class="l_cmn6">Ti.Media.Item</li>
-						<li class="l_cmn7">Ti.Media.MusicPlayer</li>
-						<lh class="l_cmn8" style="font-weight:bold;margin-left:-30px;text-decoration:underline;">Network</lh>
-						<li class="l_cmn9">Ti.Network.BonjourBrowser</li>
-						<li class="l_cmn10">Ti.Network.BonjourService</li>
-					</ul>
 
-					<div class="slidenote"><div class="l_slidenote_key_api_con">Your app can participate in the Apple Bonjour (self-configuring, discoverable) networking environment for printing and other services.</div></div>
+				<section>
+					<h2 style="" class="l_networkapis">Network APIs</h2>
+					<ul style="width:80%;">
+						<li class="l_networkapis1">Ti.Network.BonjourBrowser</li>
+						<li class="l_networkapis2">Ti.Network.BonjourService</li>
+					</ul>
+					<div class="slidenote"><div class="l_slidenote_networkapis">Your app can participate in the Apple Bonjour (self-configuring, discoverable) networking environment for printing and other services.</div></div>
 				</section>
 				
 				<section>
 					<h2 class="l_impl_app">Implementing Application Preferences</h2>
-					<p class="l_impl_app_image"><img src="images/impl-app.png" style="margin-top:5px;height:450px;"/></p>
+					<p class="l_impl_app_image"><img src="images/impl-app.png" style="margin-top:5px;height:350px;"/></p>
+					<ol style="width:75%;">
+						<li class="l_settingsneeds1">Create a Settings Bundle</li>
+						<li class="l_settingsneeds2">Access settings as properties with Ti.App.Properties</li>
+						<li class="l_settingsneeds3">Do clean-build of your project</li>
+					</ol>
 					<div class="slidenote"><div class="l_slidenote_impl_app">'The Settings Bundle'<br/><br/>Apple's guidelines say all app preferences and settings should be done through the Settings app. In practice, most apps provide at least some options and settings within the app itself. A common mix is to see 'power user' settings in the Settings app and user settings within the app.</div></div>
 				</section>
-								
+
 				<section>
 					<h2 class="l_settings">Creating the Settings Bundle</h2>
 					<ol style="width:100%;">
@@ -596,7 +587,6 @@ Ti.Network.registerForPushNotifications({
 						<li class="l_settings2">In Finder, right-click Settings.bundle and choose <strong>Show Package Contents</strong></li>
 						<li class="l_settings3">Open Root.plist</li>
 						<li class="l_settings4">Edit as necessary, then save</li>
-						<li class="l_settings5">Do clean-build of your project</li>
 					</ol>
 					<div class="slidenote"><div class="l_slidenote_settings">This is easiest way; you could also create the XML file directly<br/><br/>Settings bundle needs to be in project/platform (which doesn't exist by default)<br><br/>(Used to go in project/modules prior to 1.8)<br><br>See tutorial at http://iphoneincubator.com/blog/tutorial/how-to-create-an-iphone-preferences-file</div></div>
 				</section>
@@ -618,7 +608,7 @@ Ti.Network.registerForPushNotifications({
 				
 				<section>
 					<h1 class="l_lab_goals">Lab Goals</h1>
-					<p align="left" class="l_add_settings">Add settings to an iOS application</p><br>
+					<p align="center" class="l_add_settings">Add settings to an iOS application</p><br>
 					<p class="l_labURL" style="font-size:0.7em;margin-top:20px;"><a href='https://wiki.appcelerator.org/display/td/06+-+iOS+Deep+Dive'>wiki.appcelerator.org/display/td/06+-+iOS+Deep+Dive</a></p>
 					<div class="slidenote"><div class="l_slidenote_lab_goals">In this lab, you will create a Settings bundle so that application settings can be changed via the Settings app in the simulator or on a phone. You will then use that setting within the app to control the app's user interface</div></div>
 				</section>
