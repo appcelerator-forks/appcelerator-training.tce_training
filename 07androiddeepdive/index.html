@@ -327,9 +327,19 @@ $.win.activity.onCreateOptionsMenu = function(e) {
 				</section>
 				
 				<section>
-					<h2 style="" class="l_splashscreens">Using a 9-patch for the Splash Screen</h2>
+					<h2 style="" class="l_ninepatch">NinePatch images</h2>
+				    <img src="images/ninepatch_raw.png" style="width:400px;float:right;"/>
+					<ul style="width:60%;float:left;">
+						<li class="l_ninepatch1">Avoid stretched splash screens</li>
+						<li class="l_ninepatch2">Define stretchable areas of your graphic</li>
+						<li class="l_ninepatch3">Enable through Android theme modification</li>
+					</ul>
+					<div class="slidenote"><div class="l_slidenote_ninepatch"></div></div>
+				</section>
+				<section>
+					<h2 style="" class="l_splashscreens">Using a NinePatch for the Splash Screen</h2>
 					<ol style="width:80%;">
-						<li class="l_splashstep1">Create a 9-patch image using draw9patch utility</li>
+						<li class="l_splashstep1">Create a NinePatch image using draw9patch utility</li>
 						<li class="l_splashstep2">Copy to platform/android/res/drawable[-xdpi]</li>
 						<li class="l_splashstep3">Rename it to splash.9.png</li>
 						<li class="l_splashstep4">Create a theme.xml file, put it in platform/android/res/values</li>
@@ -350,7 +360,7 @@ $.win.activity.onCreateOptionsMenu = function(e) {
 					<h2 style="" class="l_external">Installing to the SD card</h2>
 					<ul style="width:80%;">
 						<li class="l_external1">Use tool-api-level 8 or higher</li>
-						<li class="l_external2">Set minSdkVersioin to 7 or higher</li>
+						<li class="l_external2">Set minSdkVersion to 7 or higher</li>
 						<li class="l_external3">Add the following to the AndroidManifest.xml</li>
 					</ul>
 					<pre style=""><code contenteditable>
@@ -361,7 +371,7 @@ $.win.activity.onCreateOptionsMenu = function(e) {
    &lt;/manifest&gt;
 &lt;/android&gt;
 					</code></pre>
-					<div class="slidenote"><div class="l_slidenote_external"></div></div>
+					<div class="slidenote"><div class="l_slidenote_external">Depending on the connection mode of your Android device, you might have difficulties building &amp; installing an app configured in this way. If your device is attached in USB storage mode (and some newer media modes), the SD card is inaccessible. Thus, the app cannot be installed and adb might throw an error. </div></div>
 				</section>
 
 				<section>
@@ -488,9 +498,9 @@ Ti.Android.stopService(intent); // later, to stop the service!
 				
 				<section>
 					<h2 class="l_calendar_int">Calendar and Event Integration</h2>
-					<p align="left" class="l_android_excl">Android exclusive feature, can't do it on iOS</p><br>
 					<p align="left" class="l_add_events">Add events to calendars, and alarms for status bar</p><br>
 					<p align="left" class="l_calendar_module">Ti.Android.Calendar module</p><br>
+					<p align="left" class="l_calendarintents">You can also access the calendar via Intents</p><br>
 					<div class="slidenote"><div class="l_slidenote_scalendar_int"></div></div>
 				</section>
 				
