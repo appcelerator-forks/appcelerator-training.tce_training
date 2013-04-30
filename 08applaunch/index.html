@@ -265,6 +265,28 @@ http://maps.google.com/maps?daddr=LATITUDE,LONGITUDE&directionsmode=driving
 					<div class="slidenote"><div class="l_slidenote_checking"></div></div>
 				</section>
 
+				<section>
+					<h2 style="" class="l_checkingexample">Example</h2>
+					<pre style=""><code contenteditable>
+function doClick(e) {  
+  if(OS_IOS) {
+    if(Ti.Platform.canOpenURL('Urlschemes://')) {
+      Ti.Platform.openURL('Urlschemes://');
+    } else {
+      alert('You must install the Target app first');
+    }
+  } else {
+    var didItWork = Ti.Platform.openURL('urlschemes://');
+    if(!didItWork) {
+      alert('You need to install the Target app');
+    }
+  }
+}
+
+					</code></pre>
+					<div class="slidenote"><div class="l_slidenote_checkingexample"></div></div>
+				</section>
+
 				<!-- - - - - - - - - - - - - - - - - NEW TOPIC - - - - - - - - - - - - - - - - -->
 				<section>
 					<h1 class="topicH1 l_topic"><img src="../images/topic.png"/>Topic</h1>
@@ -324,8 +346,8 @@ activity.addEventListener("create", function(e) {
 					<h2 style="" class="l_parsingargs">Parsing Arguments</h2>
 					<pre style=""><code contenteditable>
 function urlParser(url) {
-	url = url.replace(/[Uu]rlschemes:\/\/\?/,"");
-	return url.split('&');
+  url = url.replace(/[Uu]rlschemes:\/\/\?/,"");
+  return url.split('&');
 }
 
 					</code></pre>
