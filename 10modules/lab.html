@@ -83,7 +83,14 @@
 	</tr>
 	<tr>
 		<td class="tdfiller"><!-- leave empty--></td>
-		<td class="labexplanations l_labstepexplanation1"></td>
+		<td class="labexplanations l_labstepexplanation1">If you choose one of the open source modules by Appcelerator, you will be redirected to the GitHub repository when you "purchase" the module. Follow these instructions:<br/><ol>
+<li>Navigate to module_name/mobile/*platform*, for example, paypal/mobile/ios<br/>If selecting an Android module, navigate to the dist (distribution) folder</li>
+<li>Click on the zip file that you'll find in the list of files, for example, ti.paypal-iphone-1.6.2.zip</li>
+<li>Right-click View Raw, choose Copy Link Address (or your browser's option for that)</li>
+<li>In Studio, choose Help, Install Mobile Module. Paste the URL you copied into the 'Install From URL' box and click OK</li>
+<li>Skip the following step #2, though you will still need to create a new project (check the module docs; you'll probably need to create a traditional project to re-use the module's sample project)</li>
+</ol>
+			</td>
 	</tr>
 	<tr>
 		<td colspan="2" class="labinstructions l_labstep2">2. In Studio, create a new project. Copy the module zip file you downloaded to the root of your project (same folder as tiapp.xml). Build the project for the target platform to extract the zip file to its proper directories.</td>
