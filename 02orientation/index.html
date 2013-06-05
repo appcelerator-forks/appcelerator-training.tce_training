@@ -153,23 +153,25 @@
 				<section>
 					<h2 class="l_lock_orientation_android">App-level Orientation Support - Android</h2>
 					<ol style="width:100%; margin-left:30px;">
-			    		<li class="l_copy_code">Copy all <code>&lt;activity></code> tags from build/android/AndroidManifest.xml</li>
+			    		<li class="l_copy_code">Copy <code>&lt;>application></code> node &amp; all its <code>&lt;activity></code> tags from build/android/AndroidManifest.xml</li>
 			    		<li class="l_add_nested">Paste into tiapp.xml, between <code>&lt;android&gt;&lt;manifest&gt;&lt;/manifest&gt;&lt;/android&gt;</code> tags</li>
 						<li class="l_remove">remove '|orientation' from <code>configChanges</code> attribute in every activity</li>
 						<li>Specify desired app orientation in <code>screenOrientation</code> attribute</li>
 			    	</ol>
 <pre><code contenteditable class="l_lockandroid_code">
 &lt;android xmlns:android="http://schemas.android.com/apk/res/android">
-  &lt;manifest>
-    &lt;activity
-    android:name="org.appcelerator.titanium.TiActivity"
-    android:configChanges="keyboardHidden"
-       android:screenOrientation="portrait"
-    />
-    &lt;activity android:name="ti.modules.titanium.ui.TiTabActivity"
+  &lt;application>
+    &lt;manifest>
+      &lt;activity
+      android:name="org.appcelerator.titanium.TiActivity"
       android:configChanges="keyboardHidden"
-    />
-  &lt;/manifest>
+         android:screenOrientation="portrait"
+      />
+      &lt;activity android:name="ti.modules.titanium.ui.TiTabActivity"
+        android:configChanges="keyboardHidden"
+      />
+    &lt;manifest>
+  &lt;/application>
 &lt;/android>
 </code></pre>
 					<div class="slidenote"><div class="l_slidenote_lock_orientation_android">Again, this option specifies the orientations your app could support and controls the splash screen orientations. Optionally, you could create a custom manifest file in the /platform/android folder instead.</div></div>
