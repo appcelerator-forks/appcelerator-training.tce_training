@@ -29,8 +29,8 @@
         </orientations>
     </iphone>
     <android xmlns:android="http://schemas.android.com/apk/res/android">
-        <tool-api-level>11</tool-api-level>
-        <manifest android:installLocation="auto">
+        <tool-api-level>17</tool-api-level>
+        <manifest android:installLocation="preferExternal">
             <uses-sdk android:minSdkVersion="7"/>
             <supports-screens android:anyDensity="false"/>
         </manifest>

@@ -105,13 +105,13 @@
 					<h2 style="" class="l_commonschemes">Common URL Schemes</h2>
 <table border="0" cellspacing="5" cellpadding="5" width="100%" style="width:100%;">
 	<tr><th>App</th><th>Scheme</th><th>Example</th></tr>
-	<tr><td>Maps</td><td style="width:220px;"><span style="color:#326A95;">iOS: maps://<br/><br/>comgooglemaps://</span><br/><span style="color:#309149;">Android: http://</span></td><td><span style="color:#326A95;">maps://maps.google.com/maps?q=440+Bernardo+Ave,+Mountain+View</span><br/><span style="color:#326A95;">comgooglemaps://?center=40.76581,-73.97586&zoom=14</span><br/><span style="color:#309149;">http://maps.google.com/maps?q=440+Bernardo+Ave,+Mountain+View</span></td></tr>
+	<tr><td>Maps</td><td style="width:220px;"><span style="color:#326A95;">iOS: maps://<br/><br/>comgooglemaps://</span><br/><span style="color:#309149;">Android: geo:</span></td><td><span style="color:#326A95;">maps://maps.google.com/maps?q=440+Bernardo+Ave,+Mountain+View</span><br/><span style="color:#326A95;">comgooglemaps://?center=40.76581,-73.97586&zoom=14</span><br/><span style="color:#309149;">geo:0,0?q=440+Bernardo+Ave,+Mountain+View,+CA<br/>http://maps.google.com/maps?q=440+Bernardo+Ave,+Mountain+View,+CA</span></td></tr>
 	<tr><td>SMS</td><td>sms:</td><td>sms:+1234567890 &nbsp; (no // is used)</td></tr>
-	<tr><td>Phone</td><td>tel://</td><td>tel://408-555-1212</td></tr>
+	<tr><td>Phone</td><td>tel:</td><td>tel:408-555-1212 (no // is used)</td></tr>
 	<tr><td>Mail</td><td>mailto://</td><td>mailto://fake@example.com?subject=Hello</td></tr>
 	<tr><td>App Store</td><td><span style="color:#326A95;">iOS: http://</span><br/><br/><span style="color:#309149;">Android: market://</span></td><td><span style="color:#326A95;">http://itunes.apple.com/us/app/legoland-california-official/id452395530?mt=8</span><br/><span style="color:#309149;">market://details?id=com.zc.android</span></td></tr>
 </table>
-					<div class="slidenote"><div class="l_slidenote_commonschemes"></div></div>
+					<div class="slidenote"><div class="l_slidenote_commonschemes">Do not include the slashes with geo: URLs on Android but you must provide something for the lat/long (0,0). Also on Android, you can also use http:// with a maps.google.com URL to open the Maps app, though users might be prompted to choose between Maps and the browser. On some devices, geo: might open Google Earth.</div></div>
 				</section>
 
 				<section>
@@ -122,12 +122,15 @@ function doClickMaps(e) {
   if(OS_IOS) {
     Ti.Platform.openURL('maps://maps.google.com/maps?q=440+Bernardo+Ave,+Mountain+View,+CA');
   } else {
+    // no slashes, 0,0 could be a lat/long or use address as shown
+    Ti.Platform.openURL('geo:0,0?q=440+Bernardo+Ave,+Mountain+View,+CA');
+    // on Android, can also use http:// ...
     Ti.Platform.openURL('http://maps.google.com/maps?q=440+Bernardo+Ave,+Mountain+View,+CA');
   }
 }
 
 					</code></pre>
-					<div class="slidenote"><div class="l_slidenote_schemeexample"></div></div>
+					<div class="slidenote"><div class="l_slidenote_schemeexample">For Android, if you provide an address, enter the lat/long as 0,0 like shown. Otherwise, leave off the ?q= and address and just provide a lat/long pair.</div></div>
 				</section>
 
 				<section>
@@ -141,8 +144,8 @@ comgooglemaps://?daddr=440+Bernardo+Ave,+Mountain+View,+CA&directionsmode=drivin
 
 
 // Android - Google maps
-http://maps.google.com/maps?daddr=LATITUDE,LONGITUDE&directionsmode=driving
-// optional, add saddr for source 'address' (lat/long)
+http://maps.google.com/maps?daddr=440+Bernardo+Ave,+Mountain+View,+CA&directionsmode=driving
+// optional, add saddr for source 'address', can use lat/long instead of address
 					</code></pre>
 					<div class="slidenote"><div class="l_slidenote_navigation">On iOS, you can launch driving directions in either Apple Maps or Google Maps. Either accept street addresses, though according to Apple's docs, not latitude/longitude pairs. <br/><br/>On Android, you should use lat/long for the destination and source points. You can use street addresses, however, that will launch a browser session from which accessing the Navigation app requires many clicks.</div></div>
 				</section>
@@ -195,6 +198,7 @@ http://maps.google.com/maps?daddr=LATITUDE,LONGITUDE&directionsmode=driving
 					<h2 style="" class="l_customios">Custom iOS URL Schemes</h2>
 					<pre style=""><code contenteditable>
 &lt;ios>
+  &lt;plist>&lt;dict>
   &lt;key>CFBundleURLTypes&lt;/key>
   &lt;array>
     &lt;dict>
@@ -206,6 +210,7 @@ http://maps.google.com/maps?daddr=LATITUDE,LONGITUDE&directionsmode=driving
         &lt;/array>
   &lt;/dict>
   &lt;/array>
+  &lt;/dict>&lt;/plist>
 &lt;/ios>
 
 					</code></pre>

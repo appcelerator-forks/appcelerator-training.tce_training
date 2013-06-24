@@ -29,6 +29,7 @@
         </orientations>
     </iphone>
     <ios>
+    	<plist><dict>
         <key>CFBundleURLTypes</key>
         <array>
             <dict>
@@ -40,6 +41,7 @@
                 </array>
             </dict>
         </array>
+    </dict></plist>
     </ios>
     <android xmlns:android="http://schemas.android.com/apk/res/android">
     	<manifest>

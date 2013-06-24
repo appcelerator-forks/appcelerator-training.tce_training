@@ -5,7 +5,7 @@ exports.init = function (callback) {
 	var checkState = false;
 	$.checkbox.addEventListener('click', function() {
 		checkState = !checkState;
-		$.chk.text = (checkState) ? '\u2714' : '';
+		$.chk.text = (checkState) ? '\u2713' : '';
 		callback(checkState);
 	});
 	_.extend($.chk, args);

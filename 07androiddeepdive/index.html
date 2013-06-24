@@ -214,7 +214,7 @@
 				    <img src="images/tiapp.png" style="width:700px;"/>
 					<ol style="width:80%;">
 						<li class="l_tiapp2">Build once to generate stock build/android/AndroidManifest.xml</li>
-						<li class="l_tiapp2">Copy pertinent tags from generated file</li>
+						<li class="l_tiapp2">Copy pertinent tags from generated file (e.g. all of the <code>&lt;application></code> block)</li>
 						<li class="l_tiapp1">In tiapp.xml, edit <code>&lt;android .../></code> to be block rather than closed tag</li>
 						<li class="l_tiapp2">Add <code>&lt;manifest>&lt;/manifest></code> tags</li>
 						<li class="l_tiapp3">Paste in generated code, edit as needed</li>
@@ -296,14 +296,14 @@ var w = Ti.UI.createWindow({
 					<h2 style="" class="l_menuics">ICS Menu Example - Manifest</h2>
 					<pre style=""><code contenteditable>
 &lt;android xmlns:android="http://schemas.android.com/apk/res/android"> 
-    &lt;tool-api-level>11&lt;/tool-api-level> 
+    &lt;tool-api-level>17&lt;/tool-api-level> 
     &lt;manifest> 
         &lt;uses-sdk android:targetSdkVersion="11"/> 
         &lt;!-- other manifest entries --> 
     &lt;/manifest> 
 &lt;/android>
 					</code></pre>
-					<div class="slidenote"><div class="l_slidenote_menuics"></div></div>
+					<div class="slidenote"><div class="l_slidenote_menuics">The uses-sdk tag must be within the manifest tags, but outside/above the application block.</div></div>
 				</section>
 
 				<section>
@@ -366,7 +366,7 @@ $.win.activity.onCreateOptionsMenu = function(e) {
 				<section>
 					<h2 style="" class="l_external">Installing to the SD card</h2>
 					<ul style="width:80%;">
-						<li class="l_external1">Use tool-api-level 8 or higher</li>
+						<li class="l_external1">Use tool-api-level 8 or higher (best is highest you have installed)</li>
 						<li class="l_external2">Set minSdkVersion to 7 or higher</li>
 						<li class="l_external3">Add the following to the AndroidManifest.xml</li>
 					</ul>
@@ -378,7 +378,7 @@ $.win.activity.onCreateOptionsMenu = function(e) {
    &lt;/manifest&gt;
 &lt;/android&gt;
 					</code></pre>
-					<div class="slidenote"><div class="l_slidenote_external">Depending on the connection mode of your Android device, you might have difficulties building &amp; installing an app configured in this way. If your device is attached in USB storage mode (and some newer media modes), the SD card is inaccessible. Thus, the app cannot be installed and adb might throw an error. </div></div>
+					<div class="slidenote"><div class="l_slidenote_external">The uses-sdk tag must be within the manifest tags, but outside/above the application block. Depending on the connection mode of your Android device, you might have difficulties building &amp; installing an app configured in this way. If your device is attached in USB storage mode (and some newer media modes), the SD card is inaccessible. Thus, the app cannot be installed and adb might throw an error. </div></div>
 				</section>
 
 				<section>
