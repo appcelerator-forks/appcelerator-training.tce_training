@@ -37,6 +37,12 @@
 	</plist>
 	</ios>
 	<android xmlns:android="http://schemas.android.com/apk/res/android"/>
+	<!-- how hard a shake is needed (seems to have little effect) -->
+	<property name="ti.android.shake.factor">1.3</property>
+	<!-- how long must it continue, default is 1000 -->
+	<property name="ti.android.shake.active.milliseconds">250</property>
+	<!-- how long between shakes, default is 500 -->
+	<property name="ti.android.shake.quiet.milliseconds">200</property>
     <mobileweb>
         <precache/>
         <splash>
