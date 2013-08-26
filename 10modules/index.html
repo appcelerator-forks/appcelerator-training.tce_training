@@ -115,7 +115,7 @@
 				<section>
 					<h2 style="" class="l_builtins">"Built-in" Modules</h2>
 				    <img src="images/builtinmodules.png" style="width:700px;"/>
-					<p class="l_builtinspara">Install like any other module; no download needed</p>
+					<p class="l_builtinspara"><em>No download required for Facebook module</em></p>
 					<div class="slidenote"><div class="l_slidenote_builtins"></div></div>
 				</section>
 				
@@ -178,11 +178,6 @@
 					<div class="slidenote"><div class="l_slidenote_community"></div></div>
 				</section>
 
-				<section>
-					<h1 class="l_more_come">Many More!</h1>
-					<p class="l_more_img"><img src='images/marketplace.png' style='width:550px;'/></p>
-					<div class="slidenote"><div class="l_slidenote_more_come"></div>Appc has a dedicated module development team now, so this offering will continue to grow</div>
-				</section>
 
 				<!-- - - - - - - - - - - - - - - - - NEW TOPIC - - - - - - - - - - - - - - - - -->
 				<section>
@@ -191,40 +186,68 @@
 					<div class="slidenote"><div class="l_slidenote_installing"></div></div>
 				</section>
 
-				
 				<section>
-					<h2 class="l_install_mod">Installing Module for a Single Project</h2>
+					<h2 style="" class="l_installing">Installing a Module</h2>
+				    <img src="images/moduleinstalldialog.png" style="width:400px;float:right;"/>
+					<ol style="width:60%;float:left;">
+						<li class="l_installing1">Download zip file, or copy URL to zip file</li>
+						<li class="l_installing2">Choose Help, Install Mobile Module</li>
+						<li class="l_installing3">Paste URL or browse to location</li>
+						<li class="l_installing4">Choose Titanium SDK (for use in all future projects) or a specific project</li>
+					</ol>
+					<div class="slidenote"><div class="l_slidenote_installing"></div></div>
+				</section>
+
+				<section>
+					<h2 class="l_install_mod">Manually Installing for a Single Project</h2>
 					<ol style="width:80%;">
 						<li class="l_install1">Download zip file</li>
 						<li class="l_install2">Place in project's root directory</li>
 						<li class="l_install3">Build once &mdash; to unzip and create necessary folders</li>
-						<li class="l_install4">Add to tiapp.xml and JavaScript</li>
 					</ol>
 					<div class="slidenote"><div class="l_slidenote_install_mod">Installing for all projects doesn't add overhead to your projects, so is probably the best option. We'll cover how to update tiapp.xml and JavaScript on an upcoming slide.</div></div>
 				</section>
 
 				<section>
-					<h2 class="l_install_all">Installing Module for Multiple Projects</h2>
+					<h2 class="l_install_all">Manually Installing for Multiple Projects</h2>
 					<ol style="width:80%;">
 						<li class="l_installall1">Download zip file</li>
 						<li class="l_installall2">Unzip to %TITANIUM_INSTALL_DIR%/modules directory</li>
-						<li class="l_installall3">Add to tiapp.xml and JavaScript</li>
 					</ol>
 				    <img src="images/moduleinstall.png" style="width:800px;" class="noborder"/>
 
 					<div class="slidenote"><div class="l_slidenote_installall">Any future projects you develop on this computer would then be able to use the module.<br/><br/>The Titanium install directory varies by platform and operating system version. For example, on OS X Lion, it would be ~/Library/Application Support/Titanium.</div></div>
 				</section>
 
+				<!-- - - - - - - - - - - - - - - - - NEW TOPIC - - - - - - - - - - - - - - - - -->
 				<section>
-					<h1 style="" class="l_implementmodule">Load and Require Module</h1>
-					<ul style="width:80%;float:left;">
-						<li class="l_implement1"><img src='images/studio_modules.png' style='width:400px;float:right;'/>Declare in tiapp.xml</li>
-						<li class="l_implement2"><img src='images/module_require.png' style='clear:right;width:300px;float:right;'/>Require in JavaScript</li>
-						<li class="l_implement3">Implement</li>
-					</ul>
-					<p align="left" class="l_use_mod" style="clear:both;padding-top:40px;">(Every marketplace module comes with example and doc)</p><br>
-					<div class="slidenote"><div class="l_slidenote_implementmodule"></div></div>
+					<h1 class="topicH1 l_topic"><img src="../images/topic.png"/>Topic</h1>
+					<h5 style="clear:both;" class="l_loadanduse">Loading and Using Modules</h5>
+					<div class="slidenote"><div class="l_slidenote_loadanduse"></div></div>
 				</section>
+
+				<section>
+					<h2 style="" class="l_loadingmodule">Loading a Module</h2>
+					<p class="l_loadingmodulepara">Must declare dependency in tiapp.xml</p>
+					<img src='images/studio_modules.png' style='width:500px;' class="noborder"/>
+					<div class="slidenote"><div class="l_slidenote_loadingmodule"></div></div>
+				</section>
+
+				<section>
+					<h2 style="" class="l_modulewithviews">View-based Modules</h2>
+				    <img src="images/moduletag.png" style="width:700px;"/>
+					<p class="l_moduleswithviewpara">If native module exposes a view, you can output it with the &lt;Module> tag</p>
+					<div class="slidenote"><div class="l_slidenote_modulewithviews"></div></div>
+				</section>
+
+				<section>
+					<h2 style="" class="l_modulesincontroller">Modules in the Controller</h2>
+				    <img src="images/modulecontroller.png" style="width:700px;"/>
+					<p class="l_modulesincontrollerpara">Must <code>require()</code> module in your controller to use its functions</p>
+					<p class="l_use_mod">(Every marketplace module comes with example and doc)</p><br>
+					<div class="slidenote"><div class="l_slidenote_modulesincontroller"></div></div>
+				</section>
+
 
 				<section>
 					<h2 style="" class="l_summary">Summary</h2>

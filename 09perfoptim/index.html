@@ -221,19 +221,12 @@ $.imageview = null;  // &larr; native proxy can be deallocated
 var table = Ti.UI.createTableView();
 var data = [];
 for(var i = 0; i < 10000; i++){
-  // generic object references can be faster
-  data.push({
-      title:'Row #'+i,
-      selectionStyle: Ti.UI.iPhone.TableViewCellSelectionStyle.BLUE
-    });
-/* than calls to Ti proxy methods ...
   data.push(
     Ti.UI.createTableViewRow({
       title:'Row #'+i,
       selectionStyle: Ti.UI.iPhone.TableViewCellSelectionStyle.BLUE
     });
   );
-*/
 }
 table.setData(data);
 
@@ -241,16 +234,38 @@ table.setData(data);
 // and https://gist.github.com/3056032
 
 </code></pre>
-					<div class="slidenote"><div class="l_slidenote_jsoptimizations1">Every Ti proxy reference incurs a trip across the bridge, which slows execution. In some cases, you can push execution to the native layer by using generic objects in place of creating explicit objects via proxy methods.</div></div>
+					<div class="slidenote"><div class="l_slidenote_jsoptimizations1">Every Ti proxy reference incurs a trip across the bridge, which slows execution. In this case, we have over 20,000 trips across the bridge to create our table rows.</div></div>
 				</section>
 
 				<section>
 					<h2 style="" class="l_jsoptimizations2">JavaScript Optimizations</h2>
-					<p align="center" class="l_jsoptim2">And this is even faster!</p>
-<pre><code contenteditable class="l_optimcode2">
+					<p align="center" class="l_jsoptim2">Avoid trips across the bridge!</p>
+<pre style="width:100%;"><code contenteditable class="l_optimcode2">
 var table = Ti.UI.createTableView();
 var data = [];
-// create local references to Ti properties/methods
+for(var i = 0; i < 10000; i++){
+  // generic object references can be faster
+  data.push({
+      title:'Row #'+i,
+      selectionStyle: Ti.UI.iPhone.TableViewCellSelectionStyle.BLUE
+    });
+}
+table.setData(data);
+
+// References: https://gist.github.com/2989311 
+// and https://gist.github.com/3056032
+
+</code></pre>
+					<div class="slidenote"><div class="l_slidenote_jsoptimizations2">We've cut out 10,000 trips by pushing generic objects into an array and letting Titanium's native table API layer convert those objects into rows.</div></div>
+				</section>
+
+				<section>
+					<h2 style="" class="l_jsoptimizations3">JavaScript Optimizations</h2>
+					<p align="center" class="l_jsoptim3">And this is even faster!</p>
+<pre><code contenteditable class="l_optimcode3">
+var table = Ti.UI.createTableView();
+var data = [];
+// create local references to Ti properties
 var SEL_STYLE_BLUE = Ti.UI.iPhone.TableViewCellSelectionStyle.BLUE;
 for(var i = 0; i < 10000; i++){
   data.push({
@@ -264,7 +279,7 @@ table.setData(data);
 // and https://gist.github.com/3056032
 
 </code></pre>
-					<div class="slidenote"><div class="l_slidenote_jsoptimizations2">But every proxy reference counts, so create local references to properties and even methods. See the gists for full details.</div></div>
+					<div class="slidenote"><div class="l_slidenote_jsoptimizations3">Now we're down to three trips across the bridge. See the Gists for complete info, but this third technique is measurably faster than the preceding examples.</div></div>
 				</section>
 
 				

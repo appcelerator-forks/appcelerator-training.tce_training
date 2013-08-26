@@ -150,30 +150,31 @@
 				</section>
 				
 				<section>
-					<h2 class="l_lock_orientation_android">App-level Orientation Support - Android</h2>
+					<h2 class="l_lock_orientation_android">Locking Orientation on Android</h2>
+					<p class="l_androidorientationsupport"><em>By default, Android supports all orientations</em></p>
+
 					<ol style="width:100%; margin-left:30px;">
-			    		<li class="l_copy_code">Copy <code>&lt;>application></code> node &amp; all its <code>&lt;activity></code> tags from build/android/AndroidManifest.xml</li>
+			    		<li class="l_copy_code">Copy <code>&lt;application></code> node &amp; all its <code>&lt;activity></code> tags from build/android/AndroidManifest.xml</li>
 			    		<li class="l_add_nested">Paste into tiapp.xml, between <code>&lt;android&gt;&lt;manifest&gt;&lt;/manifest&gt;&lt;/android&gt;</code> tags</li>
-						<li class="l_remove">remove '|orientation' from <code>configChanges</code> attribute in every activity</li>
-						<li>Specify desired app orientation in <code>screenOrientation</code> attribute</li>
+						<li>Specify desired app orientation by adding <code>screenOrientation</code> attribute</li>
 			    	</ol>
 <pre><code contenteditable class="l_lockandroid_code">
 &lt;android xmlns:android="http://schemas.android.com/apk/res/android">
-  &lt;application>
-    &lt;manifest>
+  &lt;manifest>
+    &lt;application>
       &lt;activity
-      android:name="org.appcelerator.titanium.TiActivity"
-      android:configChanges="keyboardHidden"
-         android:screenOrientation="portrait"
+        android:name="org.appcelerator.titanium.TiActivity"
+        android:configChanges="keyboardHidden|orientation"
+        android:screenOrientation="portrait"
       />
       &lt;activity android:name="ti.modules.titanium.ui.TiTabActivity"
         android:configChanges="keyboardHidden"
       />
-    &lt;manifest>
-  &lt;/application>
+    &lt;/application>
+  &lt;/manifest>
 &lt;/android>
 </code></pre>
-					<div class="slidenote"><div class="l_slidenote_lock_orientation_android">Again, this option specifies the orientations your app could support and controls the splash screen orientations. Optionally, you could create a custom manifest file in the /platform/android folder instead.</div></div>
+					<div class="slidenote"><div class="l_slidenote_lock_orientation_android">Adding the screenOrientation attribute limits the orientations your Android app can take and controls the splash screen orientations. The '|orientation' value in the configChanges attribute prevents the native onResume() and onPause() from being called when the screen is rotated.</div></div>
 				</section>
 				
 				<section>
@@ -252,6 +253,39 @@ Ti.Gesture.addEventListener('orientationchange', function(e) {
 
 					<div class="slidenote"><div class="l_slidenote_orientationexample"></div></div>
 				</section>
+
+				<section>
+					<h2 style="" class="l_orientbestpractices">Best Practices</h2>
+					<ul style="width:80%;">
+						<li class="l_orientbestpractices1">Don't put orientationchange event listeners in your view controllers</li>
+						<li class="l_orientbestpractices2">They are a potential memory leak</li>
+						<li class="l_orientbestpractices3">Instead, put a single orientationchange event listener in index.js</li>
+						<li class="l_orientbestpractices4">Export a function from your other controllers, which you call from index.js</li>
+					</ul>
+					<div class="slidenote"><div class="l_slidenote_orientbestpractices"></div></div>
+				</section>
+
+				<section>
+					<h2 style="" class="l_bestpracticeexample">Best Practice Example</h2>
+					<pre style=""><code contenteditable>
+// file is someView.js
+exports.handleRotation = function() {
+/*
+   Add the orientation handler in the index controller, like this:
+     Ti.Gesture.addEventListener('orientationchange', function() {
+        $.someView.handleRotation();
+     });
+*/
+  if(e.source.isPortrait()) {
+     // applyProperties() as necessary for portrait
+  } else if(e.source.isLandscape()) {
+     // applyProperties() as necessary for landscape
+  }
+};
+					</code></pre>
+					<div class="slidenote"><div class="l_slidenote_bestpracticeexample"></div></div>
+				</section>
+
 
 				<!-- - - - - - - - - - - - - - - - - NEW TOPIC - - - - - - - - - - - - - - - - -->
 				<section>

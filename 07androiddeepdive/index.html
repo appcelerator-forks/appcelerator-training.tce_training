@@ -241,7 +241,7 @@
 						<li class="l_win1">Lightweight == full-screen view</li>
 						<li class="l_win2">Heavyweight == Activity</li>
 						<li class="l_win3">Title bar only with Heavyweight windows</li>
-						<li class="l_win4">No pre-built animations like with iOS</li>
+						<li class="l_win4">(New in 3.1.2) Enter/exit animations on heavyweight windows</li>
 					</ul>
 					<pre style="width:550px;float:right;"><code contenteditable>
 "#win": {
@@ -251,7 +251,13 @@
   windowSoftInputMode: Ti.UI.Android.SOFT_INPUT_ADJUST_PAN
 }
 					</code></pre>
-					<p class="" style="clear:both;font-size:0.7em;margin-top:100px;"><a href='http://docs.appcelerator.com/titanium/latest/#!/guide/Android_Platform_Overview-section-29004888_AndroidPlatformOverview-Activities'>Guides > Building Mobile Apps > Cross-Platform Mobile > Android Platform Overview</a></p>
+					<pre style="clear: both;"><code contenteditable>
+$.win.open({
+    activityEnterAnimation: Ti.Android.R.anim.slide_in_left,
+    activityExitAnimation: Ti.Android.R.anim.slide_out_right
+});
+					</code></pre>
+					<p class="l_windownote"><em>Note: In 3.2, all Android windows will be heavyweight</em></p>
 					<div class="slidenote"><div class="l_slidenote_windows">A 'heavyweight' window is Ti terminology for an Activity<br/><br>You can have a lightweight window that isn't exactly equivalent to an Activity, more like a full-screen view<br><br/>To force a Ti window to be a heavyweight window (an activity), set navBarHidden=true or set fullscreen=true or false and see the URL here for a couple of extra ways</div></div>
 				</section>
 				
@@ -330,6 +336,28 @@ $.win.activity.onCreateOptionsMenu = function(e) {
 };
 					</code></pre>
 					<div class="slidenote"><div class="l_slidenote_menuicsb"></div></div>
+				</section>
+
+				<section>
+					<h2 style="" class="l_menutabs">Menus in TabGroups</h2>
+					<ul style="width:80%;">
+						<li class="l_menutabs1">TabGroups are the activity (not the windows)</li>
+						<li class="l_menutabs2">So menu code goes inside the tab group</li>
+						<li class="l_menutabs3">One menu for whole app</li>
+						<li class="l_menutabs4">Call <code>Ti.Android.invalidateOptionsMenu()</code> within Window to re-create a menu (i.e. have separate menus for each window)</li>
+					</ul>
+					<pre style=""><code contenteditable>
+&lt;Alloy>
+  &lt;TabGroup id='tabGroup'>
+     &lt;Require src="Fugitives" id="fugitivesTab"/>
+     &lt;Require src="Captured" id="capturedTab"/>
+     &lt;Menu>
+        &lt;MenuItem title="Add" onClick="addNewFugitive"/>
+     &lt;/Menu>
+  &lt;/TabGroup>
+&lt;/Alloy>
+					</code></pre>
+					<div class="slidenote"><div class="l_slidenote_menutabs"></div></div>
 				</section>
 				
 				<section>
