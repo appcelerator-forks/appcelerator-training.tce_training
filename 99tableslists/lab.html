@@ -2,8 +2,8 @@
 <html>
 	<head>
 		<meta charset="utf-8">
-		<title class="l_labname">Lab: LABTITLE</title>
-		<meta name="description" content="Titanium Certified Developer, LABTITLE">
+		<title class="l_labname">Lab: TableViews and ListViews</title>
+		<meta name="description" content="Titanium Certified Expert, TableViews and ListViews">
     	<meta name="author" content="Appcelerator, Inc." />
 		
 		<link rel="stylesheet" href="../presentation-engine/reveal.js/css/reset.css">
@@ -44,48 +44,28 @@
 	<body>
 		<div id="reveal">	
 			<!-- Any section element inside of this container is displayed as a slide -->
-
-			<!--
-			1. Download the starting project and import it into Studio as an existing Titanium project. Update the SDK and other details of the tiapp.xml as necessary.
-			2. Build the project to view its starting state. The app features two tabs, one with a TableView and the other with a ListView. Both tables are empty at this point.
-			3. Working first with the tabletab controller, implement these features:
-				- Create a loop that creates 50 table rows (use anonymous objects), creating a new instance of the tablerow controller for each. Pass data to createController() so that:
-					- The heading of each row is "Row #" where # is the row number
-					- The subheading is "This is a subtitle"
-					- Each row has a custom property named i equal to the loop counter value (logic in tablerow.js will create the alternating left image)
-				- Add a click event listener to your table. On each click:
-					- Log a message to the console stating that "Row # was clicked" where # is the row number
-					- If the user clicks on the image, change the image to show the /dark_star.png graphic
-			4. Build and test your table and event listener. It should match the demo your instructor presented.
-			5. Working with the listtab controller, implement these features:
-				- Create a loop that creates 50 objects, each with the following details:
-					- a heading object, whose text property is "Item #" where # is the row number
-					- a subheading, whose text property is "This is a subtitle"
-					- a leftimage object, whose image property is "/dark_heart.png" for odd rows and "/dark_skull.png" for even rows
-					- a template property, whose valuie is "odd" for odd rows and "even" for even rows
-				- Add an itemclick event listener to your list. On each click:
-					- Log a message to the console stating that "Item # was clicked" where # is the row number
-					- If the user clicks on the image, change the image to show the /dark_star.png graphic. You will need a reference to the item, to update its leftimage.image property. Don't forget to update the item by calling the section's updateItemAt() method
-			6. Build and test your list and event listener. It should match the demo your instructor presented.
-			7. Increase the number of rows created to 500. Test your app, preferably on a device. Do you notice any difference in how long the app takes to load? Is scrolling performance on the table different?
-			7. Increase the number of list items created to 500. Test your app again. Do you notice any difference in how long the app takes to load? Is scrolling performance on the list different? Is scrolling performance similar or different for the table and list?
-
-			-->
-			
 			
 <div class="slides">
 <div id="labwrapper">			
 <section>
 
 <!-- YOUR LAB CONTENT GOES HERE -->
-<h1 class="l_labname">Lab - TITLE</h1>
-<p class="l_mission"><strong>Mission: </strong>In this lab, you will </p>
+<h1 class="l_labname">Lab - TableViews and ListViews</h1>
+<p class="l_mission"><strong>Mission: </strong>In this lab, you will implement both a TableView and a ListView to compare features, ease of use, and performance.</p>
 
-<p class="l_specification"><strong>Specification: </strong>what_you_have_to_do<br/><img src='labimages/FINISHED_SCREEN.png' height='300' align='right'/></p>
+<div>
+	<div class="l_specification" style="float:left;width: 65%;"><strong>Specification: </strong>To successfully complete this activity, you will:<br/>&nbsp;<ul>
+		<li>Complete a two-tabbed application that implements both TableView and ListView</li>
+		<li>Manage eventing with both components</li>
+		<li>Compare the performance of the TableView and ListView components</li>
+	</ul> 
+	</div>
+	<img src='http://assets.appcelerator.com.s3.amazonaws.com/app_u/tce_labs/Finished/listview.png' class="noborder" style='float:right;height:300px;'/>
+</div>
 
 <table>
 	<tr>
-		<td colspan="2" class="labinstructions l_step1">1. Download the starting file set from <a href='URL'>GitHub</a> or <a href='URL'>AWS/S3</a> and import the resulting files as a new Titanium Mobile project.</td>
+		<td colspan="2" class="labinstructions l_step1">1. Download the starting file set from <a href='https://github.com/appcelerator-training/tce_training'>GitHub</a> (labcode folder) or <a href='http://assets.appcelerator.com.s3.amazonaws.com/app_u/tce_labs/Starting/99listviews.zip'>AWS/S3</a> and import the resulting files as a new Titanium Mobile project. Update the SDK and other details of the tiapp.xml as necessary. </td>
 	</tr>
 	<tr>
 		<td class="tdfiller"><!-- leave empty--></td>
@@ -93,24 +73,109 @@
 	</tr>
 <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 <tr>
-	<td colspan="2" class="labinstructions l_labstep2">2. </td>
+	<td colspan="2" class="labinstructions l_labstep2">2. Build the project to view its starting state. The app features two tabs, one with a TableView and the other with a ListView. Both tables are empty at this point.</td>
 </tr>
 <tr>
 	<td class="tdfiller"><!-- leave empty--></td>
 	<td class="labexplanations l_labstepexplanation2"></td>
 </tr>
+<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+<tr>
+	<td colspan="2" class="labinstructions l_labstep3">3. Working first with the tabletab controller, implement these features:
+<ul>
+	<li>Create a loop that creates 50 table rows (use anonymous objects), creating a new instance of the tablerow controller for each. Pass data to createController() so that:<ul>
+			<li>The heading of each row is "Row #" where # is the row number</li>
+			<li>The subheading is "This is a subtitle"</li>
+			<li>Each row has a custom property named i equal to the loop counter value (logic in tablerow.js will create the alternating left image)</li>
+		</ul></li>
+	<li>Add a click event listener to your table. On each click:<ul>
+			<li>Log a message to the console stating that "Row # was clicked" where # is the row number</li>
+			<li>If the user clicks on the image, change the image to show the /dark_star.png graphic</li>
+		</ul></li>
+</ul>
+	</td>
+</tr>
+<tr>
+	<td class="tdfiller"><!-- leave empty--></td>
+	<td class="labexplanations l_labstepexplanation3"></td>
+</tr>
+<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+<tr>
+	<td colspan="2" class="labinstructions l_labstep4">4. Build and test your table and event listener. It should match the demo your instructor presented.</td>
+</tr>
+<tr>
+	<td class="tdfiller"><!-- leave empty--></td>
+	<td class="labexplanations l_labstepexplanation4"></td>
+</tr>
+<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+<tr>
+	<td colspan="2" class="labinstructions l_labstep5">5. Working with the listtab controller, implement these features:
+<ul>
+	<li>Create a loop that creates 50 objects, each with the following details:<ul>
+			<li>a heading object, whose text property is "Item #" where # is the row number</li>
+			<li>a subheading, whose text property is "This is a subtitle"</li>
+			<li>a leftimage object, whose image property is "/dark_heart.png" for odd rows and "/dark_skull.png" for even rows</li>
+			<li>a template property, whose value is "odd" for odd rows and "even" for even rows</li>
+		</ul></li>
+	<li>Add an itemclick event listener to your list. On each click:<ul>
+			<li>Log a message to the console stating that "Item # was clicked" where # is the row number</li>
+			<li>If the user clicks on the image, change the image to show the /dark_star.png graphic. You will need a reference to the item, to update its leftimage.image property. Don't forget to update the item by calling the section's updateItemAt() method</li>
+		</ul></li>
+</ul>
+	</td>
+</tr>
+<tr>
+	<td class="tdfiller"><!-- leave empty--></td>
+	<td class="labexplanations l_labstepexplanation5"></td>
+</tr>
+<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+<tr>
+	<td colspan="2" class="labinstructions l_labstep6">6. Build and test your list and event listener. It should match the demo your instructor presented.</td>
+</tr>
+<tr>
+	<td class="tdfiller"><!-- leave empty--></td>
+	<td class="labexplanations l_labstepexplanation6"></td>
+</tr>
+<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+<tr>
+	<td colspan="2" class="labinstructions l_labstep7">7. Increase the number of rows created to 500. Test your app, preferably on a device. Do you notice any difference in how long the app takes to load? Is scrolling performance on the table different?</td>
+</tr>
+<tr>
+	<td class="tdfiller"><!-- leave empty--></td>
+	<td class="labexplanations l_labstepexplanation7"></td>
+</tr>
+<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+<tr>
+	<td colspan="2" class="labinstructions l_labstep8">8. Add the <code>classname</code> property to your TableViewRow objects (setting to any string value you desire). Test your app, preferably on a device. Do you notice any difference in how long the app takes to load? Is scrolling performance on the table different?</td>
+</tr>
+<tr>
+	<td class="tdfiller"><!-- leave empty--></td>
+	<td class="labexplanations l_labstepexplanation8"></td>
+</tr>
+
+<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+<tr>
+	<td colspan="2" class="labinstructions l_labstep9">9. Increase the number of list items created to 500. Test your app again. Do you notice any difference in how long the app takes to load? Is scrolling performance on the list different? Is scrolling performance similar or different for the table and list?</td>
+</tr>
+<tr>
+	<td class="tdfiller"><!-- leave empty--></td>
+	<td class="labexplanations l_labstepexplanation9"></td>
+</tr>
+
+
 
 </table>
 
 <h2 class="l_summary">Summary</h2>
-<p class="l_summarypara">In this lab, you  </p>
+<p class="l_summarypara">In this lab, you implemented both a TableView and a ListView to compare features, ease of use, and performance. </p>
 
 <h2 class="l_resources">Resources</h2>
 
 <ul>
-	<li class="l_resources1">API docs: REFERENCE: <a href='URL'>URL</a></li>
-	<li class="l_resources2">Guides: TITLE: <a href='URL'>URL</a></li>
-	<li class="l_resources3">Finished code: <a href='URL'>Amazon S3</a></li>
+	<li class="l_resources1">API docs: ListView: <a href='http://docs.appcelerator.com/titanium/latest/#!/api/Titanium.UI.ListView'>http://docs.appcelerator.com/titanium/latest/#!/api/Titanium.UI.ListView</a></li>
+	<li class="l_resources2">API docs: TableView: <a href='http://docs.appcelerator.com/titanium/latest/#!/api/Titanium.UI.TableView'>http://docs.appcelerator.com/titanium/latest/#!/api/Titanium.UI.TableView</a></li>
+	<li class="l_resources3">Guides: ListViews: <a href='http://docs.appcelerator.com/titanium/latest/#!/guide/ListViews'>http://docs.appcelerator.com/titanium/latest/#!/guide/ListViews</a></li>
+	<li class="l_resources3">Finished code: <a href='http://assets.appcelerator.com.s3.amazonaws.com/app_u/tce_labs/Finished/99listviews.zip'>Amazon S3</a></li>
 </ul>
 
 

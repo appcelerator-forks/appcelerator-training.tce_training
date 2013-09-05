@@ -194,7 +194,7 @@ $.table.search = searchbar;
 </code></pre>
 
 					<p class="l_table_searching_image"><img src="images/tablesearch_android.png" style="margin-top:5px;height:240px;" class="noborder"/> <img src="images/tablesearch_ios.png" style="margin-top:5px;height:240px;" class="noborder"/></p>
-					<div class="slidenote"><div class="l_slidenote_tblsearch"></div></div>
+					<div class="slidenote"><div class="l_slidenote_tblsearch">You can enable a search bar on the TableView, which performs a wildcard text search on the row titles (not child views, such as labels). Rendering varies by platform, as do some of the features supported.</div></div>
 				</section>
 
 				<section>
@@ -212,7 +212,22 @@ $.table.addEventListener('click', function(e){
   // e.row.children[1] == the ImageView
 })
 					</code></pre>
-					<div class="slidenote"><div class="l_slidenote_childelems"></div></div>
+					<div class="slidenote"><div class="l_slidenote_childelems">Within an event listener, you can access child Views of a TableViewRow by accessing the children[] array.</div></div>
+				</section>
+
+				<section>
+					<h2 class="l_row_ind">Row Indicators</h2>
+					<p class="l_row_ind_image"><img src="images/row_indicators.png" class="noborder" style="margin-top:5px;height:250px;"/></p>
+					<pre style="width: 60%;"><code contenteditable>
+/* in the TSS */
+"#someRow": {
+  hasChild: true,
+  hasDetail: true,
+  hasCheck: true
+}
+					</code></pre>
+
+					<div class="slidenote"><div class="l_slidenote_row_ind">Per Apple's HIG, these icons imply the following meaning:<ul><li>hasChild &mdash; indicates sub-table or additional rows</li><li>hasDetail &mdash; indicates a detail view or alert will appear when row is tapped (not supported on Android)</li><li>hasCheck &mdash; on/off or yes/no indicator</li></ul></div></div>
 				</section>
 
 				<section>
@@ -237,7 +252,7 @@ $.table.addEventListener('click', function(e){
 				<section>
 					<h1 class="topicH1 l_topic"><img src="../images/topic.png"/>Topic</h1>
 					<h5 style="clear:both;" class="l_listviews">ListViews</h5>
-					<div class="slidenote"><div class="l_slidenote_listviews"></div></div>
+					<div class="slidenote"><div class="l_slidenote_listviews">ListViews are vertically-scrollable containers of data presented as items. They are a data-oriented component. You don't have direct access to child Views within a ListItem.</div></div>
 				</section>
 
 				<section>
@@ -273,7 +288,7 @@ fruitSection.setItems(fruitDataSet);
 sections.push(fruitSection);
 listView.setSections(sections);
 					</code></pre>
-					<div class="slidenote"><div class="l_slidenote_lvtradexample"></div></div>
+					<div class="slidenote"><div class="l_slidenote_lvtradexample">Explain the code: we define templates for our items, then we create the list view and assign the templates. Next we create sections and add items to it (you can't add items directly to a ListView). Finally, we add the sections to the list view.</div></div>
 				</section>
 
 				<section>
@@ -304,7 +319,7 @@ listView.setSections(sections);
   left: '60dp', top: 0
 }
 					</code></pre>
-					<div class="slidenote"><div class="l_slidenote_lvexample"></div></div>
+					<div class="slidenote"><div class="l_slidenote_lvexample">The Alloy code is perhaps simpler: again, we define our templates, assign them to the list view, define our section, and its items. We can put styling into the TSS file with this technique.</div></div>
 				</section>
 
 				<section>
@@ -315,7 +330,7 @@ listView.setSections(sections);
 						<li class="l_templates4">Each template can have child templates, which define what components are contained in the ListItem (row)</li>
 						<li class="l_templates5">There are built-in templates supported on iOS</li>
 					</ul>
-					<div class="slidenote"><div class="l_slidenote_templates"></div></div>
+					<div class="slidenote"><div class="l_slidenote_templates">See the API docs and guides for info on the built-in templates on iOS.</div></div>
 				</section>
 
 					<div class="slidenote"><div class="l_slidenote_accessories"></div></div>
@@ -344,11 +359,10 @@ listView.addEventListener('itemclick', function(e){
   // once you've modified the properties, you must update the item
   e.section.updateItemAt(e.itemIndex, item);  
 
-  // use bindId to determine which child component was clicked
-  // e.bindId might be the label or image in this row
+  // use bindId (not bindID!) to determine which child component was clicked
 });
 					</code></pre>
-					<div class="slidenote"><div class="l_slidenote_lveventing"></div></div>
+					<div class="slidenote"><div class="l_slidenote_lveventing">ListView events use the special itemclick event. You cannot access tiems directly from the event object as you can with TableViews. Instead, use the section's getItemAt() method. In this example, we're modifying the properties of the item. Note that we have to call updateItemAt() when we're done. The e.bindId will correspond to the ID you set in the template and will be undefined if the user doesn't click on a child component.</div></div>
 				</section>
 
 				<section>
@@ -381,7 +395,7 @@ function report(e) {
   Ti.API.info(e.type);
 }
 					</code></pre>
-					<div class="slidenote"><div class="l_slidenote_childevents"></div></div>
+					<div class="slidenote"><div class="l_slidenote_childevents">In this case, we're attaching an event listener directly to a child element (a button) and associating it with a named function defined elsewhere. It would be a poor idea to define an anonymous function in line, as a seprate function would be defined for each item in your list view.</div></div>
 				</section>
 
 
@@ -449,12 +463,12 @@ function report(e) {
 					<p class="l_labintro">In this lab, you will:</p>
 
 					<ul style="margin-bottom:40px;">
-						<li class="l_labobjective1">Create a two-tabbed application that implements both TableView and ListView</li>
+						<li class="l_labobjective1">Complete a two-tabbed application that implements both TableView and ListView</li>
 						<li class="l_labobjective2">Compare the features and capabilities of those components</li>
 						<li class="l_labobjective3">Manage eventing with both components</li>
 						<li class="l_labobjective4">Compare the performance of the TableView and ListView components</li>
 					</ul>
-					<p class="l_labURL" style="margin-top:20px;">Lab: <a href='https://wiki.appcelerator.org/display/td/'>wiki.appcelerator.org/display/td/</a></p>
+					<p class="l_labURL" style="margin-top:20px;">Lab: <a href='https://wiki.appcelerator.org/display/td/99+-+TableViews+and+ListViews'>wiki.appcelerator.org/display/td/99+-+TableViews+and+ListViews</a></p>
 					<div class="slidenote"><div class="l_slidenote_lab"></div></div>
 				</section>
 
