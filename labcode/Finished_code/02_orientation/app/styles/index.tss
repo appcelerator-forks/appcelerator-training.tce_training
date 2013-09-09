@@ -1,6 +1,9 @@
 ".container": {
 	backgroundColor:"white"
 },
+".container[platform=ios]": {
+	top: 20
+},
 "#artist[platform=ios]": {
 	text: 'Bob Dylan',
 	width: 320,
