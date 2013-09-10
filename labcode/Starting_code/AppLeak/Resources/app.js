@@ -22,7 +22,3 @@ test1btn.addEventListener('click', handleTest);
 wrapper.add(test1btn);
 win.add(wrapper);
 win.open();
-
-if((Ti.Platform.osname=='iphone' || Ti.Platform.osname=='ipad') && parseFloat(Ti.Platform.version) < 7.0) {
-    alert('Sorry, this app requires iOS 7.0 or greater');
-}
