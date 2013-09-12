@@ -123,7 +123,18 @@
 				</section>
 
 				<section>
-					<h2 style="" class="l_extend">Windows "Extend"</h2>
+					<h2 style="" class="l_flat">iOS 7 "Flat" Design</h2>
+					<ul style="width:80%;">
+						<li class="l_keydifferences1">Reduced bevels, shadows, rounding</li>
+						<li class="l_keydifferences2">Reduced textures, bitmaps &emdash; no more woodgrain or leather</li>
+						<li class="l_keydifferences3">Depth (and context) provided by layering, subtle shadows, parallax and 3D effects</li>
+						<li class="l_keydifferences4">Brighter &amp; lighter design &emdash; brighter colors, thinner fonts, line-art iconography</li>
+					</ul>
+					<div class="slidenote"><div class="l_slidenote_flat"></div></div>
+				</section>
+
+				<section>
+					<h2 style="" class="l_extend">Windows "Extend" to Fill the Screen</h2>
 				    <img src="images/ios7extendedges.png" style="width:600px;"/>
 					<div class="slidenote"><div class="l_slidenote_extend">Notice how you can see the blur of the red box under the nav bar. That's because of the extendEdges property on the window. But the status bar is all gray -- that's because the window is set to top:20. Keep in mind the nav bar only shows in TabGroups and NavigationWindows, so extendEdges has no effect on "normal" windows.</div></div>
 				</section>
@@ -142,43 +153,6 @@
 					<div class="slidenote"><div class="l_slidenote_ios_nav">A Navigation Group implements a specialized view that manages the navigation of hierarchical content. A Navigation Group is very similar to Tab Bars with the exception that they do not maintain a group of windows with a interface bar at the bottom.<br/><br/>NavigationGroup is also supported on MobileWeb, but there's a Ti.UI.MobileWeb.NavigationGroup object for that.</div></div>
 				</section>
 				
-				<section>
-					<h2 class="l_ios_nav_eg">UI: Navigation Group - Example</h2>
-<pre style="float:left;width:640px;"><code contenteditable class="l_navgroup_code1">
-&lt;Alloy>
-  &lt;Window id="index">
-    &lt;NavigationGroup id="navgroup" platform="ios">
-      &lt;Window title="Dashboard" id="win1">
-        &lt;Label>This is the first window&lt;/Label>
-      &lt;/Window>
-    &lt;/NavigationGroup>
-  &lt;/Window>
-&lt;/Alloy>
-</code></pre>
-					<p class="l_os_nav_eg_image" style="float:right;width:240px;"><img src='images/nav_dashboard.png' style='margin-top:5px;width:240px;'/></p>
-					<div class="slidenote"><div class="l_slidenote_ios_nav_eg">nav.window property defines the “home” window of the NavGroup<br>Code example doesn't show additional sub windows to the NavGroup<br>The NavGroup itself then needs to be added to a window</div></div>
-				</section>
-				
-				<section>
-					<h2 class="l_ios_nav_eg2">UI: Navigation Group - Adding a Window</h2>
-<pre><code contenteditable class="l_navgroup_code2">
-// add windows to the nav group
-$.someButton.addEventListener('click', function(e) {
-   $.navgroup.open(Alloy.createController('win2').getView());
-});
-
-// or in traditional API code
-var win2 = Ti.UI.createWindow({
-   title: 'Details',
-   barColor: #f5c115;
-});
-$.navgroup.open(win2);
-
-</code></pre>
-
-					<p class="l_os_nav_eg_2_image"><img src="images/nav_dashboard2.png" style="margin-top:5px;height:350px;"/></p>
-					<div class="slidenote"><div class="l_slidenote_ios_nav_eg_2">To add another window to the stack, create it and then call open</div></div>
-				</section>
 
 				<section>
 					<h2 style="" class="l_navwindow">iOS 7: Navigation Window</h2>
@@ -198,7 +172,7 @@ $.navgroup.open(win2);
 &lt;/Alloy>
 					</code></pre>
 					<pre style="width:550px;float:right;"><code contenteditable>
-// associated controller
+// in associated controller, add a second window
 var newWin = Alloy.createController('newWin');
 $.navwin.push(newWin.getView());
 					</code></pre>
@@ -207,20 +181,38 @@ $.navwin.push(newWin.getView());
 
 				
 				<section>
-					<h2 class="l_ios_nav_bar">UI: Navigation Bar Customization</h2>
-<pre><code contenteditable class="">
-// implement the buttons
-$.win.setLeftNavButton($.baseUIButton);
+					<h2 class="l_ios_nav_bar">Navigation Bar</h2>
+					<ul style="width:40%;float:left;">
+						<li class="l_navbar1">Present in tab groups and NavigationWindows</li>
+						<li class="l_navbar2">Modal windows have them, but with limited customizability</li>
+						<li class="l_navbar3">String, image, or View in center</li>
+						<li class="l_navbar4">Left/Right nav buttons for in-app navigation</li>
+					</ul>
+					<pre style="width:550px;float:right;"><code contenteditable>
+&lt;Alloy>
+  &lt;Window>
+    &lt;NavigationGroup>
+      &lt;Window>
+        &lt;!-- proxy properties for the window -->
+        &lt;LeftNavButton>
+          &lt;Button>Base UI&lt;/Button>
+        &lt;/LeftNavButton>
+        &lt;TitleControl>
+          &lt;ImageView image="/images/skull.png"/>
+        &lt;/TitleControl>
+        &lt;!-- rest of the Window markup -->
+      &lt;/Window>
+    &lt;/NavigationGroup>
+  &lt;/Window>
+&lt;/Alloy>
 
-// add an image to the nav bar
-$.win.titleImage('/images/skull.png');
-</code></pre>
+					</code></pre>
 					<p class=""><img src="images/navbar_image.png" style="margin-top:5px;width:300px;"/></p>
 					<div class="slidenote"><div class="l_slidenote_ios_nav_bar">There are other components that you can set, such as <br>setTItleControl()<br>setTitleImage()<br>setTitle()</div></div>
 				</section>
 				
 				<section>
-					<h2 class="l_ui_toolbar">UI: Toolbars</h2>
+					<h2 class="l_ui_toolbar">Toolbars</h2>
 					<ul style="width:60%;float:left;">
 						<li class="l_toolbar1">Buttons perform actions related to current context</li>
 						<li class="l_toolbar2">Create button objects first, store in an array</li>
@@ -233,7 +225,7 @@ $.win.titleImage('/images/skull.png');
 				</section>
 				
 				<section>
-					<h2 class="l_ui_toolbar">UI: Toolbars</h2>
+					<h2 class="l_ui_toolbar">Toolbars</h2>
 <pre style="width:60%;float:left;"><code contenteditable class="l_toolbar_code">
 &lt;Toolbar platform="ios">
   &lt;Items>
@@ -250,7 +242,7 @@ $.win.titleImage('/images/skull.png');
 				</section>
 				
 				<section>
-					<h2 class="l_ui_keyboardtoolbar">UI: Keyboard Toolbars</h2>
+					<h2 class="l_ui_keyboardtoolbar">Keyboard Toolbars</h2>
 <pre><code contenteditable class="l_keyboardtoolbar_code">
 // not supported through Alloy markup yet
 // create buttons to go in the tool bar
@@ -265,7 +257,7 @@ $.textfield.keyboardToolbarColor = '#999';
 				</section>
 				
 				<section>
-					<h2 class="l_ui_buttonbar">UI: Button Bar</h2>
+					<h2 class="l_ui_buttonbar">Button Bar</h2>
 					<p class="l_buttonbartext">Related controls that don't maintain state</p>
 					<p class="l_ui_buttonbar_image"><img src="images/buttonbar.png" style="margin-top:5px;width:300px;"/></p>
 <pre><code contenteditable class="l_buttonbar_code">
@@ -285,16 +277,16 @@ $.textfield.keyboardToolbarColor = '#999';
 				</section>
 				
 				<section>
-					<h2 class="l_ui_tabbar">UI: Tabbed Bar</h2>
+					<h2 class="l_ui_tabbar">Tabbed Bar</h2>
 					<p class="l_tabbedbar_text">Like radio buttons, maintain state</p>
-					<p class="l_ui_tabbar_image" style="position:absolute; top:300px; right:10px;z-index:2;"><img src="images/tabbedbars.png" style="margin-top:5px;width:300px;background-color:#fff;border:1px solid black;"/></p>
+					<p class="l_ui_tabbar_image" style="position:absolute; top:240px; right:0px;z-index:2;"><img src="images/tabbedbars.png" style="margin-top:5px;width:400px;" class="noborder"/></p>
 <pre><code contenteditable class="">
 &lt;TabbedBar platform="ios" onClick="doSomething">
   &lt;Labels>
     &lt;!-- Specify text with node text or "title" attribute. -->
-    &lt;Label>IMAP&lt;/Label>
-    &lt;Label title="POP"/>
-    &lt;Label title="Exchange"/>
+    &lt;Label>One&lt;/Label>
+    &lt;Label title="Two"/>
+    &lt;Label title="Three"/>
   &lt;/Labels>
 &lt;/TabbedBar>
 
@@ -306,7 +298,6 @@ function doSomething(e){
     break;
   }
 });
-win.add(tb);
 
 </code></pre>
 
@@ -315,7 +306,7 @@ win.add(tb);
 				
 				
 				<section>
-					<h2 class="l_ui_ipad">UI: iPad-Specific APIs</h2>
+					<h2 class="l_ui_ipad">iPad-Specific APIs</h2>
 					<p class="l_ipadAPIs1" style="margin-top:50px;">Ti.UI.iPad.Popover</p>
 					<p class="l_ipadAPIs2">Ti.UI.iPad.SplitWindow</p>
 					<div class="slidenote"><div class="l_slidenote_ui_ipad">There are two custom views related to iPad development.  We'll explore these two in detail</div></div>
@@ -384,7 +375,7 @@ pop.show({view:$.button});
 				</section>
 				
 				<section>
-					<h2 class="l_ui_tabbadge">UI: Tab Badge</h2>
+					<h2 class="l_ui_tabbadge">Tab Badge</h2>
 					<p class="l_ui_tabbadge_image"><img src="images/tabbadge.png" style="margin-top:5px;width:400px;"/></p>
 					<p class="l_tabbadge1">Communicates status to the user, their attention is needed in part of your app</p>
 <pre><code contenteditable class="l_tabbadge_code">
@@ -397,7 +388,7 @@ tab.badge = null; // to remove it
 				</section>
 				
 				<section>
-					<h2 class="l_ui_appbadge">UI: App Badge</h2>
+					<h2 class="l_ui_appbadge">App Badge</h2>
 					<p class="l_ui_appbadge_image" style="width:50%;float:right"><img src="images/appbadge.png" style="margin-top:5px;height:450px;"/></p>
 <pre><code contenteditable class="l_appbadge_code" style="width:45%;float:left;">
 Ti.UI.iPhone.appBadge = 14;
@@ -408,7 +399,7 @@ Ti.UI.iPhone.appBadge = null;
 				</section>
 				
 				<section>
-					<h2 class="l_ui_cover">UI: CoverFlow View</h2>
+					<h2 class="l_ui_cover">CoverFlow View</h2>
 					<img src="images/coverflow.png" style="margin-top:5px;width:300px;float:right;" class="noborder"/>
 <pre><code contenteditable class="l_coverflow_code" style="width:70%;float:left;">
 &lt;CoverFlowView id="coverflow" platform="ios">
@@ -428,7 +419,7 @@ Ti.UI.iPhone.appBadge = null;
 				</section>
 				
 				<section>
-					<h2 class="l_ui_dashboard">UI: Dashboard View</h2>
+					<h2 class="l_ui_dashboard">Dashboard View</h2>
 					<ul style="width:65%;float:left;">
 						<li class="l_dash1">Springboard-like view</li>
 						<li class="l_dash2">Use as app home screen</li>
@@ -441,7 +432,7 @@ Ti.UI.iPhone.appBadge = null;
 				</section>
 
 				<section>
-					<h2 style="" class="l_dashboardA">UI: Dashboard View</h2>
+					<h2 style="" class="l_dashboardA">Dashboard View</h2>
 					<pre style="width:100%;"><code contenteditable>
 &lt;Window>
   &lt;RightButton>
@@ -465,7 +456,7 @@ function toggleEditMode(e) {
 				</section>
 				
 				<section>
-					<h2 class="l_ui_adview">UI: AdView</h2>
+					<h2 class="l_ui_adview">AdView</h2>
 					<ul style="width:60%;float:left;">
 						<li class="l_adview1">Include ads in your app</li>
 						<li class="l_adview2">Banner or full screen</li>
@@ -477,7 +468,7 @@ function toggleEditMode(e) {
 				</section>
 				
 				<section>
-					<h2 class="l_ui_adview">UI: AdView</h2>
+					<h2 class="l_ui_adview">AdView</h2>
 <pre><code contenteditable class="l_adview_code">
 var iad = Ti.UI.iOS.createAdView({
    width: Ti.UI.FILL,
@@ -614,6 +605,7 @@ Ti.Network.registerForPushNotifications({
 					<ul style="width:80%;">
 						<li class="l_networkapis1">Ti.Network.BonjourBrowser</li>
 						<li class="l_networkapis2">Ti.Network.BonjourService</li>
+						<li>Future: Support for iOS "coalesced" background network updates</li>
 					</ul>
 					<div class="slidenote"><div class="l_slidenote_networkapis">Your app can participate in the Apple Bonjour (self-configuring, discoverable) networking environment for printing and other services.</div></div>
 				</section>
@@ -639,6 +631,69 @@ Ti.Network.registerForPushNotifications({
 					</ol>
 					<div class="slidenote"><div class="l_slidenote_settings">This is easiest way; you could also create the XML file directly<br/><br/>Settings bundle needs to be in project/platform (which doesn't exist by default)<br><br/>(Used to go in project/modules prior to 1.8)<br><br>See tutorial at http://iphoneincubator.com/blog/tutorial/how-to-create-an-iphone-preferences-file</div></div>
 				</section>
+
+				<!-- - - - - - - - - - - - - - - - - NEW TOPIC - - - - - - - - - - - - - - - - -->
+				<section>
+					<h1 class="topicH1 l_topic"><img src="../images/topic.png"/>Topic</h1>
+					<h5 style="clear:both;" class="l_ios6to7">Handling iOS 6 and 7 in the same app</h5>
+					<div class="slidenote"><div class="l_slidenote_ios6to7"></div></div>
+				</section>
+
+				<section>
+					<h2 style="" class="l_verdetect">Version Detection</h2>
+					<pre style=""><code contenteditable>
+if(OS_IOS && parseInt(Ti.Platform.version, 10) >= 7)) {
+  // iOS 7 code
+} else {
+  // everything else
+}
+					</code></pre>
+					<div class="slidenote"><div class="l_slidenote_verdetect"></div></div>
+				</section>
+
+				<section>
+					<h2 style="" class="l_handlingtop">Handling Window Top</h2>
+					<pre style="width:100%;"><code contenteditable>
+// in alloy.js
+Alloy.Globals.winTop = (OS_IOS && parseInt(Ti.Platform.version, 10) >= 7) ? 20 : 0;
+
+// then in app.tss
+"Window[platform=ios]": {
+  top: Alloy.Globals.winTop,
+  ...
+					</code></pre>
+					<div class="slidenote"><div class="l_slidenote_handlingtop"></div></div>
+				</section>
+
+				<section>
+					<h2 style="" class="l_statusbar">Handling Status Bar Color</h2>
+					<pre style=""><code contenteditable>
+// in alloy.js
+Ti.UI.backgroundColor = "#fff"; // sets bar color, text remains black
+					</code></pre>
+					<pre style=""><code contenteditable>
+// if you want a light status bar, get black text with:
+$.win.statusBarStyle = Titanium.UI.iPhone.StatusBar.LIGHT_CONTENT; // iOS 7 only
+// for an iOS 6 and 7 solution, try
+$.win.statusBarStyle = Titanium.UI.iPhone.StatusBar.TRANSLUCENT_BLACK;
+					</code></pre>
+
+					<pre style=""><code contenteditable>
+&lt;ios>
+  &lt;plist>
+    &lt;dict>
+      &lt;key>UIStatusBarStyle&lt;/key>  
+        &lt;string>UIStatusBarStyleLightContent&lt;/string>
+      &lt;key>UIStatusBarHidden&lt;/key>&lt;true/>
+    &lt;/dict>
+  &lt;/plist>
+&lt;/ios>
+					</code></pre>
+
+					<div class="slidenote"><div class="l_slidenote_statusbar">The status bar inherits the app's background color as set with the Ti.UI.backgroundColor property (best set in alloy.js). The default is black text on the bar. To have light text, you can set per-window as shown in the second code block. To set the light-content style globally, add the tiapp.xml tags as shown in the third block.</div></div>
+				</section>
+
+
 
 				<section>
 					<h2 style="" class="l_summary">Summary</h2>
