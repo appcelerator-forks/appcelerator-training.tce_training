@@ -99,9 +99,33 @@
 				</section>
 				
 				<section>
-					<h2 class="l_ios_ui">iOS User Interface Basics</h2>
-					<p class="l_ios_ui_image"><img src="images/ios-ui.png" class="noborder" style="margin-top:5px;height:500px;"/></p>
-					<div class="slidenote"><div class="l_slidenote_ios_ui">A tab bar gives people the ability to switch between different subtasks, views, or modes.<br>Use a tab bar to give users access to different perspectives on the same set of data or different subtasks related to the overall function of your app. </div></div>
+					<h2 style="" class="l_ios6v7">iOS 6 vs iOS 7</h2>
+<table border="0" cellspacing="5" cellpadding="5">
+	<tr>
+		<th style="text-align:center !important;">iO7</th>
+		<th style="text-align:center !important;">iOS6</th>
+		<th style="background-color: transparent;"></th>
+		<th style="text-align:center !important;">iO6</th>
+		<th style="text-align:center !important;">iOS7</th>
+	</tr>
+	<tr>
+		<td style="text-align:center !important;" colspan="2">
+			<img src="images/ios-7-vs-ios-6-homescreen.jpg" style="width:400px;" class="noborder"/>
+		</td>
+		<td></td>
+		<td style="text-align:center !important;" colspan="2">
+			<img src="images/weather-ios-6-vs-ios-7.jpg" style="width:400px;" class="noborder"/>
+		</td>
+	</tr>
+</table>
+					<div style="font-size:small;font-style:italic;">Source: http://osxdaily.com/2013/06/11/ios-7-vs-ios-6-visual-comparison/</div>
+					<div class="slidenote"><div class="l_slidenote_ios6v7">Examine the pictures carefully: iOS7 on left/right varies.<br/><br/>iOS7: reduced textures, gradients, shadows replaced with lighter colors, lighter text. Apps extend the full screen, with windows extending under nav bars and even the status bar. Status bar and nav bar take on the color of the app.</div></div>
+				</section>
+
+				<section>
+					<h2 style="" class="l_extend">Windows "Extend"</h2>
+				    <img src="images/ios7extendedges.png" style="width:600px;"/>
+					<div class="slidenote"><div class="l_slidenote_extend">Notice how you can see the blur of the red box under the nav bar. That's because of the extendEdges property on the window. But the status bar is all gray -- that's because the window is set to top:20. Keep in mind the nav bar only shows in TabGroups and NavigationWindows, so extendEdges has no effect on "normal" windows.</div></div>
 				</section>
 				
 				<!-- - - - - - - - - - - - - - - - - NEW TOPIC - - - - - - - - - - - - - - - - -->
@@ -112,7 +136,7 @@
 				</section>
 
 				<section>
-					<h2 class="l_ios_nav">UI: Navigation Group</h2>
+					<h2 class="l_ios_nav">iOS6: Navigation Group</h2>
 					<p class="l_ios_nav_image"><img src="images/ios-nav.png" style="margin-top:5px;height:350px;" class="noborder"/></p>
 					<p class="l_ios_nav_explanation">A Navigation Group implements a specialized view that manages the navigation of hierarchical content</p>
 					<div class="slidenote"><div class="l_slidenote_ios_nav">A Navigation Group implements a specialized view that manages the navigation of hierarchical content. A Navigation Group is very similar to Tab Bars with the exception that they do not maintain a group of windows with a interface bar at the bottom.<br/><br/>NavigationGroup is also supported on MobileWeb, but there's a Ti.UI.MobileWeb.NavigationGroup object for that.</div></div>
@@ -155,9 +179,35 @@ $.navgroup.open(win2);
 					<p class="l_os_nav_eg_2_image"><img src="images/nav_dashboard2.png" style="margin-top:5px;height:350px;"/></p>
 					<div class="slidenote"><div class="l_slidenote_ios_nav_eg_2">To add another window to the stack, create it and then call open</div></div>
 				</section>
+
+				<section>
+					<h2 style="" class="l_navwindow">iOS 7: Navigation Window</h2>
+					<ul style="width:40%;float:left;">
+						<li class="l_navwindow1">Replaces NavigationGroup</li>
+						<li class="l_navwindow2">Is a top-level container (don't put it in a window)</li>
+						<li class="l_navwindow3">Add/remove new windows with <code>push()</code> and <code>pop()</code></li>
+					</ul>
+					<pre style="width:550px;float:right;"><code contenteditable>
+&lt;!-- Titanium.UI.iOS.NavigationWindow -->
+&lt;Alloy>
+  &lt;NavigationWindow id="navwin" platform="ios">
+    &lt;Window id="win">
+      &lt;View id="box"/>
+    &lt;/Window>
+  &lt;/NavigationWindow>
+&lt;/Alloy>
+					</code></pre>
+					<pre style="width:550px;float:right;"><code contenteditable>
+// associated controller
+var newWin = Alloy.createController('newWin');
+$.navwin.push(newWin.getView());
+					</code></pre>
+					<div class="slidenote"><div class="l_slidenote_navwindow">The NavigationWindow </div></div>
+				</section>
+
 				
 				<section>
-					<h2 class="l_ios_nav_bar">UI: Navigation Bar - Example</h2>
+					<h2 class="l_ios_nav_bar">UI: Navigation Bar Customization</h2>
 <pre><code contenteditable class="">
 // implement the buttons
 $.win.setLeftNavButton($.baseUIButton);
