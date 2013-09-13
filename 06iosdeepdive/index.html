@@ -147,19 +147,12 @@
 				</section>
 
 				<section>
-					<h2 class="l_ios_nav">iOS6: Navigation Group</h2>
-					<p class="l_ios_nav_image"><img src="images/ios-nav.png" style="margin-top:5px;height:350px;" class="noborder"/></p>
-					<p class="l_ios_nav_explanation">A Navigation Group implements a specialized view that manages the navigation of hierarchical content</p>
-					<div class="slidenote"><div class="l_slidenote_ios_nav">A Navigation Group implements a specialized view that manages the navigation of hierarchical content. A Navigation Group is very similar to Tab Bars with the exception that they do not maintain a group of windows with a interface bar at the bottom.<br/><br/>NavigationGroup is also supported on MobileWeb, but there's a Ti.UI.MobileWeb.NavigationGroup object for that.</div></div>
-				</section>
-				
-
-				<section>
-					<h2 style="" class="l_navwindow">iOS 7: Navigation Window</h2>
+					<h2 style="" class="l_navwindow">NavigationWindow</h2>
 					<ul style="width:40%;float:left;">
-						<li class="l_navwindow1">Replaces NavigationGroup</li>
+						<li class="l_navwindow1">Replaces the NavigationGroup (now deprecated and unsupported on iOS 7)</li>
 						<li class="l_navwindow2">Is a top-level container (don't put it in a window)</li>
-						<li class="l_navwindow3">Add/remove new windows with <code>push()</code> and <code>pop()</code></li>
+						<li class="l_navwindow3">Windows within a NavigationWindow have a NavigationBar (title bar)</li>
+						<li class="l_navwindow4">Add/remove new windows with <code>openWindow()</code> and <code>closeWindow()</code></li>
 					</ul>
 					<pre style="width:550px;float:right;"><code contenteditable>
 &lt;!-- Titanium.UI.iOS.NavigationWindow -->
@@ -174,36 +167,34 @@
 					<pre style="width:550px;float:right;"><code contenteditable>
 // in associated controller, add a second window
 var newWin = Alloy.createController('newWin');
-$.navwin.push(newWin.getView());
+$.navwin.openWindow(newWin.getView());
 					</code></pre>
-					<div class="slidenote"><div class="l_slidenote_navwindow">The NavigationWindow </div></div>
+					<div class="slidenote"><div class="l_slidenote_navwindow">The NavigationWindow replaces the NavigationGroup and will work on iOS 6 or 7 with the 3.1.3 SDK. Unlike the older component, NavigationWindow is a top-level container (analogous to a Window and doesn't go within a Window, though it contains Windows). Add left/right nav buttons to the windows not the NavigationWindow.</div></div>
 				</section>
 
 				
 				<section>
-					<h2 class="l_ios_nav_bar">Navigation Bar</h2>
+					<h2 class="l_ios_nav_bar">NavigationBar</h2>
 					<ul style="width:40%;float:left;">
 						<li class="l_navbar1">Present in tab groups and NavigationWindows</li>
-						<li class="l_navbar2">Modal windows have them, but with limited customizability</li>
+						<li class="l_navbar2">Modal windows have them, but without nav buttons</li>
 						<li class="l_navbar3">String, image, or View in center</li>
 						<li class="l_navbar4">Left/Right nav buttons for in-app navigation</li>
 					</ul>
 					<pre style="width:550px;float:right;"><code contenteditable>
 &lt;Alloy>
-  &lt;Window>
-    &lt;NavigationGroup>
-      &lt;Window>
-        &lt;!-- proxy properties for the window -->
-        &lt;LeftNavButton>
-          &lt;Button>Base UI&lt;/Button>
-        &lt;/LeftNavButton>
-        &lt;TitleControl>
-          &lt;ImageView image="/images/skull.png"/>
-        &lt;/TitleControl>
-        &lt;!-- rest of the Window markup -->
-      &lt;/Window>
-    &lt;/NavigationGroup>
-  &lt;/Window>
+  &lt;NavigationWindow>
+    &lt;Window>
+      &lt;!-- proxy properties for the window -->
+      &lt;LeftNavButton>
+        &lt;Button>Base UI&lt;/Button>
+      &lt;/LeftNavButton>
+      &lt;TitleControl>
+        &lt;ImageView image="/images/skull.png"/>
+      &lt;/TitleControl>
+      &lt;!-- rest of the Window markup -->
+    &lt;/Window>
+  &lt;/NavigationWindow>
 &lt;/Alloy>
 
 					</code></pre>
