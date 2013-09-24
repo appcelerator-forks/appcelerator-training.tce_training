@@ -200,20 +200,6 @@ var win = Ti.UI.createWindow({
 				</section>
 
 				<section>
-					<h2 style="" class="l_winorient">Change a Window's Orientation</h2>
-					<pre style=""><code contenteditable>
-$.orient.addEventListener('click', function() {
-  if(Titanium.UI.orientation == Ti.UI.PORTRAIT) {
-    Titanium.UI.orientation = Ti.UI.LANDSCAPE_LEFT;
-  } else {
-    Titanium.UI.orientation = Ti.UI.PORTRAIT;
-  }
-})
-$.index.open();					</code></pre>
-					<div class="slidenote"><div class="l_slidenote_winorient"></div></div>
-				</section>
-				
-				<section>
 					<h2 class="l_or_events">Orientation Events</h2>
 					<ul style="width:80%;">
 						<li class="l_orevents1"><code>orientationchange</code> event in the Ti.Gesture namespace</li>
