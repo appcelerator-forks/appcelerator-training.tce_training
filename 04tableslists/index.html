@@ -242,20 +242,13 @@ $.table.addEventListener('click', function(e){
 
 				<section>
 					<h2 class="l_tableview_per">Table View Performance</h2>
-					<ul style="width:40%;float:left;">
-						<li class="l_tableview1">className allows Titanium to reuse native objects</li>
+					<ul style="width:90%;">
 						<li class="l_tableview2">setData() or table.data faster than append()</li>
 						<li class="l_tableview3">Load only as much data as needed</li>
 						<li class="l_tableview4">If your table has 1,000s of custom rows, you might need to rethink your UX design</li>
 						<li class="l_tableview5">Don't use child Views, just title &amp; row properties</li>
 					</ul>
-					<pre style="width:550px;float:right;"><code contenteditable>
-<!-- in View XML -->
-&lt;TableView id="table">
-  &lt;TableViewRow className="anystring"/>
-&lt;/TableView>
-					</code></pre>
-					<div class="slidenote"><div class="l_slidenote_tableview_per"><ul><li>Adding className enables Ti &amp; underlying OS to reuse table row objects and optimize memory</li><li>A setData() call for a lot of rows is faster than repeated appendRow() calls</li><li>Perhaps you can use alternate UI paradigm to create smaller tables</li><li><b>Dawson's Lazy Loaded Tables http://j.mp/rbL32h</b></li></ul></div></div>
+					<div class="slidenote"><div class="l_slidenote_tableview_per"><ul><li>TableViewRow.className removed ~Ti3.1 timeframe and the release of the ListView component.</li><li>A setData() call for a lot of rows is faster than repeated appendRow() calls</li><li>Perhaps you can use alternate UI paradigm to create smaller tables</li><li><b>Dawson's Lazy Loaded Tables http://j.mp/rbL32h</b></li></ul></div></div>
 				</section>
 
 				<!-- - - - - - - - - - - - - - - - - NEW TOPIC - - - - - - - - - - - - - - - - -->
