@@ -220,29 +220,16 @@
 				</section>
 
 				<section>
-					<h2 style="" class="l_customfonts">Custom Fonts</h2>
-					<ol style="width:40%;float:left;">
-						<li class="l_customfonts1">Copy OTF/TTF file to app/assets/fonts</li>
-						<li class="l_customfonts2">For iOS, modify tiapp.xml</li>
-						<li class="l_customfonts3">Update TSS:<br/><ul style="margin:5px 0 10px 60px;"><li>iOS &mdash; use "friendly name"</li><li>Android: basename</li></ul></li>
-					</ol>
-					<pre style="width:550px;float:right;"><code contenteditable>
-&lt;ios>
-&lt;plist>
-  &lt;dict>
-    &lt;key>UIAppFonts&lt;/key>
-    &lt;array>
-      &lt;string>/fonts/SpicyRice.ttf&lt;/string>
-    &lt;/array>
-  &lt;/dict>
-&lt;/plist>
-&lt;/ios>
-
-					</code></pre>
-				    <img src="images/friendlyname.png" style="width:300px;clear:both;"/>
-					<div class="slidenote"><div class="l_slidenote_customfonts">For Android, the font has to be in the fonts subdirectory. For iOS, you have to modify the info.plist &mdash; easiest is to do that in the tiapp.xml. Add the block shown anywhere between the &lt;ti:app> tags.</div></div>
+					<h2 style="" class="l_custfonts">Custom Fonts</h2>
+					<ul style="width:80%;">
+						<li class="l_custfonts1">Put in assets/fonts or assets/<em>platform</em>/fonts</li>
+						<li class="l_custfonts2">For fontFamily (default):<br/><ul style="margin-left:40px;"><li>Android use file name</li><li>iOS use PostScript name</li></ul></li>
+						<li class="l_custfonts3">Tip: rename file to PostScript name:<br/><ol style="margin-left:40px;"><li>Install font</li><li>Open FontBook &amp; find font</li><li>Press CMD + i to find PostScript name</li></ol></li>
+					</ul>
+					<img src="images/customfont.png" style="width:800px;clear:both;"/>
+					
+					<div class="slidenote"><div class="l_slidenote_custfonts">You used to have to modify the tiapp.xml for iOS. As of Ti3.1.3GA, that's no longer necessary.<br/><br/>If you're using a font on just Android (to match one that's installed by default on iOS), make sure to put it in the assets/android/fonts/ folder so that the file isn't included in the iOS build.</div></div>
 				</section>
-
 
 				<!-- - - - - - - - - - - - - - - - - NEW TOPIC - - - - - - - - - - - - - - - - -->
 				<section>
