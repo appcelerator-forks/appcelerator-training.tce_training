@@ -331,27 +331,68 @@ Ti.App.addEventListener(
 
 				<section>
 					<h2 style="" class="l_androidarguments">Launch Arguments on Android</h2>
-					<ul style="width:40%;float:left;">
+					<ul style="width:80%;">
 						<li class="l_androidarguments1">Access via the current Activity</li>
-						<li class="l_androidarguments2">Need a handle to the Intent that launched the activity</li>
-						<li class="l_androidarguments3">Data available even if app launched from backgrounded state</li>
+						<li class="l_androidarguments2">But, need to grab the activity reference in alloy.js</li>
+						<li class="l_androidarguments3">From the activity, you get a handle to the Intent that launched the activity</li>
+						<li class="l_androidarguments4">From that intent, you can call getData()</li>
+						<li class="l_androidarguments5">Data available even if app launched from backgrounded state</li>
 					</ul>
-					<pre style="width:560px;float:right;"><code contenteditable>
-var activity = Ti.Android.currentActivity;
-activity.addEventListener("create", function(e) {
-  var args = activity.getIntent().getData();
-  // validate, parse, handle
-});
-
-					</code></pre>
 					<div class="slidenote"><div class="l_slidenote_androidarguments"></div></div>
 				</section>
+
+				<section>
+					<h2 style="" class="l_andrargs">Example</h2>
+<pre style="font-size:small;	"><code contenteditable>
+// alloy.js
+if(OS_ANDROID) {
+    Alloy.Globals.action = '';    
+    <span style="background-color: #ffffcc;">var activity = Ti.Android.currentActivity;</span>
+    function doIt(e) {
+        var args = <span style="background-color: #ffffcc;">activity.getIntent().getData();</span>
+        if(args && args != 'urlschemes://') {
+            // parse the url string and arguments
+            var parsedArgs = urlParser(args);
+            switch(parsedArgs[0]) {
+                case 'maps':
+                    Alloy.Globals.action = 'maps';
+                break;
+                case 'youtube':
+                    Alloy.Globals.action = 'youtube';
+                break;
+            }
+        }
+    }           
+    <span style="background-color: #ffffcc;">activity.addEventListener("start", doIt);</span>
+}
+</code></pre>
+<pre style="font-size:small;"><code contenteditable>
+// index.js
+if(OS_ANDROID) {
+    <span style="background-color: #ffffcc;">$.index.addEventListener('open', function() {</span>
+        switch(Alloy.Globals.action) {
+            case 'maps':
+                doClickMaps();
+            break;
+            case 'youtube':
+                doClickYouTube();
+            break;
+        }
+    });
+}
+</code></pre>
+
+					<div class="slidenote"><div class="l_slidenote_andrargs">Key lines are highlighted: In alloy.js, we get a handle to the activity, then get the data from the intent that opened it. Finally, we listen on the activity's start event to run our function and parse and save the querystring data.<br/><br/>In index.js, we have to wait for the window to open before we can access that data.</div></div>
+				</section>
+				
 
 				<section>
 					<h2 style="" class="l_parsingargs">Parsing Arguments</h2>
 					<pre style=""><code contenteditable>
 function urlParser(url) {
+  // strips out urlschemes:// (and Urlschemes://) 
   url = url.replace(/[Uu]rlschemes:\/\/\?/,"");
+  // splits and returns an array of arguments
   return url.split('&');
 }
 
@@ -378,7 +419,7 @@ function urlParser(url) {
 					<h2 style="" class="l_demo">Demo</h2>
 				    <img src="images/goal.png" style="width:700px;" class="noborder"/>
 					<p class="l_demopara"><em>Some links work only on device</em></p>
-					<div class="slidenote"><div class="l_slidenote_demo">Demo the finished lab code with URLSchemes and URLSchemes2</div></div>
+					<div class="slidenote"><div class="l_slidenote_demo">Demo the finished lab code with URLSchemes and 108_source</div></div>
 				</section>
 
 				

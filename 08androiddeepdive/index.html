@@ -236,29 +236,22 @@
 
 				
 				<section>
-					<h2 class="l_windows">Windows</h2>
-					<ul style="width:40%;float:left;">
-						<li class="l_win1">Lightweight == full-screen view</li>
-						<li class="l_win2">Heavyweight == Activity</li>
-						<li class="l_win3">Title bar only with Heavyweight windows</li>
-						<li class="l_win4">(New in 3.1.2) Enter/exit animations on heavyweight windows</li>
+					<h2 class="l_windows">Windows and Activities</h2>
+					<ul style="width:100%;">
+						<li class="l_windows1">Starting with Ti3.2, a Window == Activity</li>
+						<li class="l_windows2">Menus, title bars, and more are associated with the activity</li>
+						<li class="l_windows3">Enter &amp; exit animations on activities</li>
+						<li class="l_windows4">Older SDKs distinguished between heavyweight (activities) and lightweight (full-screen views) windows</li>
+						<li>In a TabGroup, the activity is associated with the TabGroup not the windows</li>
 					</ul>
-					<pre style="width:550px;float:right;"><code contenteditable>
-"#win": {
-  fullscreen: false,
-  navBarHidden: false,
-  modal: false,
-  windowSoftInputMode: Ti.UI.Android.SOFT_INPUT_ADJUST_PAN
-}
-					</code></pre>
+					
 					<pre style="clear: both;"><code contenteditable>
 $.win.open({
     activityEnterAnimation: Ti.Android.R.anim.slide_in_left,
     activityExitAnimation: Ti.Android.R.anim.slide_out_right
 });
 					</code></pre>
-					<p class="l_windownote"><em>Note: In 3.2, all Android windows will be heavyweight</em></p>
-					<div class="slidenote"><div class="l_slidenote_windows">A 'heavyweight' window is Ti terminology for an Activity<br/><br>You can have a lightweight window that isn't exactly equivalent to an Activity, more like a full-screen view<br><br/>To force a Ti window to be a heavyweight window (an activity), set navBarHidden=true or set fullscreen=true or false and see the URL here for a couple of extra ways</div></div>
+					<div class="slidenote"><div class="l_slidenote_windows">All windows are "heavyweight" starting with Titanium 3.2. </div></div>
 				</section>
 				
 				<section>
@@ -276,43 +269,7 @@ $.win.open({
 
 
 				<section>
-					<h2 style="" class="l_menuold">Menu Example - pre-ICS</h2>
-					<pre style=""><code contenteditable>
-var w = Ti.UI.createWindow({
-  backgroundColor : 'blue',
-  navBarHidden : false,
-  activity : {
-    onCreateOptionsMenu : function(e) {
-    var menu = e.menu;
-
-    var m1 = menu.add({ title : 'Close Window' });
-    m1.setIcon(Titanium.Android.R.drawable.ic_menu_close_clear_cancel);
-    m1.addEventListener('click', function(e) {
-      w.close();
-    });
-    }
-  }
-});
-					</code></pre>
-					<div class="slidenote"><div class="l_slidenote_menuold"></div></div>
-				</section>
-
-				<section>
-					<h2 style="" class="l_menuics">ICS Menu Example - Manifest</h2>
-					<pre style=""><code contenteditable>
-&lt;android xmlns:android="http://schemas.android.com/apk/res/android"> 
-    &lt;tool-api-level>17&lt;/tool-api-level> 
-    &lt;manifest> 
-        &lt;uses-sdk android:targetSdkVersion="11"/> 
-        &lt;!-- other manifest entries --> 
-    &lt;/manifest> 
-&lt;/android>
-					</code></pre>
-					<div class="slidenote"><div class="l_slidenote_menuics">The uses-sdk tag must be within the manifest tags, but outside/above the application block.</div></div>
-				</section>
-
-				<section>
-					<h2 style="" class="l_menuicsb">ICS Menu Example - Code</h2>
+					<h2 style="" class="l_menuold">Menu Example</h2>
 					<pre style=""><code contenteditable>
 &lt;Menu>
   &lt;MenuItem title="Compose" icon="/images/compose_icon.png"
@@ -322,20 +279,40 @@ var w = Ti.UI.createWindow({
 
 					</code></pre>
 					<pre style=""><code contenteditable>
-// or in code is still valid
-$.win.activity.onCreateOptionsMenu = function(e) { 
-    var menu = e.menu; 
-    var menuItem = menu.add({ 
-        title : "Compose", 
-        icon : "/images/compose_icon.png", 
-        showAsAction : Ti.Android.SHOW_AS_ACTION_IF_ROOM 
-    }); 
-    menuItem.addEventListener("click", function(e) { 
-        Ti.API.info("Action Item Clicked!"); 
-    }); 
-};
+// Or in traditional code
+var w = Ti.UI.createWindow({
+  backgroundColor : 'white',
+  activity : {
+    onCreateOptionsMenu : function(e) {
+    var menu = e.menu;
+
+    var m1 = menu.add({ title : 'Compose' });
+    m1.setIcon('/images/compose_icon.png');
+    m1.addEventListener('click', function(e) {
+      // doSomething()
+    });
+    }
+  }
+});
 					</code></pre>
-					<div class="slidenote"><div class="l_slidenote_menuicsb"></div></div>
+					<div class="slidenote"><div class="l_slidenote_menuold"></div></div>
+				</section>
+
+				<section>
+					<h2 style="" class="l_menuics">Menu, Continued</h2>
+					<p class="l_menuics">To get the ActionBar style menu, you just need to build with a current SDK, which is the default</p>
+					
+					<pre style="font-size:small;"><code contenteditable>
+&lt;android xmlns:android="http://schemas.android.com/apk/res/android"> 
+    &lt;manifest> 
+        &lt;!-- target SDK 14+ (Android 4.0) to get ActionBar style menus
+                default if you omit uses-sdk is to target highest installed --> 
+        &lt;uses-sdk android:minSdkVersion="10" android:targetSdkVersion="14"/> 
+        &lt;!-- other manifest entries including &lt;application> tag--> 
+    &lt;/manifest> 
+&lt;/android>
+					</code></pre>
+					<div class="slidenote"><div class="l_slidenote_menuics">The uses-sdk tag must be within the manifest tags, but outside/above the application block. You can still support Android 2.x by including a minSdkVersion of 10 or higher.</div></div>
 				</section>
 
 				<section>
@@ -360,6 +337,23 @@ $.win.activity.onCreateOptionsMenu = function(e) {
 					<div class="slidenote"><div class="l_slidenote_menutabs"></div></div>
 				</section>
 				
+				<section>
+					<h2 style="" class="l_external">Installing to the SD card</h2>
+					<ul style="width:80%;">
+						<li class="l_external1">Must build with SDK tools 8 or higher (default is to use highest installed)</li>
+						<li class="l_external2">Set minSdkVersion to 10 or higher</li>
+						<li class="l_external3">Options are preferExternal, preferInternal, or auto (default)</li>
+					</ul>
+					<pre style=""><code contenteditable>
+&lt;android xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;&gt;
+   &lt;manifest android:installLocation=&quot;preferExternal&quot;&gt;
+      &lt;uses-sdk android:minSdkVersion=&quot;10&quot; /&gt;
+   &lt;/manifest&gt;
+&lt;/android&gt;
+					</code></pre>
+					<div class="slidenote"><div class="l_slidenote_external">The tool-api-level tag is now deprecated and ignored.</div></div>
+				</section>
+
 				<section>
 					<h2 style="" class="l_ninepatch">NinePatch images</h2>
 				    <img src="images/ninepatch_raw.png" style="width:400px;float:right;"/>
@@ -391,30 +385,12 @@ $.win.activity.onCreateOptionsMenu = function(e) {
 				</section>
 
 				<section>
-					<h2 style="" class="l_external">Installing to the SD card</h2>
-					<ul style="width:80%;">
-						<li class="l_external1">Use tool-api-level 8 or higher (best is highest you have installed)</li>
-						<li class="l_external2">Set minSdkVersion to 7 or higher</li>
-						<li class="l_external3">Add the following to the AndroidManifest.xml</li>
-					</ul>
-					<pre style=""><code contenteditable>
-&lt;android xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;&gt;
-   &lt;tool-api-level&gt;8&lt;/tool-api-level&gt;
-   &lt;manifest android:installLocation=&quot;preferExternal&quot;&gt;
-      &lt;uses-sdk android:minSdkVersion=&quot;7&quot; /&gt;
-   &lt;/manifest&gt;
-&lt;/android&gt;
-					</code></pre>
-					<div class="slidenote"><div class="l_slidenote_external">The uses-sdk tag must be within the manifest tags, but outside/above the application block. Depending on the connection mode of your Android device, you might have difficulties building &amp; installing an app configured in this way. If your device is attached in USB storage mode (and some newer media modes), the SD card is inaccessible. Thus, the app cannot be installed and adb might throw an error. </div></div>
-				</section>
-
-				<section>
 					<h2 class="l_android_labels">Android Labels</h2>
-					<p align="left" class="l_much_ios">Much more capable than iOS Labels</p><br>
-					<p align="left" class="l_styling_props">Styling properties on creation same cross platform</p><br>
-					<p align="left" class="l_android_inline">Android can display inline HTML (basic formatting tags)</p><br>
-					<p align="left" class="l_android_links">Android can display links inline (web, tel, maps)</p><br>
-					<p align="left" class="l_demo_label">Demo: Label gymnastics</p><br>
+					<ul style="width:100%;">
+						<li class="l_andlabels1">Use Label.html to apply formatting like you would use AttributedStrings on iOS</li>
+						<li class="l_andlabels2">Use Label.autoLink to "linkify" URLs, phone numbers, address, etc.</li>
+						<li class="l_andlabels3">autoLink also works on TextAreas</li>
+					</ul>
 					<div class="slidenote"><div class="l_slidenote_android_labelsv2">Demo - KitchenSink: label_linkify.js<br>iOS supports similar auto-linking on text areas<br/>Ti 3.0: Android now supports autolinking on textareas</div></div>
 				</section>
 				
@@ -447,7 +423,7 @@ n.show();
 						<li class="l_hijack3">Careful about user expectations</li>
 						<li class="l_hijack4">Demo: AndroidBackDemo</li>
 					</ul>
-					<div class="slidenote"><div class="l_slidenote_hijackv2"><ul><li><b>Demo</b>AndroidBackDemo project is part of the TCE repop</li><li>View hijacks the back button &amp; closes<br>Then restores it so you can close the window</li><li>In the event listener, you can monitor the other hardware buttons in the form:<br>androidcamera<br>androidhome (colon removed in Ti 3.0, e.g. was android:camera)</li></ul></div></div>
+					<div class="slidenote"><div class="l_slidenote_hijackv2"><ul><li><b>Demo</b>AndroidBackDemo project is part of the TCE repo</li><li>View hijacks the back button &amp; closes<br>Then restores it so you can close the window</li><li>In the event listener, you can monitor the other hardware buttons in the form:<br>androidcamera<br>androidhome (colon removed in Ti 3.0, e.g. was android:camera)</li></ul></div></div>
 				</section>
 				
 				<!-- - - - - - - - - - - - - - - - - NEW TOPIC - - - - - - - - - - - - - - - - -->
@@ -528,14 +504,6 @@ intent.putExtra('interval', SECONDS * 1000); // Needs to be milliseconds
 Ti.Android.stopService(intent); // later, to stop the service!
 					</code></pre>
 					<div class="slidenote"><div class="l_slidenote_serviceexample">See http://docs.appcelerator.com/titanium/latest/#!/guide/Simple_Android_Services_in_Titanium for more information.</div></div>
-				</section>
-				
-				<section>
-					<h2 class="l_calendar_int">Calendar and Event Integration</h2>
-					<p align="left" class="l_add_events">Add events to calendars, and alarms for status bar</p><br>
-					<p align="left" class="l_calendar_module">Ti.Android.Calendar module</p><br>
-					<p align="left" class="l_calendarintents">You can also access the calendar via Intents</p><br>
-					<div class="slidenote"><div class="l_slidenote_scalendar_int"></div></div>
 				</section>
 				
 				<section>
