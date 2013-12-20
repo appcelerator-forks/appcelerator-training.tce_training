@@ -139,6 +139,20 @@
 					<div class="slidenote"><div class="l_slidenote_extend">Notice how you can see the blur of the red box under the nav bar. That's because of the extendEdges property on the window. But the status bar is all gray -- that's because the window is set to top:20. Keep in mind the nav bar only shows in TabGroups and NavigationWindows, so extendEdges has no effect on "normal" windows.</div></div>
 				</section>
 				
+				<section>
+					<h2 style="" class="l_tintcolor">Tint Color Properties</h2>
+					<p class="l_tintpara">Applies "key" color to elements, such as button text foreground color in a navigation bar</p>
+					<ul style="width:100%;">
+						<li class="l_tint1">TabGroup.tabsTintColor - sets the key color for the active tab in the tab group</li>
+						<li class="l_tint2">Window.navTintColor - sets the key color for the window's navigation bar</li>
+						<li class="l_tint3">View.tintColor - sets the key color for the UI element.</li>
+						<li class="l_tint4">Toolbar.tintColor - sets the color of button text on the toolbar </li>
+					</ul>
+					
+					<div class="slidenote"><div class="l_slidenote_tintcolor">As of Ti3.2, some components must be defined in the controller in order for the tintColor to be applied properly.</div></div>
+				</section>
+				
+				
 				<!-- - - - - - - - - - - - - - - - - NEW TOPIC - - - - - - - - - - - - - - - - -->
 				<section>
 					<h1 class="topicH1 l_topic"><img src="../images/topic.png"/>Topic</h1>
@@ -149,7 +163,7 @@
 				<section>
 					<h2 style="" class="l_navwindow">NavigationWindow</h2>
 					<ul style="width:40%;float:left;">
-						<li class="l_navwindow1">Replaces the NavigationGroup (now deprecated and unsupported on iOS 7)</li>
+						<li class="l_navwindow1">Replaces the NavigationGroup (removed and unsupported on iOS 7)</li>
 						<li class="l_navwindow2">Is a top-level container (don't put it in a window)</li>
 						<li class="l_navwindow3">Windows within a NavigationWindow have a NavigationBar (title bar)</li>
 						<li class="l_navwindow4">Add/remove new windows with <code>openWindow()</code> and <code>closeWindow()</code></li>
@@ -304,6 +318,14 @@ function doSomething(e){
 				</section>
 				
 				<section>
+					<h2 style="" class="l_textstyles">Dynamic Text (textStyle)</h2>
+					<img src="images/textstyles.png" style="width:100%;" class="noborder"/>
+					
+					<div class="slidenote"><div class="l_slidenote_textstyles"></div></div>
+				</section>
+				
+				
+				<section>
 					<h2 class="l_ui_ipad">iPad-Specific APIs</h2>
 					<p class="l_ipadAPIs1" style="margin-top:50px;">Ti.UI.iPad.Popover</p>
 					<p class="l_ipadAPIs2">Ti.UI.iPad.SplitWindow</p>
@@ -318,15 +340,16 @@ function doSomething(e){
 						<li class="l_popover2">Hovers over app content</li>
 					</ul>
 <pre><code contenteditable class="l_popover_code">
-&lt;Popover title="Inbox" height="300" width="250">
-  &lt;LeftNavButton>
-    &lt;Button onClick="showAlert">My MobileMe Account&lt;/Button>
-  &lt;/LeftNavButton>
-  &lt;RightNavButton>
-    &lt;Button onClick="showAlert">Edit&lt;/Button>
-  &lt;/RightNavButton>
-
-  &lt;TableView>...
+&lt;Popover title="Inbox">
+  &lt;ContentView>
+    &lt;NavigationWindow>
+      &lt;LeftNavButton id="mobileMe"/>
+      &lt;RightNavButton id="edit"/>
+      &lt;Window>    
+        &lt;TableView id="tbl"/>
+      &lt;/Window>
+	&lt;/NavigationWindow>
+  &lt;/ContentView>
 &lt;/Popover>
 
 // view property controls where the
@@ -336,7 +359,7 @@ pop.show({view:$.button});
 </code></pre>
 					</div>
 					<p class="l_key_api_ti_image" style="width:25%;float:right;"><img src="images/popover.png" style="margin-top:5px;width:300px;"/></p>
-					<div class="slidenote"><div class="l_slidenote_key_api_ti"><ul><li>Like a dialog box</li><li>Always has an arrow pointing to the control that opened it</li><li>Contain a Ti.UI.View</li></ul></div></div>
+					<div class="slidenote"><div class="l_slidenote_key_api_ti"><ul><li>Like a dialog box</li><li>Typically has an arrow pointing to the control that opened it</li><li>Starting in Ti.3.2, you put a ContentView (specialized View container) inside the popover. Prior to that, you could add views directly to the popover component.</li></ul></div></div>
 				</section>
 				
 				<section>
@@ -527,7 +550,7 @@ var svc = Ti.App.iOS.registerBackgroundService({
  
 </code></pre>
 
-					<div class="slidenote"><div class="l_slidenote_backgroundv2">This JS will run when the app is paused (home button clicked).<br><br/>Services typically run for 10 mins or until iOS shuts them down.<br/><br/>Useful to finish a download, cache data, etc.<br/><br/>For a BackgroundService to run for more than a limited period of time, the application must declare one or more of these background modes.</div></div>
+					<div class="slidenote"><div class="l_slidenote_backgroundv2">Note: there's a separate slide to discuss background network operations <br/><br/>This JS will run when the app is paused (home button clicked).<br><br/>Services typically run for 10 mins or until iOS shuts them down.<br/><br/>Useful to finish a download, cache data, etc.<br/><br/>For a BackgroundService to run for more than a limited period of time (10 ms), the application must declare one or more of these background modes.</div></div>
 				</section>
 
 				<section>
@@ -607,6 +630,20 @@ Ti.Network.registerForPushNotifications({
 					</ul>
 					<div class="slidenote"><div class="l_slidenote_networkapis">Your app can participate in the Apple Bonjour (self-configuring, discoverable) networking environment for printing and other services.</div></div>
 				</section>
+				
+				<section>
+					<h2 style="" class="l_bgnet">Background Networking</h2>
+					<ul style="width:100%;">
+						<li class="l_bgnet1">New APIs to support iOS 7 "coalesced" (background) network activity</li>
+						<li class="l_bgnet2">Download large files using <code>UrlSession</code></li>
+						<li class="l_bgnet3">Perform actions when the app is awoken to perform background downloads by listening for the <code>backgroundfetch</code> event</li>
+						<li class="l_bgnet4">Requires an add-on (though included) module, com.appcelerator.urlSession</li>
+						<li class="l_bgnet5">See the <a href="http://docs.appcelerator.com/titanium/latest/#!/guide/iOS_Background_Services">iOS Background Services</a> guide for all the details</li>
+					</ul>
+					
+					<div class="slidenote"><div class="l_slidenote_bgnet">Background networking is supported on iOS 7. iOS determines when to perform the actual downloads and schedules such actions depending on various factors such as how often you request these downloads and how long it takes to perform them. So, use care or your app won't be given too many opportunities to download data in the background. Read the guide for further details.</div></div>
+				</section>
+				
 				
 				<section>
 					<h2 class="l_impl_app">Implementing Application Preferences</h2>
