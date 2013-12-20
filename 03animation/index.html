@@ -291,6 +291,104 @@ $.loginButton.addEventListener('click', function() {
 					<div class="slidenote"><div class="l_slidenote_alloyanimexample"></div></div>
 				</section>
 
+				<!-- - - - - - - - - - - - - - - - - NEW TOPIC - - - - - - - - - - - - - - - - -->
+				<section>
+					<h1 class="topicH1 l_topic"><img src="../images/topic.png"/>Topic</h1>
+					<h5 style="clear:both;" class="l_physics">iOS 7-specific Animations</h5>
+					<div class="slidenote"><div class="l_slidenote_physics"></div></div>
+				</section>
+				
+				<section>
+					<h2 style="" class="l_i7transitions">iOS 7 Animated Transitions</h2>
+<pre style="font-size:small;"><code contenteditable>
+var transition = Ti.UI.iOS.createTransitionAnimation({
+    duration: 300,
+    // The show transition makes the window opaque and rotates it upright
+    transitionTo: {
+        opacity: 1,
+        duration: 300,
+        transform: Ti.UI.create2DMatrix()
+    },
+    // The hide transition makes the window transparent and rotates it upside down
+    transitionFrom: {
+        opacity: 0,
+        duration: 300 / 2,
+        transform: Ti.UI.create2DMatrix().rotate(180),
+    }
+});
+
+$.openButton.addEventListener('click', function(){
+    var win2 = Alloy.createController("win2", {trans: transition});
+    $.navWindow.openWindow(win2);
+});
+
+$.navWindow.open();
+
+</code></pre>
+<pre style="font-size:small;"><code contenteditable>
+// in the win2 controller:
+var args = arguments[0] || {};
+if(args.trans) {
+	$.win2.transitionAnimation = args.trans;
+    $.win2.opacity = 0;
+    $.win2.transform = Ti.UI.create2DMatrix().rotate(180);
+}
+
+</code></pre>
+					<div class="slidenote"><div class="l_slidenote_i7transitions">Create a transition animation that runs when opening or closing windows in a Titanium.UI.iOS.NavigationWindow or Titanium.UI.Tab.<br/><br/>In this example, the red window opens with a transition animation, while closing it uses the default behavior where it slides off screen. To add a transition animation when the red window closes, define a transition animation for the blue window.</div></div>
+				</section>
+				
+				<section>
+					<h2 style="" class="l_physics">Animator to add Physics Effects</h2>
+					<ul style="width:100%;">
+						<li class="l_physics1">Titanium.UI.iOS.Animator object</li>
+						<li class="l_physics2">Add physics-related capabilities and animations using the iOS physics engine</li>
+						<li class="l_physics3">Behaviors - define rules of the animator</li>
+						<li class="l_physics4">Items - assigned one or more behaviors</li>
+						<li class="l_physics5">Start with <code>startAnimator()</code></li>
+					</ul>
+					
+					<div class="slidenote"><div class="l_slidenote_physics"></div></div>
+				</section>
+				
+				<section>
+					<h2 style="" class="l_physexample">Animator Example</h2>
+					<img class="noborder" src="images/animator.png" style="width:29%;float:right;"/>
+					
+<pre style="font-size:small;width:70%;float:left;"><code contenteditable>
+// Create an Animator object using the window as the coordinate system
+var animator = Ti.UI.iOS.createAnimator({referenceView: $.win});
+
+// Create default collision behavior, window edges as boundaries
+var collision = Ti.UI.iOS.createCollisionBehavior();
+
+// Simulate Earth's gravity
+var gravity = Ti.UI.iOS.createGravityBehavior({
+    gravityDirection: {x: 0.0, y: 1.0}
+});
+
+// Create a bunch of random blocks; add to the window and behaviors
+var blocks = [];
+for (var i = 0; i < 20; i++) {
+    blocks[i] = Alloy.createController('box').getView();
+    $.win.add(blocks[i]);
+    collision.addItem(blocks[i]);
+    gravity.addItem(blocks[i]);
+}
+animator.addBehavior(collision);
+animator.addBehavior(gravity);
+           
+// Start the animation when the window opens
+$.win.addEventListener('open', function(e){
+    animator.startAnimator();
+});
+
+$.win.open();
+</code></pre>
+					<div class="slidenote"><div class="l_slidenote_physexample">A demo app is included in the labcode/Demos folder of the TCD repo.</div></div>
+				</section>
+				
+				
 				<section>
 					<h2 style="" class="l_summary">Summary</h2>
 					<p class="l_summarypara">In this lesson, you:</p>

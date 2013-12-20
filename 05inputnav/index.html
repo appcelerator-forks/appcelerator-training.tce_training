@@ -183,7 +183,7 @@ if(OS_IOS) {
 					<ul style="width:80%;">
 						<li class="l_prevent1">Put field in a scrolling view (i.e. ScrollView)</li>
 						<li class="l_prevent2">On Android, set:
-					<pre style=""><code contenteditable>
+					<pre style="font-size:small;"><code contenteditable>
 $.win.windowSoftInputMode = Ti.UI.Android.SOFT_INPUT_ADJUST_PAN;
 					</code></pre>
 							</li>
@@ -244,7 +244,7 @@ $.alert.show();
 				<section>
 					<h2 class="l_ui_switch">UI: Switch</h2>
 					<div style="width:200px;float:left;">
-					<img src="images/switches.png" style="width:120px;"/>
+					<img src="images/switches.png" style="width:100px;"/>
 					<img src="images/switches_android.png" style="width:100px;"/>
 					</div>
 					<div style="width:75%;float:right;">
@@ -269,7 +269,7 @@ $.theSwitch.addEventListener('change', function(e){
 </div>
 					<ul style="width:60%;clear:both;">
 						<li class="l_switch1">Presents two mutually exclusive choices</li>
-						<li class="l_switch2">On iOS, can't change labels</li>
+						<li class="l_switch2">On iOS, user can turn on indicators: | (on) and 0 (off)</li>
 					</ul>
 					<div class="slidenote"><div class="l_slidenote_ui_switch"><ul><li>Can't change 'On' and 'Off' labels on iOS</li><li>On Android &amp; Mobile Web you can use a checkbox style and change the labels</li><li>Add <code>change</code> event listener to switch and check <code>value</code> property to determine state</li></ul></div></div>
 				</section>
@@ -391,7 +391,7 @@ $.dialog.show();
 
 					</code></pre>
 					<div style="position:relative;top:-100px;right:60;z-index:3;float:right;">
-					    <img src="images/optiondialog_ios.png" style="width:300px;"/>
+					    <img src="images/optiondialog_ios.png" style="width:340px;"/>
 					    <img src="images/optiondialog_android.png" style="width:280px;"/>
 					</div>
 					<div class="slidenote"><div class="l_slidenote_optdialog">On iOS, the option dialog is a modal that slides up from the bottom of the screen; on Android, it's a modal that's centered within the window. Clicking a button on iOS closes the modal whereas on Android, you have to select the value then click the button.</div></div>
@@ -407,6 +407,15 @@ $.dialog.show();
 					<p class="l_styling_input_contdn_image"><img src="images/styling-input.png" style="margin-top:5px;height:250px;" class="noborder"/></p>
 					<div class="slidenote"><div class="l_slidenote_styling_input_contd"><ul><li>Set normal, selected, and disabled background colors</li><li>Gradients on iOS only</li><li>Graphics stretch to fill control size, or are cropped if larger than control</li><li>On iOS, you can enable special stretching mode via backgroundLeftCap / top cap<ul><li>You define an area on the left/top that won't be stretched</li><li>one pixel in the middle is stretched to fill most of the rest</li><li>right/bottom cap is calculated as<br/>total size &ndash; left cap &ndash; center 1px</li></ul></div></div>
 				</section>
+				
+				<section>
+					<h2 style="" class="l_shadows">Shadows</h2>
+					<p class="l_shadowpara">Add shadows to Labels (cross-platform) and Buttons (Android only)</p>
+					<img src="images/shadows.png" style="width:95%;" class="noborder"/>
+										
+					<div class="slidenote"><div class="l_slidenote_shadows"></div></div>
+				</section>
+				
 				
 				<section>
 					<h2 style="" class="l_summary">Summary</h2>
