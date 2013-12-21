@@ -20,3 +20,6 @@
 "Window": {
 	backgroundColor: 'white'
 }
+"Tab[platform=ios]": {
+	icon: "KS_nav_views.png"
+}

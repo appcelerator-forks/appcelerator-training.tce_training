@@ -1,5 +1,5 @@
 <Alloy>
-	<Tab title="ListView" icon="KS_nav_views.png">
+	<Tab title="ListView">
 		<Window title="ListView">
 			<ListView id="list" defaultItemTemplate="odd">
 				<Templates>
