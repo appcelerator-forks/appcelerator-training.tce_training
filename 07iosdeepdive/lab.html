@@ -76,9 +76,9 @@
 
 <p class="l_specification"><strong>Specification: </strong>To successfully complete this lab, you must implement the following functionality:</p>
 <ul style="width:70%">
-	<li class="l_spec1">Your app will implement configuration options in the Settings app. </li>
-	<li class="l_spec2">The setting will control the image placement when the app is opened from a completely stopped state.</li>
-	<li class="l_spec3">The UI will update the image placement after being resumed from the background (such as when you switch to the Settings app, change the placement option, the switch back to the app).</li>
+	<li class="l_spec1">Your app will implement configuration options in the Settings app. The setting will control the image placement when the app is opened from a completely stopped state.</li>
+	<li class="l_spec2">Your app will implement dynamic text. When a user updates text display options in the Settings app, the text in your app will honor those settings.</li>
+	<li class="l_spec3">The UI will update the image placement and text sizes after being resumed from the background (such as when you switch to the Settings app, change the placement option, the switch back to the app).</li>
 </ul>
 
 
@@ -163,12 +163,20 @@
 	<td class="tdfiller"><!-- leave empty--></td>
 	<td class="labexplanations l_labstepexplanation6"></td>
 </tr>
+<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 <tr>
-	<td colspan="2" class="labinstructions l_labstep7">7. When you're done, build the project for either the iOS Simulator. he picture should be on the left and text (within the view) on the right. Return to the Springboard. In Settings, set the "Image on right" option to On. Open the Lab 360 app again. The picture should be on the right with vitals to the left. Correct any code mistakes, if necessary.</td>
+	<td colspan="2" class="labinstructions l_labstep7">7. Update the style sheet to specify the #fuginame element to use the HEADLINE dynamic text style. Set the #fugidetails element to use the BODY dynamic text style. Modify your setLayout() function to reapply those text styles. This will ensure that font size and weight as set in the Settings app are applied to these labels.</td>
 </tr>
 <tr>
 	<td class="tdfiller"><!-- leave empty--></td>
 	<td class="labexplanations l_labstepexplanation7"></td>
+</tr>
+<tr>
+	<td colspan="2" class="labinstructions l_labstep8">8. When you're done, build the project for the iOS Simulator. The picture should be on the left and text (within the view) on the right. Return to the Springboard. In Settings, set the "Image on right" option to On. Open the Lab 360 app again. The picture should be on the right with vitals to the left. <br/><br/>In Settings, open the General, Text Size tab and change the size of the text. Switch back to your app. The labels should update in size/weight.<br/><br/>Correct any code mistakes, if necessary.</td>
+</tr>
+<tr>
+	<td class="tdfiller"><!-- leave empty--></td>
+	<td class="labexplanations l_labstepexplanation8"></td>
 </tr>
 </table>
 

@@ -1,9 +1,9 @@
 <Alloy>
-	<Tab title="ListView" icon="KS_nav_views.png">
+	<Tab title="ListView">
 		<Window title="ListView">
 			<ListView id="list" defaultItemTemplate="odd">
 				<Templates>
-					<ItemTemplate name="odd" height="60" accessoryType="Ti.UI.LIST_ACCESSORY_TYPE_CHECKMARK">
+					<ItemTemplate name="odd" height="60" id="oddrows" accessoryType="Ti.UI.LIST_ACCESSORY_TYPE_CHECKMARK">
 						<ImageView bindId="leftimage" id="leftimage"/>
 						<Label bindId="heading" id="heading"/>
 						<Label bindId="subheading" id="subheading"/>

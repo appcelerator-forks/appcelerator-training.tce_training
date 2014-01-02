@@ -10,6 +10,8 @@ function setLayout() {
 		$.vitalsview.left = 110;
 		$.vitalsview.right = 10;
 	}
+    $.fuginame.font = { textStyle: Ti.UI.TEXT_STYLE_HEADLINE };
+    $.fugidetails.font = { textStyle: Ti.UI.TEXT_STYLE_BODY };
 }
 
 Ti.App.addEventListener('resume', function() {

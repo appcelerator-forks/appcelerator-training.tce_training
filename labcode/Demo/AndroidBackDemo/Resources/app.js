@@ -1,79 +1,64 @@
-var myapp = {};
+// this sets the background color of the master UIView (when there are no windows/tab groups on it)
+Titanium.UI.setBackgroundColor('#000');
 
-(function() {
-	myapp.ui = {};
-	
-	myapp.ui.createApplicationWindow = function(_color) {
-		// must be a heavyweight window to capture the android:back event
-		// so set something like fullscreen:false
-		var win = Ti.UI.createWindow({
-			title:'Hello world',
-			backgroundColor:_color,
-			fullscreen:false,
-			exitOnClose:true
-		});
-		var winlabel = Ti.UI.createLabel({
-			text:'Tap the Android Back button to close app',
-			font:{ fontWeight:'bold', fontSize:20 },
-			color: 'black',
-			left:10,
-			right:10
-		});
-		win.add(winlabel);
-		
-		var myview = Ti.UI.createView({
-			width:'90%',
-			height:'90%',
-			backgroundColor:'white'
-		});
-		var label = Ti.UI.createLabel({
-			text:'Tap the Android Back button to close this white View and show the underlying red Window',
-			font:{ fontWeight:'bold', fontSize:20 },
-			color: 'black',
-			left:10,
-			right:10
-		});
-		myview.add(label);
-		
-		// Need to define a function for closing the view so that we can remove the listener later
-		closeView = function() {
-			myview.hide();
-			// remove the event listener on the window so that we can hit the
-			// Back button again to close the app
-			// existOnClose:true is required on the window for this to work
-			win.removeEventListener('androidback',closeView);
-		};
-		
-		win.addEventListener('androidback',closeView);
-		win.add(myview);
-		
-		return win;
-	}
-})();
+// create tab group
+var tabGroup = Titanium.UI.createTabGroup();
 
-myapp.mainwin = myapp.ui.createApplicationWindow('red');
-myapp.mainwin.open();
+
+//
+// create base UI tab and root window
+//
+var win1 = Titanium.UI.createWindow({  
+    title:'Tab 1',
+    backgroundColor:'#fff'
+});
+var tab1 = Titanium.UI.createTab({  
+    icon:'KS_nav_views.png',
+    title:'Tab 1',
+    window:win1
+});
+
+var label1 = Titanium.UI.createLabel({
+	color:'#999',
+	text:'I am Window 1',
+	font:{fontSize:20,fontFamily:'Helvetica Neue'},
+	textAlign:'center',
+	width:'auto'
+});
+
+win1.add(label1);
+
+//
+// create controls tab and root window
+//
+var win2 = Titanium.UI.createWindow({  
+    title:'Tab 2',
+    backgroundColor:'#fff'
+});
+var tab2 = Titanium.UI.createTab({  
+    icon:'KS_nav_ui.png',
+    title:'Tab 2',
+    window:win2
+});
+
+var label2 = Titanium.UI.createLabel({
+	color:'#999',
+	text:'I am Window 2',
+	font:{fontSize:20,fontFamily:'Helvetica Neue'},
+	textAlign:'center',
+	width:'auto'
+});
+
+win2.add(label2);
 
 
 
+//
+//  add tabs
+//
+tabGroup.addTab(tab1);  
+tabGroup.addTab(tab2);  
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+// open tab group
+tabGroup.open();

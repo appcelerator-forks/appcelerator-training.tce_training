@@ -1,5 +1,5 @@
 <Alloy>
-	<Tab title="TableView" icon="KS_nav_ui.png">
+	<Tab title="TableView">
 		<Window title="TableView">
 			<TableView id="table"></TableView>
 		</Window>

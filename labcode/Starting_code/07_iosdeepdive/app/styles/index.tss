@@ -11,10 +11,8 @@
 	top: 5
 },
 "#fuginame": {
-	font: { fontWeight: 'bold'}
 },
 "#fugidetails": {
-	font: { fontSize: 12 }
 },
 "#vitalsview": {
 	top: 25,

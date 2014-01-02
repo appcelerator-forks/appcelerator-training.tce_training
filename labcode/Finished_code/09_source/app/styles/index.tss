@@ -1,3 +1,6 @@
+"Window[platform=android]": {
+	exitOnClose: true
+}
 ".container": {
 	backgroundColor:"white",
 	layout: 'vertical'

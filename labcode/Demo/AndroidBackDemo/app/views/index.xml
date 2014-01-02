@@ -1,0 +1,8 @@
+<Alloy>
+	<Window class="container" id="win">
+		<Label id="winlabel"/>
+		<View id="overlay">
+			<Label id="viewlabel"/>
+		</View>
+	</Window>
+</Alloy>

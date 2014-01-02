@@ -24,6 +24,8 @@ Ti.Gesture.addEventListener('shake', function() {
 // handle the orientation change event
 // by moving elements to new locations
 Ti.Gesture.addEventListener('orientationchange', function(e) {
+    console.log('in orientationchange');
+    console.log('orientation is ' + e.orientation);
 	if (e.source.isLandscape()) {
 		Ti.API.info('landscape');
 		

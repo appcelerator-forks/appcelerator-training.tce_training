@@ -9,3 +9,30 @@
 // object. For example:
 //
 // Alloy.Globals.someGlobalFunction = function(){};
+
+Alloy.Globals.urlParser = function(url) {
+    url = url.replace(/[Uu]rlschemes:\/\/\?/,"");
+    return url.split('&');
+};
+
+
+if(OS_ANDROID) {
+    Alloy.Globals.action = '';    
+    var activity = Ti.Android.currentActivity;
+    function doIt(e) {
+        var args = activity.getIntent().getData();
+        if(args && args != 'urlschemes://') {
+            // parse the url string and arguments
+            var parsedArgs = Alloy.Globals.urlParser(args);
+            switch(parsedArgs[0]) {
+                case 'maps':
+                    Alloy.Globals.action = 'maps';
+                break;
+                case 'youtube':
+                    Alloy.Globals.action = 'youtube';
+                break;
+            }
+        }
+    }           
+    activity.addEventListener("start", doIt);
+}

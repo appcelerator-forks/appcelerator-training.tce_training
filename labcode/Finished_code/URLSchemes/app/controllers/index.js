@@ -2,7 +2,7 @@ function doClickMaps(e) {
 	if(OS_IOS) {
 	    Ti.Platform.openURL('maps://maps.google.com/maps?q=440+Bernardo+Ave,+Mountain+View,+CA&hl=en&sll=42.746632,-75.770041&sspn=6.364676,10.305176&oq=44&hnear=440+Bernardo+Ave,+Mountain+View,+Santa+Clara,+California+94043&t=m&z=17');
 	} else {
-		Ti.Platform.openURL('http://maps.google.com/maps?q=440+Bernardo+Ave,+Mountain+View,+CA&hl=en&sll=42.746632,-75.770041&sspn=6.364676,10.305176&oq=44&hnear=440+Bernardo+Ave,+Mountain+View,+Santa+Clara,+California+94043&t=m&z=17');
+		Ti.Platform.openURL('geo:0,0?q=440+Bernardo+Ave,+Mountain+View,+CA');
 	}
 }
 
@@ -36,54 +36,42 @@ function doClickStore(e) {
 	}
 }
 
-function urlParser(url) {
-	url = url.replace(/[Uu]rlschemes:\/\/\?/,"");
-	return url.split('&');
-}
-
 // check for arguments passed to this app
 if(OS_IOS) {
-	function grabArguments() {
-		var args = Ti.App.getArguments();
-		if(args.url) {
-			// property present only if app has been launched from the other app
-			var parsedArgs = urlParser(args.url);
-			//alert(JSON.stringify(parsedArgs));
-			switch(parsedArgs[0]) {
-				case 'maps':
-					doClickMaps();
-				break;
-				case 'youtube':
-					doClickYouTube();
-				break;
-			}
-		}
-	}
-	// grab the arguments when the app is opened from a closed state
-	grabArguments();
-	// then, we need to explicitly handle a resumed app state. but
-	// be careful, we must listen for 'resumed' not 'resume'
-	// see http://docs.appcelerator.com/titanium/latest/#!/api/Titanium.App-event-resumed
-	Ti.App.addEventListener('resumed', grabArguments);
-} else {
-	// on Android ...
-	var activity = Ti.Android.currentActivity;
-	activity.addEventListener("create", function(e) {
-		var args = activity.getIntent().getData();
-		if(args && args != 'urlschemes://') {
-			var parsedArgs = urlParser(args);
-			//alert(JSON.stringify(parsedArgs));
-			switch(parsedArgs[0]) {
-				case 'maps':
-					doClickMaps();
-				break;
-				case 'youtube':
-					doClickYouTube();
-				break;
-			}
-		}
-	});
+    $.index.addEventListener('open', function(e){
+        	function grabArguments() {
+        		var args = Ti.App.getArguments();
+        		if(args.url) {
+        			// property present only if app has been launched from the other app
+        			var parsedArgs = Alloy.Globals.urlParser(args.url);
+        			switch(parsedArgs[0]) {
+        				case 'maps':
+        					doClickMaps();
+        				break;
+        				case 'youtube':
+        					doClickYouTube();
+        				break;
+        			}
+        		}
+        	}
+        	// grab the arguments when the app is opened from a closed state
+        	grabArguments();
+        	// then, we need to explicitly handle a resumed app state. but
+        	// be careful, we must listen for 'resumed' not 'resume'
+        	// see http://docs.appcelerator.com/titanium/latest/#!/api/Titanium.App-event-resumed
+        	Ti.App.addEventListener('resumed', grabArguments);
+    });
+} else if(OS_ANDROID) {
+    $.index.addEventListener('open', function() {
+        switch(Alloy.Globals.action) {
+            case 'maps':
+                doClickMaps();
+            break;
+            case 'youtube':
+                doClickYouTube();
+            break;
+        }
+    });
 }
-
 
 $.index.open();

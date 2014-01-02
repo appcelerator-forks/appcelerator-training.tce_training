@@ -77,7 +77,7 @@
 <h1 class="l_labname">Lab - App Interconnections</h1>
 <p class="l_mission"><strong>Mission: </strong>In this lab, you will write two interconnected apps: one app will be able to launch and pass data to the other app.</p>
 
-<p class="l_specification"><strong>Specification: </strong><img src='http://assets.appcelerator.com.s3.amazonaws.com/app_u/tce_labs/Finished/08applaunch.png' height='300' align='right'/>You will write two apps, a "source" and "target" app. <br/><br/>
+<p class="l_specification"><strong>Specification: </strong><img src='http://assets.appcelerator.com.s3.amazonaws.com/app_u/tce_labs/Finished/08applaunch.png' height='300' align='right' style="border: 1px solid #000;"/>You will write two apps, a "source" and "target" app. <br/><br/>
 The Target app will include five buttons, which when clicked will open various built-in or standard apps, such as Maps or SMS. You can extend the app you started in the "Try It" exercise in this lesson.<br/><br/>
 The Source app will include three buttons, which will launch the target app and optionally send it launch parameters to control the target app's actions.</p>
 
@@ -174,7 +174,7 @@ titanium build --platform ios --force-copy
 <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 <tr>
 	<td colspan="2" class="labinstructions l_labstep6">6. Create a second Alloy app with a name and app ID of your choice. This app should have three buttons, each with a custom property named 'action' as follows: <br/>
-		<table width="400">
+		<table width="600" border="1" cellspacing="0" cellpadding="2">
 			<tr>
 				<td width="150"><strong>Label</strong></td>
 				<td width="250"><strong>'action' property</strong></td>
@@ -235,52 +235,33 @@ $.index.open();
 </tr>
 <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 <tr>
-	<td colspan="2" class="labinstructions l_labstep9">9. In your URLSchemes app, open the index controller. Add the following code before the open() call.<br/>
+	<td colspan="2" class="labinstructions l_labstep9">9. In your URLSchemes app, open the alloy.js file. We'll need to add code here to support Android, and we'll define a global function used on both platforms. Add the following code:<br/>
 <pre><code>
-function urlParser(url) {
-  url = url.replace(/[Uu]rlschemes:\/\/\?/,"");
-  return url.split('&');
-}
+Alloy.Globals.urlParser = function(url) {
+    url = url.replace(/[Uu]rlschemes:\/\/\?/,"");
+    return url.split('&');
+};
 
-// check for arguments passed to this app
-if(OS_IOS) {
-  function grabArguments() {
-    var args = Ti.App.getArguments();
-    if(args.url) {
-      // property present only if app has been launched from the other app
-      var parsedArgs = urlParser(args.url);
-      //alert(JSON.stringify(parsedArgs));
-      switch(parsedArgs[0]) {
-        case 'maps':
-          doClickMaps();
-        break;
-        case 'youtube':
-          doClickYouTube();
-        break;
-      }
-    }
-  }
-  // grab the arguments when the app is opened from a closed state
-  grabArguments();
-  Ti.App.addEventListener('resumed', grabArguments);
-} else {
-  // on Android ...
-  var activity = Ti.Android.currentActivity;
-  activity.addEventListener("create", function(e) {
-    var args = activity.getIntent().getData();
-    if(args && args != 'urlschemes://') {
-      var parsedArgs = urlParser(args);
-      //alert(JSON.stringify(parsedArgs));
-      switch(parsedArgs[0]) {
-        case 'maps':
-          doClickMaps();
-        break;
-        case 'youtube':
-          doClickYouTube();
-        break;
-      }
-    }
-  });
+
+if(OS_ANDROID) {
+    Alloy.Globals.action = '';    
+    var activity = Ti.Android.currentActivity;
+    function doIt(e) {
+        var args = activity.getIntent().getData();
+        if(args && args != 'urlschemes://') {
+            // parse the url string and arguments
+            var parsedArgs = Alloy.Globals.urlParser(args);
+            switch(parsedArgs[0]) {
+                case 'maps':
+                    Alloy.Globals.action = 'maps';
+                break;
+                case 'youtube':
+                    Alloy.Globals.action = 'youtube';
+                break;
+            }
+        }
+    }           
+    activity.addEventListener("start", doIt);
 }
 </code></pre>
 </td>
@@ -291,11 +272,55 @@ if(OS_IOS) {
 </tr>
 <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 <tr>
-	<td colspan="2" class="labinstructions l_labstep10">10. Build both apps using the command-line technique described above. In the "source" app, click either the <em>In Target app, open Maps</em> or <em>In Target app, open YouTube</em> buttons. The URLSchemes app should open, then immediately the appropriate target app will be opened.</td>
+	<td colspan="2" class="labinstructions l_labstep10">10. Next, open the index controller. Add the following code before the open() call.<br/>
+<pre><code>
+// check for arguments passed to this app
+if(OS_IOS) {
+    $.index.addEventListener('open', function(e){
+        	function grabArguments() {
+        		var args = Ti.App.getArguments();
+        		if(args.url) {
+        			// property present only if app has been launched from the other app
+        			var parsedArgs = Alloy.Globals.urlParser(args.url);
+        			switch(parsedArgs[0]) {
+        				case 'maps':
+        					doClickMaps();
+        				break;
+        				case 'youtube':
+        					doClickYouTube();
+        				break;
+        			}
+        		}
+        	}
+        	grabArguments();
+        	Ti.App.addEventListener('resumed', grabArguments);
+    });
+} else if(OS_ANDROID) {
+    $.index.addEventListener('open', function() {
+        switch(Alloy.Globals.action) {
+            case 'maps':
+                doClickMaps();
+            break;
+            case 'youtube':
+                doClickYouTube();
+            break;
+        }
+    });
+}
+</code></pre>
+</td>
 </tr>
 <tr>
 	<td class="tdfiller"><!-- leave empty--></td>
 	<td class="labexplanations l_labstepexplanation10"></td>
+</tr>
+<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+<tr>
+	<td colspan="2" class="labinstructions l_labstep11">11. Build both apps using the command-line technique described above. In the "source" app, click either the <em>In Target app, open Maps</em> or <em>In Target app, open YouTube</em> buttons. The URLSchemes app should open, then immediately the appropriate target app will be opened. Correct any code errors, if necessary.</td>
+</tr>
+<tr>
+	<td class="tdfiller"><!-- leave empty--></td>
+	<td class="labexplanations l_labstepexplanation11"></td>
 </tr>
 </table>
 

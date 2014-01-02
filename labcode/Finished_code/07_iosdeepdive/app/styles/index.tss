@@ -11,10 +11,14 @@
 	top: 5
 },
 "#fuginame": {
-	font: { fontWeight: 'bold'}
+	font: { 
+		textStyle: Ti.UI.TEXT_STYLE_HEADLINE
+	}
 },
 "#fugidetails": {
-	font: { fontSize: 12 }
+	font: { 
+		textStyle: Ti.UI.TEXT_STYLE_BODY
+	}
 },
 "#vitalsview": {
 	top: 25,

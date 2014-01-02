@@ -2,6 +2,9 @@
 	backgroundColor:"white",
 	layout: 'vertical'
 },
+".container[platform=android]":{
+	exitOnClose: true
+}
 "Label": {
 	width: Ti.UI.SIZE,
 	height: Ti.UI.SIZE,

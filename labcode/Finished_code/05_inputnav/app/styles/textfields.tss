@@ -1,0 +1,42 @@
+"Tab[platform=ios]": {
+	icon: 'KS_nav_ui.png'
+},
+"#win1": {
+	backgroundColor:"white"
+},
+"#scrolly": {
+	layout: "vertical"
+},
+"TextField": {
+	top: 40, width: '85%', height: '40dp',
+	borderStyle: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
+}
+"#normal":{
+	keyboardType: Ti.UI.KEYBOARD_DEFAULT,
+	returnKeyType: Ti.UI.RETURNKEY_DEFAULT,
+	autocorrect: true,
+	autocapitalization: Ti.UI.TEXT_AUTOCAPITALIZATION_WORDS,
+	hintText: 'default'
+},
+"#numeric":{
+	keyboardType: Ti.UI.KEYBOARD_NUMBERS_PUNCTUATION,
+	returnKeyType: Ti.UI.RETURNKEY_DONE,
+	hintText: 'numbers_punctuation'
+},
+"#web":{
+	keyboardType: Ti.UI.KEYBOARD_URL,
+	returnKeyType: Ti.UI.RETURNKEY_GO,
+	hintText: 'url'
+},
+"#email":{
+	keyboardType: Ti.UI.KEYBOARD_EMAIL,
+	returnKeyType: Ti.UI.RETURNKEY_SEND,
+	hintText: 'email'
+},
+"#password":{
+	keyboardType: Ti.UI.KEYBOARD_DEFAULT,
+	hintText: 'password',
+	passwordMask: true,
+	autocorrect: false,
+	autocapitalization: Ti.UI.TEXT_AUTOCAPITALIZATION_NONE
+}

@@ -1,0 +1,24 @@
+"Tab[platform=ios]": {
+	icon: 'KS_nav_views.png'
+},
+"#win2": {
+	layout: 'vertical',
+	backgroundColor: 'white'
+},
+"#aSlider": {
+	top: 40,
+	min: 0,
+	max: 10,
+	value: 3,
+	width: '90%'
+},
+"#aSwitch": {
+	top: 20
+},
+'#aSwitch[platform=android]': {
+  style: Ti.UI.Android.SWITCH_STYLE_TOGGLEBUTTON
+},
+"#aPicker": {
+	top: 20
+}
+

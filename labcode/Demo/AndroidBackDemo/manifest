@@ -1,8 +1,8 @@
 #appname: AndroidBackDemo
 #publisher: tpoulsen
-#url: http://appc.com
+#url: http://
 #image: appicon.png
 #appid: com.appcelerator.androidbackdemo
 #desc: undefined
-#type: ipad
-#guid: 5310dc84-c5a2-4c2e-945c-66cbe0de00d4
+#type: mobile
+#guid: 0d1f080e-199a-412f-a804-83b638b7706a

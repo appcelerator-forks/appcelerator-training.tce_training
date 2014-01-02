@@ -16,7 +16,7 @@
     <navbar-hidden>false</navbar-hidden>
     <analytics>true</analytics>
     <guid>0832d024-44c7-4681-91ad-c65baf839ff8</guid>
-    <property name="ti.ui.defaultunit" type="string">system</property>
+    <property name="ti.ui.defaultunit" type="string">dp</property>
     <iphone>
         <orientations device="iphone">
             <orientation>Ti.UI.PORTRAIT</orientation>
@@ -44,47 +44,40 @@
     </dict></plist>
     </ios>
     <android xmlns:android="http://schemas.android.com/apk/res/android">
-    	<manifest>
-			<application android:icon="@drawable/appicon"
-				android:label="URLSchemes" android:name="UrlschemesApplication"
-				android:debuggable="false">
-		
-				<!-- TI_APPLICATION -->
-		
-				<activity android:name=".UrlschemesActivity"
-					android:label="URLSchemes" android:theme="@style/Theme.Titanium"
-					android:configChanges="keyboardHidden|orientation">
-					<intent-filter>
-						<action android:name="android.intent.action.MAIN" />
-						<category android:name="android.intent.category.LAUNCHER" />
-		            </intent-filter>
-						<intent-filter>
-		                    <action android:name="android.intent.action.VIEW"/>
-		                    <category android:name="android.intent.category.DEFAULT"/>
-		                    <category android:name="android.intent.category.BROWSABLE"/>
-		                    <data android:scheme="urlschemes" android:host=""/>
-		                </intent-filter>
-				</activity>
-				
-		
-				<activity android:name="org.appcelerator.titanium.TiActivity"
-					android:configChanges="keyboardHidden|orientation" />
-				<activity android:name="org.appcelerator.titanium.TiTranslucentActivity"
-					android:configChanges="keyboardHidden|orientation"
-					android:theme="@android:style/Theme.Translucent" />
-				<activity android:name="org.appcelerator.titanium.TiModalActivity"
-					android:configChanges="keyboardHidden|orientation"
-					android:theme="@android:style/Theme.Translucent" />
-				<activity android:name="ti.modules.titanium.ui.TiTabActivity"
-					android:configChanges="keyboardHidden|orientation" />
-				<activity android:name="ti.modules.titanium.ui.android.TiPreferencesActivity" />
-		
-				<service android:name="org.appcelerator.titanium.analytics.TiAnalyticsService"
-					android:exported="false" />
-				
-		
-			</application>
-    	</manifest>
+        <manifest>
+            <application android:debuggable="false"
+                android:icon="@drawable/appicon"
+                android:label="URLSchemes" android:name="UrlschemesApplication">
+                <!-- TI_APPLICATION -->
+                <activity
+                    android:configChanges="keyboardHidden|orientation"
+                    android:label="URLSchemes"
+                    android:name=".UrlschemesActivity" android:theme="@style/Theme.Titanium">
+                    <intent-filter>
+                        <action android:name="android.intent.action.MAIN"/>
+                        <category android:name="android.intent.category.LAUNCHER"/>
+                    </intent-filter>
+                    <intent-filter>
+                        <action android:name="android.intent.action.VIEW"/>
+                        <category android:name="android.intent.category.DEFAULT"/>
+                        <category android:name="android.intent.category.BROWSABLE"/>
+                        <data android:host="" android:scheme="urlschemes"/>
+                    </intent-filter>
+                </activity>
+                <activity
+                    android:configChanges="keyboardHidden|orientation" android:name="org.appcelerator.titanium.TiActivity"/>
+                <activity
+                    android:configChanges="keyboardHidden|orientation"
+                    android:name="org.appcelerator.titanium.TiTranslucentActivity" android:theme="@android:style/Theme.Translucent"/>
+                <activity
+                    android:configChanges="keyboardHidden|orientation"
+                    android:name="org.appcelerator.titanium.TiModalActivity" android:theme="@android:style/Theme.Translucent"/>
+                <activity
+                    android:configChanges="keyboardHidden|orientation" android:name="ti.modules.titanium.ui.TiTabActivity"/>
+                <activity android:name="ti.modules.titanium.ui.android.TiPreferencesActivity"/>
+                <service android:exported="false" android:name="org.appcelerator.titanium.analytics.TiAnalyticsService"/>
+            </application>
+        </manifest>
     </android>
     <mobileweb>
         <precache/>
@@ -102,7 +95,7 @@
         <target device="iphone">true</target>
         <target device="mobileweb">true</target>
     </deployment-targets>
-    <sdk-version>3.0.2.GA</sdk-version>
+    <sdk-version>3.2.0.GA</sdk-version>
     <plugins>
         <plugin version="1.0">ti.alloy</plugin>
     </plugins>

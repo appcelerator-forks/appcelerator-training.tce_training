@@ -8,3 +8,6 @@
 	separatorColor: 'transparent',
 	color: 'black'
 }
+"Tab[platform=ios]": {
+	 icon: "KS_nav_ui.png"
+}

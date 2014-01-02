@@ -1,6 +1,8 @@
-# TCD Certification Training
+# TCE Certification Training
 
-This project houses the training materials needed for the TCD - Titanium Certified Developer training course, which corresponds to the Titanium Certified Developer (TCD) certification exam.
+This project houses the training materials needed for the TCE - Titanium Certified Expert training course, which corresponds to the Titanium Certified Expert (TCE) certification exam.
+
+**Current version support:** Appcelerator Titanium ver 3.2
 
 # License
 
@@ -15,25 +17,25 @@ These slides use [Crystal Clear](http://commons.wikimedia.org/wiki/Crystal_Clear
 
 ## Instructions 
 
-1. Download a copy of [presentation-engine](https://github.com/appcelerator-training/presentation-engine) to a suitable directory on your computer.
-2. Download a copy of the course slides to that same directory so that you end up with a structure like this:
+Simply download and extract the zip file to create a directory structure as shown below.  
 
 ```
 some_folder  
-   - presentation-engine (folder, must be named as shown here!)  
-   - tcd_certification (folder)  
-      - index.html  <-- TOC for the whole course  
-         - 000 (folder)  
+   - TCE Training Course (folder)  
+      - index.html  <-- TOC for the whole course, open this file 
+      - 00courseintro (folder)  
             - index.html <-- TOC for the lesson  
-         ... etc
+      - 01gettingstarted
+      - (... additional lessons)
+      - labcode (folder containing starting/finished lab code)  
+      - presentation-engine
 ```
 
 ### Running a presentation
 
-1. Open the coursename/index.html in your browser. Safari and Chrome work best, Firefox works too.
-2. Click a lesson's name, which opens that lesson's index.html file.
-3. Click the "Notes" icon to open a separate window (you might need to override any pop-up blocker to see that window). That new window will display presenter notes as you step through the slides.
-4. At the end of a lesson, if running Chrome, close the presenter notes window. In all browsers, click the home icon, which will take you back to the course TOC slide. Click the next lesson's title. (If running Chrome, reopen the presenter notes window.)
+1. Open the *coursename*/index.html in your browser. Safari and Chrome work best, Firefox works too.
+2. Click the "Notes" icon to open a separate window (you might need to override any pop-up blocker to see that window). You don't need to reload or do anything with that window. It will automatically display presenter notes as you step through the slides. 
+3. Click the home icon, which will take you back to the course TOC slide. Within a lesson, click the up/left arrow icon to return to that lesson's first slide.
 
 ### Navigating within a presentation
 
@@ -41,19 +43,9 @@ Press right or left arrow keys to move forward/back in a presentation. Some slid
 
 Press the Spacebar to see a partial overview of the slides in a presentation.
 
-### Downloading a specific version of the slides
+Click the house icon to return to the course table of contents slide.
 
-We recently started tagging releases of these slides with the corresponding Titanium version. That way, you can download slides for a given version.
-
-**Step 1:** Click Tags as shown:
-
-<img src='https://img.skitch.com/20120808-cushunc9ksj4i2tux99sxka2hc.png' width='640' alt='Downloading at a given tag step 1' style='border: 1px solid #000;'>
-
-**Step 2:** Click the download version; you'll get a zip of the repo at that state:
-
-<img src='https://img.skitch.com/20120808-mk19ffd8bc1t9sgpu3muj37w9x.png' width='640' alt='Download the zip file' style='border: 1px solid #000;'>
-
-**Step 3:** Unzip the archive you downloaded and rename it to **tcd_certification**
+Click the blue arrow icon to return to the first slide in the current lesson
 
 # Corrections and Contributions
 
@@ -123,13 +115,5 @@ When a course is updated, language string names will be changed (perhaps by addi
 
 Lab steps and descriptions are provided in the lab.html files and associated i18n/lablocalizations and labimages folders, all included in the repo. The rendered content of those files are posted to wiki.appcelerator.org as a convenience for presenters and students. To translate a lab, follow the same types of steps described previously. In your pull request, or a separate email to training@appcelerator.com please note that you have translated the labs and would like them posted to the wiki. 
 
-## Thanks to our translators
-
-Appcelerator thanks these great Titanium community supporters for translating our materials into Japanese:
-
-* kazuaki konno (@kaz_konno)
-* daisuke aoki (@daoki2)
-* toshiro yagi (@yagi_)
-* go ando (@goando)
 
 

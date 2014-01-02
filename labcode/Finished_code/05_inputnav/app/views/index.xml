@@ -1,36 +1,6 @@
 <Alloy>
 	<TabGroup>
-		<Tab title="Keyboards" icon="KS_nav_ui.png">
-			<Window title="Keyboard Types" id="win1">
-				<ScrollView id="scrolly">
-					<TextField id="normal"/>
-					<TextField id="numeric"/>
-					<TextField id="web"/>
-					<TextField id="email"/>
-					<TextField id="password"/>
-				</ScrollView>
-			</Window>
-		</Tab>
-		<Tab title="Components" icon="KS_nav_views.png">
-			<Window title="Tab 2" id="win2">
-				<Switch id='aSwitch' value="false"/>
-				<Slider id='aSlider'/>
-				<Picker id="aPicker" selectionIndicator="true" useSpinner="true">
-				  <PickerColumn id="column1">
-				    <PickerRow title="Bananas"/>
-				    <PickerRow title="Strawberries"/>
-				    <PickerRow title="Mangos"/>
-				    <PickerRow title="Grapes"/>
-				  </PickerColumn>
-				  <!-- Picker shorthand notation -->
-				  <Column id="column2">
-				    <Row title="red"/>
-				    <Row title="green"/>
-				    <Row title="blue"/>
-				    <Row title="orange"/>
-				  </Column>
-				</Picker>
-			</Window>
-		</Tab>
+		<Require src="textfields" id="textfields"/>
+		<Require src="components" id="components"/>
 	</TabGroup>
 </Alloy>

@@ -1,0 +1,30 @@
+"#win": {
+	backgroundColor:"red",
+	title: 'AndroidBackDemo',
+	exitOnClose: true
+},
+"Label": {
+	width: Ti.UI.SIZE,
+	height: Ti.UI.SIZE,
+	color: "#000"
+}
+"#winlabel": {
+	text:'Tap the Android Back button to close app',
+	font:{ fontWeight:'bold', fontSize:20 },
+	color: 'black',
+	left:10,
+	right:10
+
+}
+"#viewlabel": {
+	text:'Tap the Android Back button to close this white View and show the underlying red Window',
+	font:{ fontWeight:'bold', fontSize:20 },
+	color: 'black',
+	left:10,
+	right:10
+}
+"View": {
+	width:'90%',
+	height:'90%',
+	backgroundColor:'white'
+}

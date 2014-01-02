@@ -18,7 +18,9 @@
 	hintText:'Enter a message to share',
 	width:'90%',
 	height:120,
-	top:35
+	top:35,
+	backgroundColor: 'white',
+	color: 'black'
 },
 "#share": {
 	top:175,
