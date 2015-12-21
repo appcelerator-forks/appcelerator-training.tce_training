@@ -1,3 +1,5 @@
+# DEPRECATED
+
 # TCE Certification Training
 
 This project houses the training materials needed for the TCE - Titanium Certified Expert training course, which corresponds to the Titanium Certified Expert (TCE) certification exam.
